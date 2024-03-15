@@ -9,10 +9,13 @@ import {
 } from "react-router-dom";
 import Root from "./routes/Root";
 import ErrorPage from "./routes/ErrorPage";
+import HomePage from "./routes/HomePage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Root />} errorElement={<ErrorPage />}></Route>
+    <Route path="/" element={<Root />} errorElement={<ErrorPage />}>
+      <Route path="/" element={<HomePage/>} errorElement={<ErrorPage/>} />
+    </Route>
   )
 );
 

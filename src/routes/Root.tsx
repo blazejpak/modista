@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
+import Header from "../components/header/Header";
+import Footer from "../components/footer/Footer";
 
 function Root() {
   useEffect(() => {
@@ -14,10 +16,10 @@ function Root() {
   }, []);
 
   return (
-    <div className="grid grid-rows-[90px_1fr_650px] overflow-x-hidden md:grid-rows-[90px_1fr_400px]">
-      {/* <Header /> */}
+    <div className="flex flex-col overflow-x-hidden min-h-screen relative">
+      <Header />
       <Outlet />
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }
