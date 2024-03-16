@@ -7,7 +7,7 @@ export default {
       colors: {
         "gold-dark": "#D87D4A",
         "gold-lighter": "#FBAF85",
-        "black-lighter": "#101010",
+        "black-lighter": "#191919",
         "grey-normal": "#F1F1F1",
         "grey-lighter": "#FAFAFA",
       },

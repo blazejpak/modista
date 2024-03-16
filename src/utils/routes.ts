@@ -1,4 +1,5 @@
 type Routes = {
+  HOMEPAGE: string;
   MEN: string;
   WOMEN: string;
   ACCESSORIES: string;
@@ -14,6 +15,7 @@ type Routes = {
   HOME_FURNITURE: string;
 };
 const ROUTES: Routes = {
+  HOMEPAGE: "/",
   MEN: "/men",
   MEN_SHIRTS: "/men/shirts",
   MEN_SHOES: "/men/shoes",

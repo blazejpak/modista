@@ -99,7 +99,7 @@ const HeaderPhone = () => {
           </ul>
         </div>
       )}
-      <NavLink to={ROUTES.HOME} className="active:scale-110 transition-all">
+      <NavLink to={ROUTES.HOMEPAGE} className="active:scale-110 transition-all">
         <img alt="Logo" src={logo} height={60} width={160} />
       </NavLink>
       <PiShoppingCart
