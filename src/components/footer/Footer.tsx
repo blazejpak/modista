@@ -9,7 +9,7 @@ import ROUTES from "../../utils/routes";
 
 const Footer = () => {
   return (
-    <footer className="bg-black-lighter text-grey-normal flex flex-col gap-8 py-8 px-[10%] lg:flex-row lg:gap-24">
+    <footer className="bg-black-lighter text-grey-normal flex flex-col gap-8 py-8 px-[10%] lg:flex-row lg:gap-24 h-[300px] lg:h-[200px]">
       <div className="flex flex-col gap-8">
         <Link to={ROUTES.HOMEPAGE}>
           <img alt="logo" src={logo} height={90} width={130} />
