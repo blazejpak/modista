@@ -9,3 +9,8 @@
     font-family: "Manrope", sans-serif;
   }
 }
+@layer components {
+  .hover-link {
+    @apply hover:text-gold-dark active:text-gold-lighter;
+  }
+}

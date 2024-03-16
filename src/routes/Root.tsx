@@ -6,7 +6,7 @@ import Footer from "../components/footer/Footer";
 function Root() {
   useEffect(() => {
     const getData = async () => {
-      const data = await fetch("https://dummyjson.com/products");
+      const data = await fetch("https://dummyjson.com/products/categories");
       const response = await data.json();
       console.log(response);
       return response;

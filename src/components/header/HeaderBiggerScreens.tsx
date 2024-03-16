@@ -12,21 +12,20 @@ const HeaderBiggerScreens = () => {
         <img alt="Logo" src={logo} height={60} width={160} />
       </NavLink>
       <ul className="flex gap-4 h-full items-center">
-        <li className="hover:text-gold-dark active:text-gold-lighter active:scale-110 transition-all">
+        <li className="hover-link active:scale-110 transition-all">
           <NavLink to={ROUTES.MEN}>Men</NavLink>
         </li>
-        <li className="hover:text-gold-dark active:text-gold-lighter active:scale-110 transition-all">
+        <li className="hover-link active:scale-110 transition-all">
           <NavLink to={ROUTES.WOMEN}>Women</NavLink>
         </li>
-        <li className="hover:text-gold-dark active:text-gold-lighter active:scale-110 transition-all">
+        <li className="hover-link active:scale-110 transition-all">
           <NavLink to={ROUTES.ACCESSORIES}>Accessories</NavLink>
         </li>
       </ul>
       <PiShoppingCart
         size={24}
-        className="active:scale-110 transition-all hover:text-gold-dark active:text-gold-lighter  cursor-pointer"
+        className="active:scale-110 transition-all hover-link  cursor-pointer"
       />
-      
     </nav>
   );
 };

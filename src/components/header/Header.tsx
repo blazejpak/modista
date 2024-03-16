@@ -16,7 +16,7 @@ const Header = () => {
     return () => window.removeEventListener("resize", handlerResize);
   }, []);
   return (
-    <header className="w-full bg-black-lighter text-grey-normal  h-[90px] border-b-2 border-grey-normal">
+    <header className="w-full bg-black-lighter text-grey-normal  h-[90px] border-b-2 border-grey-normal select-none">
       {width < 768 ? <HeaderPhone /> : <HeaderBiggerScreens />}
     </header>
   );
