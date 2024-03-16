@@ -16,7 +16,7 @@ function Root() {
   }, []);
 
   return (
-    <div className="flex flex-col overflow-x-hidden min-h-screen relative">
+    <div className="grid grid-rows-[90px_1fr_300px] overflow-x-hidden min-h-screen relative lg:grid-rows-[90px_1fr_200px]">
       <Header />
       <Outlet />
       <Footer />
