@@ -16,7 +16,7 @@ const HeaderPhone = () => {
   const [burgerClicked, setBurgerClicked] = useState<boolean>(false);
   const [menClicked, setMenClicked] = useState<boolean>(false);
   const [womenClicked, setWomenClicked] = useState<boolean>(false);
-  const [accessoriesClciked, setAccessoriesClicked] = useState<boolean>(false);
+  const [accessoriesClicked, setAccessoriesClicked] = useState<boolean>(false);
 
   const menClickedHandle = () => {
     setMenClicked((prevState) => !prevState);
@@ -51,7 +51,12 @@ const HeaderPhone = () => {
           <IoClose
             size={30}
             className="absolute top-4 right-4 cursor-pointer hover-link active:scale-110 transition-all text-grey-normal"
-            onClick={() => setBurgerClicked(false)}
+            onClick={() => {
+              setBurgerClicked(false);
+              setMenClicked(false);
+              setWomenClicked(false);
+              setAccessoriesClicked(false);
+            }}
           />
 
           <ul className="flex flex-col gap-4 top-[20%] items-center absolute text-3xl">
@@ -81,13 +86,13 @@ const HeaderPhone = () => {
                 onClick={accessoriesClickedHandle}
               >
                 <p className="first-letter:uppercase">accessories</p>
-                {accessoriesClciked ? (
+                {accessoriesClicked ? (
                   <HiMinus size={24} />
                 ) : (
                   <HiPlus size={24} />
                 )}
               </div>
-              {accessoriesClciked && (
+              {accessoriesClicked && (
                 <HeaderPhoneLinks typeLink="accessories" />
               )}
             </li>
