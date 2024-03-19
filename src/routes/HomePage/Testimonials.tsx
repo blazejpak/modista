@@ -5,7 +5,7 @@ import fourthTestimonial from "../../assets/fourthTestimonial.jpg";
 
 const Testimonials = () => {
   return (
-    <section className="mt-8 p-4">
+    <section className="my-16 p-4">
       <h2 className="mb-8 text-center text-3xl">What others think about us?</h2>
       <div className="grid grid-cols-1 justify-items-center gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         <div className="flex max-w-[350px] flex-col gap-4 border-[1px] border-grey-normal border-opacity-50 p-8 shadow-md">
