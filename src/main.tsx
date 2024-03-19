@@ -9,18 +9,18 @@ import {
 } from "react-router-dom";
 import Root from "./routes/Root";
 import ErrorPage from "./routes/ErrorPage";
-import HomePage from "./routes/HomePage";
+import HomePage from "./routes/HomePage/HomePage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />} errorElement={<ErrorPage />}>
-      <Route path="/" element={<HomePage/>} errorElement={<ErrorPage/>} />
-    </Route>
-  )
+      <Route path="/" element={<HomePage />} errorElement={<ErrorPage />} />
+    </Route>,
+  ),
 );
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <RouterProvider router={router} />
-  </React.StrictMode>
+  </React.StrictMode>,
 );
