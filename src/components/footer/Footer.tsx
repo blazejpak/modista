@@ -9,7 +9,7 @@ import ROUTES from "../../utils/routes";
 
 const Footer = () => {
   return (
-    <footer className="bg-black-lighter text-grey-normal flex flex-col gap-8 py-8 px-[10%] lg:flex-row lg:gap-24 h-[300px] lg:h-[200px]">
+    <footer className="flex h-[300px] flex-col gap-8 bg-black-lighter px-[10%] py-8 text-grey-normal lg:h-[200px] lg:flex-row lg:gap-24">
       <div className="flex flex-col gap-8">
         <Link to={ROUTES.HOMEPAGE}>
           <img alt="logo" src={logo} height={90} width={130} />
@@ -22,39 +22,39 @@ const Footer = () => {
           elevate your wardrobe with our stylish collection.
         </p>
       </div>
-      <div className="flex justify-between items-center gap-6 lg:gap-0 flex-col-reverse sm:flex-row lg:flex-col lg:justify-around">
+      <div className="flex flex-col-reverse items-center justify-between gap-6 sm:flex-row lg:flex-col lg:justify-around lg:gap-0">
         <p className="text-xs opacity-50">
           Copyright 2024. All Rights Reserved
         </p>
         <div className="flex gap-4">
           <a
             href="https://github.com/blazejpak"
-            className="cursor-pointer w-6 block"
+            className="block w-6 cursor-pointer"
             aria-label="Facebook link"
           >
             <AiFillFacebook
               size={24}
-              className="transition-colors duration-500 hover:fill-orange-600"
+              className="transition-colors duration-500 hover:fill-gold-dark active:fill-gold-lighter"
             />
           </a>
           <a
             href="https://github.com/blazejpak"
-            className="cursor-pointer w-6 block"
+            className="block w-6 cursor-pointer"
             aria-label="Twitter link"
           >
             <AiFillTwitterCircle
               size={24}
-              className="transition-colors duration-500 hover:fill-orange-600"
+              className="transition-colors duration-500 hover:fill-gold-dark active:fill-gold-lighter"
             />
           </a>
           <a
             href="https://github.com/blazejpak"
-            className="cursor-pointer w-6 block"
+            className="block w-6 cursor-pointer"
             aria-label="Instagram link"
           >
             <AiFillInstagram
               size={24}
-              className="transition-colors duration-500 hover:fill-orange-600"
+              className="transition-colors duration-500 hover:fill-gold-dark active:fill-gold-lighter"
             />
           </a>
         </div>
