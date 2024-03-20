@@ -3,11 +3,15 @@ import HeaderBiggerScreens from "./HeaderBiggerScreens";
 import { useLayoutEffect, useState } from "react";
 
 const Header = () => {
-  const [width, setWidth] = useState<number>(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   useLayoutEffect(() => {
     const handlerResize = () => {
-      setWidth(window.innerWidth);
+      if (window.innerWidth <= 768) {
+        setIsMobile(true);
+      } else {
+        setIsMobile(false);
+      }
     };
 
     window.addEventListener("resize", handlerResize);
@@ -16,8 +20,8 @@ const Header = () => {
     return () => window.removeEventListener("resize", handlerResize);
   }, []);
   return (
-    <header className="w-full bg-black-lighter text-grey-normal  h-[90px]  select-none">
-      {width < 768 ? <HeaderPhone /> : <HeaderBiggerScreens />}
+    <header className="h-[90px] w-full select-none  bg-black-lighter  text-grey-normal">
+      {isMobile ? <HeaderPhone /> : <HeaderBiggerScreens />}
     </header>
   );
 };

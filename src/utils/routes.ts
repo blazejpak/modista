@@ -31,4 +31,23 @@ const ROUTES: Routes = {
   HOME_FURNITURE: "/home/furniture",
 };
 
+export const NavLinks = {
+  men: [
+    { link: ROUTES.MEN_SHIRTS, label: "shirts" },
+    { link: "", label: "shoes" },
+    { link: "", label: "watches" },
+  ],
+  women: [
+    { link: "", label: "dresses" },
+    { link: "", label: "shoes" },
+    { link: "", label: "watches" },
+    { link: "", label: "bags" },
+    { link: "", label: "jewellery" },
+  ],
+  accessories: [
+    { link: "", label: "groceries" },
+    { link: "", label: "lighting" },
+  ],
+};
+
 export default ROUTES;

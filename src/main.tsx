@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import {
+  LoaderFunctionArgs,
   Route,
   RouterProvider,
   createBrowserRouter,
@@ -33,6 +34,8 @@ import { WomenLoader } from "./routes/WomenPage/WomenLoader";
 import { WomenDressesLoader } from "./routes/WomenPage/Dresses/WomenDressesLoader";
 import { WomenTopsLoader } from "./routes/WomenPage/Tops/WomenTopsLoader";
 import { WomenShoesLoader } from "./routes/WomenPage/Shoes/WomenShoesLoader";
+import CategoryPage from "./routes/CategoryPage/CategoryPage";
+import { CategoryDataLoader } from "./routes/CategoryPage/CategoryDataLoader";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -114,6 +117,15 @@ const router = createBrowserRouter(
           loader={WomenShoesLoader}
         />
       </Route>
+
+      <Route
+        path={"category/:category"}
+        element={<CategoryPage />}
+        loader={({ params }: LoaderFunctionArgs<string>) =>
+          CategoryDataLoader(params.category!)
+        }
+        errorElement={<ErrorPage />}
+      />
     </Route>,
   ),
 );
