@@ -8,16 +8,15 @@ function Root() {
     const getData = async () => {
       const data = await fetch("https://dummyjson.com/products/categories");
       const response = await data.json();
-      console.log(response);
+      // console.log(response);
       return response;
     };
     const data = getData();
-    console.log(data);
   }, []);
 
   return (
-    <div className="w-full flex justify-center items-center">
-      <div className="flex flex-col overflow-x-hidden min-h-screen relative  max-w-[2000px] ">
+    <div className="flex w-full items-center justify-center">
+      <div className="relative flex min-h-screen max-w-[2000px] flex-col  overflow-x-hidden ">
         <Header />
         <main>
           <Outlet />
