@@ -1,4 +1,4 @@
-export const ShoesLoader = async () => {
+export const MenShoesLoader = async () => {
   const data = await fetch(
     "https://dummyjson.com/products/category/mens-shoes",
   );

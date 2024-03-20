@@ -8,7 +8,7 @@ type typeLink = {
 const HeaderBiggerScreenLinks = ({ typeLink }: typeLink) => {
   if (typeLink === "men") {
     return (
-      <div className="text-xl flex flex-col gap-1 left-0 items-center absolute top-[101%] h-fit w-full bg-black-lighter p-8 rounded-b-md z-10">
+      <div className="absolute left-0 top-[100%] z-10 flex h-fit w-full flex-col items-center gap-1 rounded-b-md bg-black-lighter p-8 text-xl">
         <NavLink className="hover-link transition-colors" to={ROUTES.MEN}>
           All
         </NavLink>
@@ -31,7 +31,7 @@ const HeaderBiggerScreenLinks = ({ typeLink }: typeLink) => {
     );
   } else if (typeLink === "women") {
     return (
-      <div className="text-xl flex flex-col gap-1 items-center absolute left-0 top-[101%] z-10 h-fit w-full bg-black-lighter p-8 rounded-b-md">
+      <div className="absolute left-0 top-[100%] z-10 flex h-fit w-full flex-col items-center gap-1 rounded-b-md bg-black-lighter p-8 text-xl">
         <NavLink className="hover-link transition-colors" to={ROUTES.WOMEN}>
           All
         </NavLink>
@@ -63,7 +63,7 @@ const HeaderBiggerScreenLinks = ({ typeLink }: typeLink) => {
     );
   } else if (typeLink === "accessories") {
     return (
-      <div className="text-xl flex flex-col gap-1 items-center absolute left-0 top-[101%] z-10 h-fit w-full bg-black-lighter p-8 rounded-b-md">
+      <div className="absolute left-0 top-[100%] z-10 flex h-fit w-full flex-col items-center gap-1 rounded-b-md bg-black-lighter p-8 text-xl">
         <NavLink className="hover-link transition-colors" to={ROUTES.MEN}>
           All
         </NavLink>

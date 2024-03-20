@@ -1,4 +1,4 @@
-export const ShirtsLoader = async () => {
+export const MenShirtsLoader = async () => {
   const data = await fetch(
     "https://dummyjson.com/products/category/mens-shirts",
   );

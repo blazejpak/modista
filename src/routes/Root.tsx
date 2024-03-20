@@ -8,7 +8,7 @@ function Root() {
     const getData = async () => {
       const data = await fetch("https://dummyjson.com/products/categories");
       const response = await data.json();
-      // console.log(response);
+      console.log(response);
       return response;
     };
     const data = getData();

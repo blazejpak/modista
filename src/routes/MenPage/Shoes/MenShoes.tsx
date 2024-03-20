@@ -1,10 +1,9 @@
 import { useLoaderData } from "react-router-dom";
 
-const MenPage = () => {
+const MenShoes = () => {
   const data = useLoaderData();
   console.log(data);
-
-  return <div>MenPage</div>;
+  return <div>Shoes</div>;
 };
 
-export default MenPage;
+export default MenShoes;

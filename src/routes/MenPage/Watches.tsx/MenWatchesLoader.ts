@@ -1,4 +1,4 @@
-export const WatchesLoader = async () => {
+export const MenWatchesLoader = async () => {
   const data = await fetch(
     "https://dummyjson.com/products/category/mens-watches",
   );
