@@ -11,7 +11,12 @@ const Footer = () => {
   return (
     <footer className="flex h-[300px] flex-col gap-8 bg-black-lighter px-[10%] py-8 text-grey-normal lg:h-[200px] lg:flex-row lg:gap-24">
       <div className="flex flex-col gap-8">
-        <Link to={ROUTES.HOMEPAGE}>
+        <Link
+          to={ROUTES.HOMEPAGE}
+          onClick={() => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
+        >
           <img alt="logo" src={logo} height={90} width={130} />
         </Link>
         <p className="text-xs opacity-50">

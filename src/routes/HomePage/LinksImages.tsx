@@ -11,7 +11,7 @@ const LinksImages = () => {
         <img
           alt="Image of man"
           src={manImg}
-          height={300}
+          height={600}
           className="grayscale group-hover:grayscale-0"
         />
         <div className="absolute bottom-10 left-[50%] translate-x-[-50%] cursor-pointer rounded bg-grey-lighter p-2 text-center text-sm uppercase lg:p-3 lg:text-base">
@@ -22,7 +22,7 @@ const LinksImages = () => {
         <img
           alt="Image of woman"
           src={womanImg}
-          height={300}
+          height={600}
           className="grayscale transition-all group-hover:grayscale-0"
         />
         <div className="absolute bottom-10 left-[50%] translate-x-[-50%] cursor-pointer rounded bg-grey-lighter p-2 text-center text-sm uppercase lg:p-3 lg:text-base">
@@ -33,7 +33,7 @@ const LinksImages = () => {
         <img
           alt="Image of home decorations"
           src={homeImg}
-          height={300}
+          height={600}
           className="grayscale transition-all group-hover:grayscale-0"
         />
         <div className="absolute bottom-10 left-[50%] translate-x-[-50%] cursor-pointer rounded bg-grey-lighter p-2 text-center text-sm uppercase lg:p-3 lg:text-base">

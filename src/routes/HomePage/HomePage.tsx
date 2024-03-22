@@ -1,4 +1,5 @@
 import mainImg from "../../assets/pexels-primary-image.webp";
+import { navLinks } from "../../utils/routes";
 import LinksImages from "./LinksImages";
 import Testimonials from "./Testimonials";
 
