@@ -3,9 +3,11 @@ import { navLinks } from "../../utils/routes";
 
 type typeLink = {
   typeLink: keyof typeof navLinks;
+  closeMenu: React.Dispatch<React.SetStateAction<boolean>>;
+  clearClicked: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const HeaderPhoneLinks = ({ typeLink }: typeLink) => {
+const HeaderPhoneLinks = ({ typeLink, closeMenu, clearClicked }: typeLink) => {
   const links = navLinks[typeLink];
 
   if (!links || !links.length) {
@@ -18,6 +20,10 @@ const HeaderPhoneLinks = ({ typeLink }: typeLink) => {
             className="hover-link transition-colors"
             to={link}
             key={link}
+            onClick={() => {
+              closeMenu(false);
+              clearClicked("");
+            }}
           >
             {label}
           </NavLink>

@@ -14,30 +14,15 @@ import HeaderPhoneLinks from "./HeaderPhoneLinks";
 
 const HeaderPhone = () => {
   const [burgerClicked, setBurgerClicked] = useState<boolean>(false);
-  const [menClicked, setMenClicked] = useState<boolean>(false);
-  const [womenClicked, setWomenClicked] = useState<boolean>(false);
-  const [accessoriesClicked, setAccessoriesClicked] = useState<boolean>(false);
+  const [activeMenuItem, setActiveMenuItem] = useState<string>("");
 
-  const menClickedHandle = () => {
-    setMenClicked((prevState) => !prevState);
-
-    setWomenClicked(false);
-    setAccessoriesClicked(false);
+  const handleToggle = (activeItem: string) => {
+    setActiveMenuItem(activeItem);
   };
 
-  const womenClickedHandle = () => {
-    setWomenClicked((prevState) => !prevState);
-
-    setMenClicked(false);
-    setAccessoriesClicked(false);
-  };
-
-  const accessoriesClickedHandle = () => {
-    setAccessoriesClicked((prevState) => !prevState);
-
-    setMenClicked(false);
-    setWomenClicked(false);
-  };
+  const menClicked = activeMenuItem === "men";
+  const womenClicked = activeMenuItem === "women";
+  const accessoriesClicked = activeMenuItem === "accessories";
 
   return (
     <nav className="flex h-full items-center justify-between gap-8  ">
@@ -53,9 +38,7 @@ const HeaderPhone = () => {
             className="hover-link absolute right-4 top-4 cursor-pointer text-grey-normal transition-all active:scale-110"
             onClick={() => {
               setBurgerClicked(false);
-              setMenClicked(false);
-              setWomenClicked(false);
-              setAccessoriesClicked(false);
+              setActiveMenuItem("");
             }}
           />
 
@@ -63,19 +46,23 @@ const HeaderPhone = () => {
             <li className="flex flex-col">
               <div
                 className="hover-link flex cursor-pointer items-center justify-center gap-2 p-4 transition-colors  "
-                onClick={menClickedHandle}
+                onClick={() => handleToggle("men")}
               >
                 <p className="first-letter:uppercase">men</p>
                 {menClicked ? <HiMinus size={24} /> : <HiPlus size={24} />}
               </div>
               {menClicked && (
-                <HeaderPhoneLinks typeLink="men" closeMenu={setBurgerClicked} />
+                <HeaderPhoneLinks
+                  typeLink="men"
+                  closeMenu={setBurgerClicked}
+                  clearClicked={setActiveMenuItem}
+                />
               )}
             </li>
             <li className="flex flex-col">
               <div
                 className="hover-link flex cursor-pointer items-center justify-center gap-2 p-2 transition-colors "
-                onClick={womenClickedHandle}
+                onClick={() => handleToggle("women")}
               >
                 <p className="first-letter:uppercase">women</p>
                 {womenClicked ? <HiMinus size={24} /> : <HiPlus size={24} />}
@@ -84,13 +71,14 @@ const HeaderPhone = () => {
                 <HeaderPhoneLinks
                   typeLink="women"
                   closeMenu={setBurgerClicked}
+                  clearClicked={setActiveMenuItem}
                 />
               )}
             </li>
             <li className="flex flex-col">
               <div
                 className="hover-link flex cursor-pointer items-center justify-center gap-2 p-2 transition-colors "
-                onClick={accessoriesClickedHandle}
+                onClick={() => handleToggle("accessories")}
               >
                 <p className="first-letter:uppercase">accessories</p>
                 {accessoriesClicked ? (
@@ -103,6 +91,7 @@ const HeaderPhone = () => {
                 <HeaderPhoneLinks
                   typeLink="accessories"
                   closeMenu={setBurgerClicked}
+                  clearClicked={setActiveMenuItem}
                 />
               )}
             </li>

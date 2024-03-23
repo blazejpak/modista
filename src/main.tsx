@@ -32,7 +32,7 @@ const router = createBrowserRouter(
         errorElement={<ErrorPage />}
       />
       <Route
-        path={"men/:category"}
+        path={"category/:category"}
         element={<CategoryPage />}
         loader={async ({ params }) => {
           console.log(params);
@@ -41,29 +41,19 @@ const router = createBrowserRouter(
           return await CategoryDataLoader(category);
         }}
         errorElement={<ErrorPage />}
-      />
-      <Route
-        path={"women/:category"}
-        element={<CategoryPage />}
-        loader={async ({ params }) => {
-          console.log(params);
-          const category = params.category || "";
-          console.log(category);
-          return await CategoryDataLoader(category);
-        }}
-        errorElement={<ErrorPage />}
-      />
-      <Route
-        path={"accessories/:category"}
-        element={<CategoryPage />}
-        loader={async ({ params }) => {
-          console.log(params);
-          const category = params.category || "";
-          console.log(category);
-          return await CategoryDataLoader(category);
-        }}
-        errorElement={<ErrorPage />}
-      />
+      >
+        <Route
+          path={":product"}
+          element={<CategoryPage />}
+          loader={async ({ params }) => {
+            console.log(params);
+            const category = params.category || "";
+            console.log(category);
+            return await CategoryDataLoader(category);
+          }}
+          errorElement={<ErrorPage />}
+        ></Route>
+      </Route>
     </Route>,
   ),
 );
