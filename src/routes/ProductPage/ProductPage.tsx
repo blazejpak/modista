@@ -1,9 +1,10 @@
 import { useLoaderData } from "react-router-dom";
 
-const CategoryPage = () => {
+const ProductPage = () => {
   const data = useLoaderData();
   console.log(data);
-  return <div>CATEGORY</div>;
+
+  return <div>ProductPage</div>;
 };
 
-export default CategoryPage;
+export default ProductPage;

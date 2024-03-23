@@ -15,8 +15,10 @@ import Root from "./routes/Root";
 
 import HomePage from "./routes/HomePage/HomePage";
 import CategoryPage from "./routes/CategoryPage/CategoryPage";
+import ProductPage from "./routes/ProductPage/ProductPage";
 
 import { CategoryDataLoader } from "./routes/CategoryPage/CategoryDataLoader";
+import { ProductPageLoader } from "./routes/ProductPage/ProductPageLoader";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -34,26 +36,19 @@ const router = createBrowserRouter(
       <Route
         path={"category/:category"}
         element={<CategoryPage />}
-        loader={async ({ params }) => {
-          console.log(params);
+        loader={() => CategoryDataLoader()}
+        errorElement={<ErrorPage />}
+      />
+      <Route
+        path={"category/:category/:product"}
+        element={<ProductPage />}
+        loader={({ params }) => {
           const category = params.category || "";
-          console.log(category);
-          return await CategoryDataLoader(category);
+          const product = params.product || "";
+          return ProductPageLoader(category, product);
         }}
         errorElement={<ErrorPage />}
-      >
-        <Route
-          path={":product"}
-          element={<CategoryPage />}
-          loader={async ({ params }) => {
-            console.log(params);
-            const category = params.category || "";
-            console.log(category);
-            return await CategoryDataLoader(category);
-          }}
-          errorElement={<ErrorPage />}
-        ></Route>
-      </Route>
+      />
     </Route>,
   ),
 );

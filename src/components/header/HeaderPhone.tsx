@@ -42,7 +42,7 @@ const HeaderPhone = () => {
             }}
           />
 
-          <ul className="absolute top-[20%] flex flex-col items-center gap-4 text-3xl">
+          <ul className="absolute top-[20%] flex flex-col items-center gap-4 text-3xl uppercase">
             <li className="flex flex-col">
               <div
                 className="hover-link flex cursor-pointer items-center justify-center gap-2 p-4 transition-colors  "

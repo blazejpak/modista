@@ -19,11 +19,13 @@ const ROUTES = {
 
 export const navLinks = {
   men: [
+    { link: ROUTES.MEN, label: "all" },
     { link: ROUTES.MEN_SHIRTS, label: "shirts" },
     { link: ROUTES.MEN_SHOES, label: "shoes" },
     { link: ROUTES.MEN_WATCHES, label: "watches" },
   ],
   women: [
+    { link: ROUTES.WOMEN, label: "all" },
     { link: ROUTES.WOMEN_DRESSES, label: "dresses" },
     { link: ROUTES.WOMEN_SHOES, label: "shoes" },
     { link: ROUTES.WOMEN_WATCHES, label: "watches" },
@@ -31,6 +33,7 @@ export const navLinks = {
     { link: ROUTES.WOMEN_JEWELLERY, label: "jewellery" },
   ],
   accessories: [
+    { link: ROUTES.ACCESSORIES, label: "all" },
     { link: ROUTES.ACCESSORIES_DECORATIONS, label: "home decoration" },
     { link: ROUTES.ACCESSORIES_FURNITURE, label: "furniture" },
     { link: ROUTES.ACCESSORIES_SKINCARE, label: "skincare" },

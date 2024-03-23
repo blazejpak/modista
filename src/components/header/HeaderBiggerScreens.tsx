@@ -8,26 +8,42 @@ import { useState } from "react";
 import HeaderBiggerScreenLinks from "./HeaderBiggerScreenLinks";
 
 const HeaderBiggerScreens = () => {
-  const [isHover, setIsHover] = useState();
-  const [menHover, setMenHover] = useState<boolean>(false);
-  const [womenHover, setWomenHover] = useState<boolean>(false);
-  const [accessoriesHover, setAccessoriesHover] = useState<boolean>(false);
-
-  const navMenMouseOver = () => {
-    setMenHover(true);
-  };
-  const navWomenMouseOver = () => {
-    setWomenHover(true);
-  };
-  const navAccessoriesMouseOver = () => {
-    setAccessoriesHover(true);
-  };
+  const [hoverState, setHoverState] = useState({
+    men: false,
+    women: false,
+    accessories: false,
+  });
 
   const navMouseOut = () => {
-    setMenHover(false);
-    setWomenHover(false);
-    setAccessoriesHover(false);
+    setHoverState({
+      men: false,
+      women: false,
+      accessories: false,
+    });
   };
+
+  const navMouseOver = (category: string) => {
+    console.log("hover " + category);
+    setHoverState((prevState) => ({
+      ...prevState,
+      [category]: true,
+    }));
+  };
+
+  type Categories = {
+    label: string;
+    route: string;
+    typeLink: "men" | "women" | "accessories";
+  };
+  const categories: Categories[] = [
+    { label: "Men", route: ROUTES.MEN, typeLink: "men" },
+    { label: "Women", route: ROUTES.WOMEN, typeLink: "women" },
+    {
+      label: "Accessories",
+      route: ROUTES.ACCESSORIES,
+      typeLink: "accessories",
+    },
+  ];
 
   return (
     <nav className="flex h-full items-center justify-between px-[10%] text-xl font-bold">
@@ -35,47 +51,24 @@ const HeaderBiggerScreens = () => {
         <img alt="Logo" src={logo} height={60} width={160} />
       </NavLink>
       <ul className="relative  flex h-full items-center px-4">
-        <li
-          className="flex h-full items-center px-8"
-          onMouseOver={navMenMouseOver}
-          onMouseOut={navMouseOut}
-        >
-          <NavLink
-            to={ROUTES.MEN}
-            className="hover-link transition-all active:scale-110 "
+        {categories.map(({ label, route, typeLink }) => (
+          <li
+            className="flex h-full items-center px-8"
+            onMouseOver={() => navMouseOver(typeLink)}
+            onMouseOut={navMouseOut}
+            key={label}
           >
-            Men
-          </NavLink>
-          {menHover && <HeaderBiggerScreenLinks typeLink="men" />}
-        </li>
-        <li
-          className="flex h-full items-center px-8"
-          onMouseOver={navWomenMouseOver}
-          onMouseOut={navMouseOut}
-        >
-          <NavLink
-            to={ROUTES.WOMEN}
-            className="hover-link transition-all active:scale-110 "
-          >
-            Women
-          </NavLink>
-          {womenHover && <HeaderBiggerScreenLinks typeLink="women" />}
-        </li>
-        <li
-          className=" flex h-full items-center px-8"
-          onMouseOver={navAccessoriesMouseOver}
-          onMouseOut={navMouseOut}
-        >
-          <NavLink
-            to={ROUTES.ACCESSORIES}
-            className="hover-link transition-all active:scale-110 "
-          >
-            Accessories
-          </NavLink>
-          {accessoriesHover && (
-            <HeaderBiggerScreenLinks typeLink="accessories" />
-          )}
-        </li>
+            <NavLink
+              to={route}
+              className="hover-link transition-all active:scale-110 "
+            >
+              {label}
+            </NavLink>
+            {hoverState[typeLink] && (
+              <HeaderBiggerScreenLinks typeLink={typeLink} />
+            )}
+          </li>
+        ))}
       </ul>
       <PiShoppingCart
         size={24}

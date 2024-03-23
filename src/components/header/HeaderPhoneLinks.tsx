@@ -17,7 +17,7 @@ const HeaderPhoneLinks = ({ typeLink, closeMenu, clearClicked }: typeLink) => {
       <div className="flex flex-col items-center gap-1 text-xl ">
         {links.map(({ link, label }) => (
           <NavLink
-            className="hover-link transition-colors"
+            className="hover-link uppercase transition-colors"
             to={link}
             key={link}
             onClick={() => {
