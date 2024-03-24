@@ -25,7 +25,7 @@ const SubCategories = () => {
                 alt={label}
                 src={`${img}`}
                 height={300}
-                className="h-[350px] w-[200px] grayscale  group-hover:grayscale-0 md:w-[250px] lg:h-[450px] lg:w-[300px]"
+                className="h-[350px] w-[200px] grayscale  group-hover:grayscale-0 md:w-[250px] lg:h-[450px] lg:w-[400px]"
               />
               <p className=" p-6 text-center uppercase text-grey-lighter transition-colors group-hover:text-gold-dark ">
                 {label}
