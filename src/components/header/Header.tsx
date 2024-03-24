@@ -1,9 +1,15 @@
 import HeaderPhone from "./HeaderPhone";
 import HeaderBiggerScreens from "./HeaderBiggerScreens";
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const Header = () => {
   const [isMobile, setIsMobile] = useState<boolean>(false);
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   useLayoutEffect(() => {
     const handlerResize = () => {
