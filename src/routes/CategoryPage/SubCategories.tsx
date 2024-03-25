@@ -4,10 +4,6 @@ import { categoryLinks } from "./categoryLinks";
 const SubCategories = () => {
   const { category } = useParams();
 
-  for (const categoryMd of categoryLinks["women"]) {
-    console.log(categoryMd);
-  }
-
   const linkArr = category ? categoryLinks[category] : [];
 
   return (

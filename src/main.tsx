@@ -20,6 +20,8 @@ import HomePage from "./routes/HomePage/HomePage";
 import CategoryPage from "./routes/CategoryPage/CategoryPage";
 import ProductPage from "./routes/ProductPage/ProductPage";
 
+import { CategoryPageLoader } from "./routes/CategoryPage/CategoryPageLoader";
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route
@@ -37,6 +39,11 @@ const router = createBrowserRouter(
         path={"category/:category"}
         element={<CategoryPage />}
         errorElement={<ErrorPage />}
+        loader={({ params }: any) => {
+          const category = params.category || "";
+
+          return CategoryPageLoader(category);
+        }}
       />
       <Route
         path={"category/:category/:product"}
