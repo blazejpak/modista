@@ -15,7 +15,6 @@ export const CategoryPageLoader = async (param: string) => {
     }
 
     const response = await Promise.all(requests);
-    console.log(response);
     return response;
   } catch (error) {
     console.error("Error", error);

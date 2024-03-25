@@ -1,19 +1,19 @@
 import { Link, useLoaderData } from "react-router-dom";
-import type { Category } from "../../utils/types";
+import { Category } from "../../utils/types";
 
-const Bestsellers = () => {
+const Discount = () => {
   const data = useLoaderData() as Category[];
 
   const highRatedProducts = [];
 
   if (data) {
     for (const category of data) {
-      let bestRating = 0;
+      let bestDiscount = 0;
       let bestProduct = null;
 
       for (const product of category.products) {
-        if (product.rating > bestRating) {
-          bestRating = product.rating;
+        if (product.discountPercentage > bestDiscount) {
+          bestDiscount = product.rating;
           bestProduct = product;
         }
       }
@@ -24,9 +24,9 @@ const Bestsellers = () => {
 
   return (
     <section className="flex flex-col gap-8">
-      <h2 className=" mx-auto text-3xl font-bold uppercase">
-        Check ours bestsellers!
-      </h2>
+      <h3 className=" mx-auto text-2xl font-bold uppercase">
+        With the biggest discount
+      </h3>
       <div className="flex flex-wrap justify-center gap-4 lg:justify-start lg:gap-8 ">
         {highRatedProducts.map(
           (product) =>
@@ -53,4 +53,4 @@ const Bestsellers = () => {
   );
 };
 
-export default Bestsellers;
+export default Discount;
