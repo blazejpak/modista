@@ -1,5 +1,5 @@
 import { Link, useLoaderData } from "react-router-dom";
-import { Category } from "../../utils/types";
+import type { Category, Product } from "../../utils/types";
 
 const Discount = () => {
   const data = useLoaderData() as Category[];
@@ -13,12 +13,20 @@ const Discount = () => {
 
       for (const product of category.products) {
         if (product.discountPercentage > bestDiscount) {
-          bestDiscount = product.rating;
+          bestDiscount = product.discountPercentage;
           bestProduct = product;
         }
       }
 
       highRatedProducts.push(bestProduct);
+    }
+    if (highRatedProducts) {
+      highRatedProducts.sort((a, b) => {
+        if (a && b) {
+          return b?.discountPercentage - a?.discountPercentage;
+        }
+        return 0;
+      });
     }
   }
 
