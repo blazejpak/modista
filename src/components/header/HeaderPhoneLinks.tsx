@@ -10,6 +10,9 @@ type typeLink = {
 const HeaderPhoneLinks = ({ typeLink, closeMenu, clearClicked }: typeLink) => {
   const links = navLinks[typeLink];
 
+  console.log();
+  
+
   if (!links || !links.length) {
     return <div>Can't find a link called {typeLink}</div>;
   } else {

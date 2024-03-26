@@ -3,45 +3,34 @@ import { NavLink } from "react-router-dom";
 import { PiShoppingCart } from "react-icons/pi";
 import logo from "../../assets/logo-no-background.png";
 
-import ROUTES from "../../utils/routes";
+import ROUTES, { CATEGORIES, Category } from "../../utils/routes";
 import { useState } from "react";
 import HeaderBiggerScreenLinks from "./HeaderBiggerScreenLinks";
 
 const HeaderBiggerScreens = () => {
-  const [hoverState, setHoverState] = useState({
-    men: false,
-    women: false,
-    accessories: false,
-  });
+  const [hoverState, setHoverState] = useState<null | Category>(null);
 
   const navMouseOut = () => {
-    setHoverState({
-      men: false,
-      women: false,
-      accessories: false,
-    });
+    setHoverState(null);
   };
 
-  const navMouseOver = (category: string) => {
+  const navMouseOver = (category: Category) => {
     console.log("hover " + category);
-    setHoverState((prevState) => ({
-      ...prevState,
-      [category]: true,
-    }));
+    setHoverState(category);
   };
 
   type Categories = {
     label: string;
     route: string;
-    typeLink: "men" | "women" | "accessories";
+    typeLink: string;
   };
   const categories: Categories[] = [
-    { label: "Men", route: ROUTES.MEN, typeLink: "men" },
-    { label: "Women", route: ROUTES.WOMEN, typeLink: "women" },
+    { label: "Men", route: ROUTES.MEN, typeLink: CATEGORIES.men },
+    { label: "Women", route: ROUTES.WOMEN, typeLink: CATEGORIES.women },
     {
       label: "Accessories",
       route: ROUTES.ACCESSORIES,
-      typeLink: "accessories",
+      typeLink: CATEGORIES.accessories,
     },
   ];
 
@@ -54,7 +43,7 @@ const HeaderBiggerScreens = () => {
         {categories.map(({ label, route, typeLink }) => (
           <li
             className="flex h-full items-center px-8"
-            onMouseOver={() => navMouseOver(typeLink)}
+            onMouseOver={() => navMouseOver(typeLink as Category)}
             onMouseOut={navMouseOut}
             key={label}
           >
@@ -64,7 +53,7 @@ const HeaderBiggerScreens = () => {
             >
               {label}
             </NavLink>
-            {hoverState[typeLink] && (
+            {hoverState === typeLink && (
               <HeaderBiggerScreenLinks typeLink={typeLink} />
             )}
           </li>
