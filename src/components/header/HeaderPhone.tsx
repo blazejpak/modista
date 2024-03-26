@@ -14,76 +14,71 @@ import HeaderPhoneLinks from "./HeaderPhoneLinks";
 
 const HeaderPhone = () => {
   const [burgerClicked, setBurgerClicked] = useState<boolean>(false);
-  const [menClicked, setMenClicked] = useState<boolean>(false);
-  const [womenClicked, setWomenClicked] = useState<boolean>(false);
-  const [accessoriesClicked, setAccessoriesClicked] = useState<boolean>(false);
+  const [activeMenuItem, setActiveMenuItem] = useState<string>("");
 
-  const menClickedHandle = () => {
-    setMenClicked((prevState) => !prevState);
-
-    setWomenClicked(false);
-    setAccessoriesClicked(false);
+  const handleToggle = (activeItem: string) => {
+    setActiveMenuItem(activeItem);
   };
 
-  const womenClickedHandle = () => {
-    setWomenClicked((prevState) => !prevState);
-
-    setMenClicked(false);
-    setAccessoriesClicked(false);
-  };
-
-  const accessoriesClickedHandle = () => {
-    setAccessoriesClicked((prevState) => !prevState);
-
-    setMenClicked(false);
-    setWomenClicked(false);
-  };
+  const menClicked = activeMenuItem === "men";
+  const womenClicked = activeMenuItem === "women";
+  const accessoriesClicked = activeMenuItem === "accessories";
 
   return (
-    <nav className="h-full flex items-center gap-8 justify-between  ">
+    <nav className="flex h-full items-center justify-between gap-8  ">
       <GiHamburgerMenu
         size={24}
-        className="hover:text-gold-lighter ml-8 transition-colors cursor-pointer"
+        className="ml-8 cursor-pointer transition-colors hover:text-gold-lighter"
         onClick={() => setBurgerClicked((prevState) => !prevState)}
       />
       {burgerClicked && (
-        <div className="top-[0] bg-black-lighter flex justify-center  w-full h-screen z-10 absolute ">
+        <div className="absolute top-[0] z-10 flex  h-screen w-full justify-center bg-black-lighter ">
           <IoClose
             size={30}
-            className="absolute top-4 right-4 cursor-pointer hover-link active:scale-110 transition-all text-grey-normal"
+            className="hover-link absolute right-4 top-4 cursor-pointer text-grey-normal transition-all active:scale-110"
             onClick={() => {
               setBurgerClicked(false);
-              setMenClicked(false);
-              setWomenClicked(false);
-              setAccessoriesClicked(false);
+              setActiveMenuItem("");
             }}
           />
 
-          <ul className="flex flex-col gap-4 top-[20%] items-center absolute text-3xl">
+          <ul className="absolute top-[20%] flex flex-col items-center gap-4 text-3xl uppercase">
             <li className="flex flex-col">
               <div
-                className="flex gap-2 cursor-pointer p-4 items-center justify-center hover-link transition-colors  "
-                onClick={menClickedHandle}
+                className="hover-link flex cursor-pointer items-center justify-center gap-2 p-4 transition-colors  "
+                onClick={() => handleToggle("men")}
               >
                 <p className="first-letter:uppercase">men</p>
                 {menClicked ? <HiMinus size={24} /> : <HiPlus size={24} />}
               </div>
-              {menClicked && <HeaderPhoneLinks typeLink="men" />}
+              {menClicked && (
+                <HeaderPhoneLinks
+                  typeLink="men"
+                  closeMenu={setBurgerClicked}
+                  clearClicked={setActiveMenuItem}
+                />
+              )}
             </li>
             <li className="flex flex-col">
               <div
-                className="flex gap-2 cursor-pointer p-2 items-center justify-center hover-link transition-colors "
-                onClick={womenClickedHandle}
+                className="hover-link flex cursor-pointer items-center justify-center gap-2 p-2 transition-colors "
+                onClick={() => handleToggle("women")}
               >
                 <p className="first-letter:uppercase">women</p>
                 {womenClicked ? <HiMinus size={24} /> : <HiPlus size={24} />}
               </div>
-              {womenClicked && <HeaderPhoneLinks typeLink="women" />}
+              {womenClicked && (
+                <HeaderPhoneLinks
+                  typeLink="women"
+                  closeMenu={setBurgerClicked}
+                  clearClicked={setActiveMenuItem}
+                />
+              )}
             </li>
             <li className="flex flex-col">
               <div
-                className="flex gap-2 cursor-pointer p-2 items-center justify-center hover-link transition-colors "
-                onClick={accessoriesClickedHandle}
+                className="hover-link flex cursor-pointer items-center justify-center gap-2 p-2 transition-colors "
+                onClick={() => handleToggle("accessories")}
               >
                 <p className="first-letter:uppercase">accessories</p>
                 {accessoriesClicked ? (
@@ -93,18 +88,22 @@ const HeaderPhone = () => {
                 )}
               </div>
               {accessoriesClicked && (
-                <HeaderPhoneLinks typeLink="accessories" />
+                <HeaderPhoneLinks
+                  typeLink="accessories"
+                  closeMenu={setBurgerClicked}
+                  clearClicked={setActiveMenuItem}
+                />
               )}
             </li>
           </ul>
         </div>
       )}
-      <NavLink to={ROUTES.HOMEPAGE} className="active:scale-110 transition-all">
+      <NavLink to={ROUTES.HOMEPAGE} className="transition-all active:scale-110">
         <img alt="Logo" src={logo} height={60} width={160} />
       </NavLink>
       <PiShoppingCart
         size={24}
-        className="active:scale-110 mr-8 transition-all hover-link  cursor-pointer"
+        className="hover-link mr-8 cursor-pointer transition-all  active:scale-110"
       />
     </nav>
   );
