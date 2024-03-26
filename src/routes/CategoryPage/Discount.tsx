@@ -45,6 +45,11 @@ const Discount = () => {
                 <p className=" p-6 text-center uppercase text-grey-lighter transition-colors group-hover:text-gold-dark ">
                   {product.title}
                 </p>
+                <div className="absolute right-0 top-0 rounded-full bg-red-600/80 p-4">
+                  <p className="text-xl font-bold text-white">
+                    -{product.discountPercentage}%
+                  </p>
+                </div>
               </Link>
             ),
         )}
