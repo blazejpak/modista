@@ -34,7 +34,7 @@ export const navLinks = {
   ],
   accessories: [
     { link: ROUTES.ACCESSORIES, label: "all" },
-    { link: ROUTES.ACCESSORIES_DECORATIONS, label: "home decoration" },
+    { link: ROUTES.ACCESSORIES_DECORATIONS, label: "home-decoration" },
     { link: ROUTES.ACCESSORIES_FURNITURE, label: "furniture" },
     { link: ROUTES.ACCESSORIES_SKINCARE, label: "skincare" },
     { link: ROUTES.ACCESSORIES_SUNGLASSES, label: "sunglasses" },

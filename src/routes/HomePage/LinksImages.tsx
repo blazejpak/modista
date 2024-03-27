@@ -1,6 +1,6 @@
-import manImg from "../../assets/pexels-man.webp";
-import womanImg from "../../assets/pexels-woman.webp";
-import homeImg from "../../assets/pexels-home.webp";
+import manImg from "../../assets/man.webp";
+import womanImg from "../../assets/woman.webp";
+import homeImg from "../../assets/accessories.webp";
 import { Link } from "react-router-dom";
 import ROUTES from "../../utils/routes";
 
@@ -37,7 +37,7 @@ const LinksImages = () => {
           className="grayscale transition-all group-hover:grayscale-0"
         />
         <div className="absolute bottom-10 left-[50%] translate-x-[-50%] cursor-pointer rounded bg-grey-lighter p-2 text-center text-sm uppercase lg:p-3 lg:text-base">
-          <Link to={ROUTES.HOME}>home section</Link>
+          <Link to={ROUTES.ACCESSORIES}>Accessories </Link>
         </div>
       </div>
     </div>

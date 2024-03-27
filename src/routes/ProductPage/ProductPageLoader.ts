@@ -1,3 +1,5 @@
+import { URL } from "../../utils/helpers";
+
 export const ProductPageLoader = async (category: string, param: string) => {
   let typeCategory = "";
 
@@ -7,7 +9,7 @@ export const ProductPageLoader = async (category: string, param: string) => {
 
   const input = typeCategory + param;
 
-  const data = await fetch("https://dummyjson.com/products/category/" + input);
+  const data = await fetch(`${URL}products/category/` + input);
   const response = data.json();
   return response;
 };
