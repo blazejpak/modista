@@ -22,12 +22,14 @@ const Bestsellers = () => {
                   to={product.id.toString()}
                   className="group relative h-[350px] w-[250px] overflow-hidden rounded-xl bg-black-lighter shadow transition-transform focus:scale-105"
                 >
-                  <img
-                    alt={product.description}
-                    src={product.images[0]}
-                    height={300}
-                    className="h-[250px] w-full "
-                  />
+                  {product.images[0] && (
+                    <img
+                      alt={product.description}
+                      src={product.images[0]}
+                      height={300}
+                      className="h-[250px] w-full "
+                    />
+                  )}
                   <p className=" p-6 text-center uppercase text-grey-lighter transition-colors group-hover:text-gold-dark ">
                     {product.title}
                   </p>
