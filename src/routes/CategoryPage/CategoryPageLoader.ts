@@ -1,8 +1,9 @@
+import { URL } from "../../utils/helpers";
 import { categoryLinks } from "./categoryLinks";
 
 export const CategoryPageLoader = async (param: string) => {
   try {
-    const URI = "https://dummyjson.com/products/category/";
+    const URI = `${URL}products/category/`;
     const requests = [];
 
     if (categoryLinks[param]) {

@@ -1,5 +1,7 @@
 import { Category } from "./types";
 
+export const URL = "https://dummyjson.com/";
+
 export function getDataRatingAndDiscount(
   data: Category[],
   type: "discount" | "rating",
