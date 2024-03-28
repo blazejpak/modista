@@ -10,11 +10,11 @@ const SubcategoryPage = () => {
     <section className="p-6">
       <div className="xs:grid-cols-2 xs:divide-y-0 xs:gap-2 grid grid-cols-1 items-center justify-center divide-y-2 md:gap-4 lg:grid-cols-3 xl:grid-cols-4">
         {data &&
-          data.products.map((product): any => {
+          data.products.map((product: any) => {
             console.log(product.id);
             return (
               <Link
-                className="xs:shadow xs:px-4 flex flex-col py-4"
+                className="xs:shadow xs:px-4 flex flex-col gap-2 py-4"
                 key={product.id}
                 to={`${product.id}`}
               >
