@@ -7,8 +7,8 @@ function Root() {
   const { state } = useNavigation();
 
   return (
-    <div className="flex w-full items-center justify-center">
-      <div className="relative grid min-h-screen max-w-[2000px] grid-rows-[90px_1fr_300px] shadow-xl lg:grid-rows-[90px_1fr_200px] ">
+    <div className="flex w-full items-center justify-center bg-grey-normal">
+      <div className="relative grid min-h-screen max-w-[2000px] grid-rows-[90px_1fr_300px] bg-white shadow-xl lg:grid-rows-[90px_1fr_200px]">
         <Header />
         <main>
           {state === "loading" ? (
