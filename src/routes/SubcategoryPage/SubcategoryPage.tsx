@@ -1,12 +1,15 @@
 import { useLoaderData } from "react-router";
 import { Link } from "react-router-dom";
+import SortProducts from "./SortProducts";
 
 const SubcategoryPage = () => {
   // TODO type for data
   const data = useLoaderData() as any;
 
   return (
-    <section className="p-6">
+    <section className="flex flex-col gap-8 p-6">
+      <SortProducts />
+
       <div className="grid grid-cols-1 items-center justify-center divide-y-2 xs:grid-cols-2 xs:gap-2 xs:divide-y-0 md:gap-4 lg:grid-cols-3 xl:grid-cols-4">
         {data &&
           data.products.map((product: any) => {
