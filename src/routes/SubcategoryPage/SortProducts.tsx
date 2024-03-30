@@ -1,24 +1,32 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { GrRadial } from "react-icons/gr";
 import { GrRadialSelected } from "react-icons/gr";
-
-type SortType = {
-  label: string;
-  id: number;
-};
-
-const sortType: SortType[] = [
-  { label: "Lowest price", id: 0 },
-  { label: "Highest price", id: 1 },
-  { label: "Discount", id: 2 },
-  { label: "Name", id: 3 },
-];
+import { dataSort, sortType } from "./utils";
+import { SortDataContext } from "../../context/SortDataContext";
 
 const SortProducts = () => {
   const [isActive, setIsActive] = useState<boolean>(false);
-  const [selectSort, setSelectSort] = useState<number>(0);
+  const [selectSort, setSelectSort] = useState<string>("Lowest price");
+
+  const { sortedData, setSortedData } = useContext(SortDataContext);
+
+  useEffect(() => {
+    if (sortedData) {
+      const sortData = dataSort(sortedData, selectSort);
+      setSortedData(sortData);
+    }
+  }, []);
+
+  // setSortedData(sortData);
+  const handleSortChange = (sortType: string) => {
+    setSelectSort(sortType);
+    const sortData = dataSort(sortedData, sortType);
+    setSortedData(sortData);
+
+    console.log(sortData);
+  };
 
   return (
     <div className="relative">
@@ -38,10 +46,10 @@ const SortProducts = () => {
           {sortType.map((item) => (
             <li
               key={item.id}
-              className={`flex cursor-pointer items-center gap-2 ${selectSort === item.id && "bg-grey-normal"} p-4 hover:bg-grey-normal`}
-              onClick={() => setSelectSort(item.id)}
+              className={`flex cursor-pointer items-center gap-2 ${selectSort === item.label && "bg-grey-normal"} p-4 hover:bg-grey-normal`}
+              onClick={() => handleSortChange(item.label)}
             >
-              {selectSort === item.id ? <GrRadialSelected /> : <GrRadial />}
+              {selectSort === item.label ? <GrRadialSelected /> : <GrRadial />}
               <p>{item.label}</p>
             </li>
           ))}
