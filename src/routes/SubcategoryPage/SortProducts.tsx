@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { GrRadial } from "react-icons/gr";
@@ -12,20 +12,10 @@ const SortProducts = () => {
 
   const { sortedData, setSortedData } = useContext(SortDataContext);
 
-  useEffect(() => {
-    if (sortedData) {
-      const sortData = dataSort(sortedData, selectSort);
-      setSortedData(sortData);
-    }
-  }, []);
-
-  // setSortedData(sortData);
   const handleSortChange = (sortType: string) => {
     setSelectSort(sortType);
     const sortData = dataSort(sortedData, sortType);
     setSortedData(sortData);
-
-    console.log(sortData);
   };
 
   return (

@@ -14,11 +14,8 @@ export function dataSort(data: any[], typeSort: string) {
   try {
     const sortedProducts = [];
 
-    console.log(data);
-
     if (data) {
       for (const product of data) {
-        console.log(product);
         let sort = 0;
         let sortProduct = null;
 
@@ -57,8 +54,8 @@ export function dataSort(data: any[], typeSort: string) {
             if (typeSort === "Discount")
               return a?.discountPercentage - b?.discountPercentage;
             if (typeSort === "Name") {
-              if (a.name < b.name) return -1;
-              if (a.name > b.name) return 1;
+              if (a.title < b.title) return -1;
+              if (a.title > b.title) return 1;
               return 0;
             }
           }
