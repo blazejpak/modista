@@ -8,13 +8,13 @@ import { SortDataContext } from "../../context/SortDataContext";
 
 const SortProducts = () => {
   const [isActive, setIsActive] = useState<boolean>(false);
-  const [selectSort, setSelectSort] = useState<string>("Lowest price");
 
-  const { sortedData, setSortedData } = useContext(SortDataContext);
+  const { sortedData, setSortedData, typeSort, setTypeSort } =
+    useContext(SortDataContext);
 
   const handleSortChange = (sortType: string) => {
-    setSelectSort(sortType);
-    const sortData = dataSort(sortedData, sortType);
+    setTypeSort(sortType);
+    const sortData = dataSort(sortedData, typeSort);
     setSortedData(sortData);
   };
 
@@ -36,10 +36,10 @@ const SortProducts = () => {
           {sortType.map((item) => (
             <li
               key={item.id}
-              className={`flex cursor-pointer items-center gap-2 ${selectSort === item.label && "bg-grey-normal"} p-4 hover:bg-grey-normal`}
+              className={`flex cursor-pointer items-center gap-2 ${typeSort === item.label && "bg-grey-normal"} p-4 hover:bg-grey-normal`}
               onClick={() => handleSortChange(item.label)}
             >
-              {selectSort === item.label ? <GrRadialSelected /> : <GrRadial />}
+              {typeSort === item.label ? <GrRadialSelected /> : <GrRadial />}
               <p>{item.label}</p>
             </li>
           ))}

@@ -1,17 +1,30 @@
-import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import { SortDataContext } from "../../context/SortDataContext";
+import { dataSort } from "./utils";
 
-const DisplayProducts = () => {
-  const { sortedData } = useContext(SortDataContext);
-  console.log(sortedData);
+const DisplayProducts = ({ products }: any) => {
+  const { sortedData, typeSort } = useContext(SortDataContext);
+  const [displayData, setDisplayData] = useState<any[]>([]);
+  const { subCategory } = useParams();
+
+  useEffect(() => {
+    setDisplayData([]);
+    if (sortedData.length > 0) {
+      const sortData = dataSort(products, typeSort);
+      setDisplayData(sortData);
+    }
+  }, [subCategory, products]);
+
   return (
     <div className="grid grid-cols-1 items-center justify-center divide-y-2 xs:grid-cols-2 xs:gap-2 xs:divide-y-0 md:gap-4 lg:grid-cols-3 xl:grid-cols-4">
-      {sortedData.length > 0 &&
-        sortedData.map((product: any) => {
+      {displayData.length > 0 &&
+        displayData.map((product: any) => {
+          const priceWithDiscount =
+            product.price * ((100 - product.discountPercentage) / 100);
           return (
             <Link
-              className="flex h-[420px] flex-col justify-between gap-2 py-4 shadow  xs:px-4 xs:shadow "
+              className=" flex h-[420px] flex-col justify-between gap-2 py-4 shadow  xs:px-4 xs:shadow "
               key={product.id}
               to={`${product.id}`}
             >
@@ -26,7 +39,12 @@ const DisplayProducts = () => {
                 <h2 className=" text-sm first-letter:uppercase">
                   {product.title}
                 </h2>
-                <p>${product.price.toFixed(2)} </p>
+                <div className="flex gap-2">
+                  <p className="line-through">${product.price.toFixed(2)} </p>
+                  <p className="font-bold text-red-500">
+                    ${priceWithDiscount.toFixed(2)}{" "}
+                  </p>
+                </div>
               </div>
             </Link>
           );

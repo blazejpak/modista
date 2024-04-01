@@ -28,7 +28,7 @@ const SubcategoryPage = () => {
     <section className="flex flex-col gap-8 p-6">
       <SortProducts />
 
-      {sortedData.length > 0 && <DisplayProducts />}
+      {sortedData.length > 0 && <DisplayProducts products={sortedData} />}
     </section>
   );
 };
