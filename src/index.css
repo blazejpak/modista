@@ -5,6 +5,8 @@
 @layer base {
   html {
     font-family: "Manrope", sans-serif;
+    overflow-y: scroll;
+    overflow-x: hidden;
   }
 }
 @layer components {
