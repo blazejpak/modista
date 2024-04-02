@@ -1,47 +1,42 @@
-import { Category } from "./types";
+import { Category, Product } from "./types";
 
 export const URL = "https://dummyjson.com/";
+
+type ProductType = 'discountPercentage' | 'rating';
+
+const mappingNames = {
+  discount: 'discountPercentage',
+  rating: 'rating'
+}
 
 export function getDataRatingAndDiscount(
   data: Category[],
   type: "discount" | "rating",
 ) {
   try {
-    const highRatedProducts = [];
+    const highRatedProducts: Product[] = [];
+    const _type = mappingNames[type] as ProductType;
 
-    if (data) {
-      for (const category of data) {
-        let bestPrice = 0;
-        let bestProduct = null;
+    if (!data) { return }
+    
+    for (const category of data) {
+      let bestPrice = 0;
+      let bestProduct = null;
 
-        for (const product of category.products) {
-          if (type === "discount") {
-            if (product.discountPercentage > bestPrice) {
-              bestPrice = product.discountPercentage;
-              bestProduct = product;
-            }
-          }
-
-          if (type === "rating") {
-            if (product.rating > bestPrice) {
-              bestPrice = product.rating;
-              bestProduct = product;
-            }
-          }
+      for (const product of category.products) {
+        if (product.discountPercentage > bestPrice) {
+          bestPrice = product[_type];
+          bestProduct = product;
+        }
+        
+        if (!bestProduct) {
+          continue;
         }
 
         highRatedProducts.push(bestProduct);
       }
-      if (highRatedProducts) {
-        highRatedProducts.sort((a, b) => {
-          if (a && b) {
-            if (type === "discount")
-              return b?.discountPercentage - a?.discountPercentage;
-            if (type === "rating") return b?.rating - a?.rating;
-          }
-          return 0;
-        });
-      }
+
+      highRatedProducts?.sort((a, b) => b[_type] - a[_type]);
     }
     return highRatedProducts;
   } catch (error) {
