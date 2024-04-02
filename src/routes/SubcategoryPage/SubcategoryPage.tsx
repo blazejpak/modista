@@ -7,7 +7,7 @@ import DisplayProducts from "./DisplayProducts";
 import FilterData from "./FilterData";
 
 const SubcategoryPage = () => {
-  const { sortedData, setSortedData } = useContext(SortDataContext);
+  const { sortedData, setSortedData, typeSort } = useContext(SortDataContext);
   const { subCategory } = useParams();
 
   // TODO type for data
@@ -15,16 +15,12 @@ const SubcategoryPage = () => {
   const { products } = data;
 
   useEffect(() => {
-    setSortedData(products);
-  }, [subCategory]);
-
-  useEffect(() => {
-    if (sortedData.length > 0) {
+    if (products) {
       const sortData = dataSort(products, "Lowest price");
       setSortedData(sortData);
     }
-  }, [subCategory]);
-
+  }, [subCategory, typeSort]);
+  console.log(sortedData);
   return (
     <section className="flex flex-col  gap-8 p-6">
       <div className="flex justify-between px-2 md:px-8 lg:px-[10%]">
