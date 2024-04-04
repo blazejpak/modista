@@ -12,58 +12,23 @@ export const sortType: SortType[] = [
 
 export function dataSort(data: any[], typeSort: string) {
   try {
-    const sortedProducts = [];
-
-    if (data) {
-      for (const product of data) {
-        let sort = 0;
-        let sortProduct = null;
-
-        if (typeSort === "Lowest price") {
-          if (product.price > sort) {
-            sort = product.price;
-            sortProduct = product;
+    if (!data) return null;
+    else {
+      data.sort((a, b) => {
+        if (a && b) {
+          if (typeSort === "Lowest price") return a.price - b.price;
+          else if (typeSort === "Highest price") return b.price - a.price;
+          else if (typeSort === "Discount")
+            return a.discountPercentage - b.discountPercentage;
+          else if (typeSort === "Name") {
+            return a.title.localeCompare(b.title);
           }
         }
+        return 0;
+      });
 
-        if (typeSort === "Highest price") {
-          if (product.price > sort) {
-            sort = product.price;
-            sortProduct = product;
-          }
-        }
-
-        if (typeSort === "Discount") {
-          if (product.discountPercentage > sort) {
-            sort = product.discountPercentage;
-            sortProduct = product;
-          }
-        }
-
-        if (typeSort === "Name") {
-          sortProduct = product;
-        }
-
-        sortedProducts.push(sortProduct);
-      }
-      if (sortedProducts) {
-        sortedProducts.sort((a, b) => {
-          if (a && b) {
-            if (typeSort === "Lowest price") return a?.price - b?.price;
-            if (typeSort === "Highest price") return b?.price - a?.price;
-            if (typeSort === "Discount")
-              return a?.discountPercentage - b?.discountPercentage;
-            if (typeSort === "Name") {
-              if (a.title < b.title) return -1;
-              if (a.title > b.title) return 1;
-              return 0;
-            }
-          }
-          return 0;
-        });
-      }
+      return data;
     }
-    return sortedProducts;
   } catch (error) {
     console.error(error);
     return [];

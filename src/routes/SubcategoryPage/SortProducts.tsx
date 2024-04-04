@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { GrRadial } from "react-icons/gr";
@@ -14,9 +14,13 @@ const SortProducts = () => {
 
   const handleSortChange = (sortType: string) => {
     setTypeSort(sortType);
-    const sortData = dataSort(sortedData, typeSort);
+    const sortData = dataSort(sortedData, sortType);
     setSortedData(sortData);
   };
+
+  useEffect(() => {
+    setTypeSort("Lowest price");
+  }, []);
 
   return (
     <div className="relative">
@@ -33,16 +37,17 @@ const SortProducts = () => {
       </div>
       {isActive && (
         <ul className="absolute left-0 top-[150%] z-10 flex flex-col gap-1 border bg-grey-lighter  text-sm">
-          {sortType.map((item) => (
-            <li
-              key={item.id}
-              className={`flex cursor-pointer items-center gap-2 ${typeSort === item.label && "bg-grey-normal"} p-4 hover:bg-grey-normal`}
-              onClick={() => handleSortChange(item.label)}
-            >
-              {typeSort === item.label ? <GrRadialSelected /> : <GrRadial />}
-              <p>{item.label}</p>
-            </li>
-          ))}
+          {sortType &&
+            sortType.map((item) => (
+              <li
+                key={item.id}
+                className={`flex cursor-pointer items-center gap-2 ${typeSort === item.label && "bg-grey-normal"} p-4 hover:bg-grey-normal`}
+                onClick={() => handleSortChange(item.label)}
+              >
+                {typeSort === item.label ? <GrRadialSelected /> : <GrRadial />}
+                <p>{item.label}</p>
+              </li>
+            ))}
         </ul>
       )}
     </div>

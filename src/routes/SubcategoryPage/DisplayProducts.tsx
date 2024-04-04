@@ -1,30 +1,15 @@
-import { useContext, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { SortDataContext } from "../../context/SortDataContext";
-import { dataSort } from "./utils";
+import { Link } from "react-router-dom";
 
 const DisplayProducts = ({ products }: any) => {
-  const { sortedData, typeSort } = useContext(SortDataContext);
-  const [displayData, setDisplayData] = useState<any[]>([]);
-  const { subCategory } = useParams();
-
-  useEffect(() => {
-    setDisplayData([]);
-    if (sortedData.length > 0) {
-      const sortData = dataSort(products, typeSort);
-      setDisplayData(sortData);
-    }
-  }, [subCategory, products]);
-
   return (
-    <div className="grid grid-cols-1 items-center justify-center divide-y-2 xs:grid-cols-2 xs:gap-2 xs:divide-y-0 md:gap-4 lg:grid-cols-3 xl:grid-cols-4">
-      {displayData.length > 0 &&
+    <div className="xs:grid-cols-2 xs:gap-2 xs:divide-y-0 grid grid-cols-1 items-center justify-center divide-y-2 md:gap-4 lg:grid-cols-3 xl:grid-cols-4">
+      {products.length > 0 &&
         products.map((product: any) => {
           const priceWithDiscount =
             product.price * ((100 - product.discountPercentage) / 100);
           return (
             <Link
-              className=" flex h-[420px] flex-col justify-between gap-2 py-4 shadow  xs:px-4 xs:shadow "
+              className=" xs:px-4 xs:shadow flex h-[420px] flex-col justify-between gap-2  py-4 shadow "
               key={product.id}
               to={`${product.id}`}
             >

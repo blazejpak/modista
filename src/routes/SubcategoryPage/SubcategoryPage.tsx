@@ -1,4 +1,4 @@
-import { useLoaderData, useParams } from "react-router";
+import { useLoaderData } from "react-router";
 import SortProducts from "./SortProducts";
 import { useContext, useEffect } from "react";
 import { SortDataContext } from "../../context/SortDataContext";
@@ -7,20 +7,19 @@ import DisplayProducts from "./DisplayProducts";
 import FilterData from "./FilterData";
 
 const SubcategoryPage = () => {
-  const { sortedData, setSortedData, typeSort } = useContext(SortDataContext);
-  const { subCategory } = useParams();
+  const { sortedData, setSortedData } = useContext(SortDataContext);
 
   // TODO type for data
   const data = useLoaderData() as any;
   const { products } = data;
 
   useEffect(() => {
-    if (products) {
+    if (products.length > 0) {
       const sortData = dataSort(products, "Lowest price");
       setSortedData(sortData);
     }
-  }, [subCategory, typeSort]);
-  console.log(sortedData);
+  }, []);
+
   return (
     <section className="flex flex-col  gap-8 p-6">
       <div className="flex justify-between px-2 md:px-8 lg:px-[10%]">
