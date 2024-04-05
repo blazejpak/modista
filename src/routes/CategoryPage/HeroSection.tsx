@@ -15,12 +15,14 @@ const HeroSection = () => {
 
   return (
     <section className="relative">
-      <img
-        alt={`image of ${category}`}
-        height={800}
-        src={img}
-        className="grayscale"
-      />
+      {img && (
+        <img
+          alt={`image of ${category}`}
+          height={800}
+          src={img}
+          className="grayscale"
+        />
+      )}
       <div className="absolute left-[50%] top-0 translate-x-[-50%] rounded bg-grey-lighter p-2 text-lg font-bold uppercase shadow-lg md:p-10 md:text-3xl">
         <p>{category}</p>
       </div>
