@@ -1,10 +1,16 @@
-import { Outlet, useNavigation } from "react-router-dom";
+import { Outlet, useLocation, useNavigation } from "react-router-dom";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import { BeatLoader } from "react-spinners";
+import { useEffect } from "react";
 
 function Root() {
   const { state } = useNavigation();
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
     <div className="flex w-full items-center justify-center">
@@ -12,7 +18,7 @@ function Root() {
         <Header />
         <main>
           {state === "loading" ? (
-            <div className="absolute left-[50%] top-[35%] translate-x-[-50%] ">
+            <div className="absolute left-[50%] top-[25%] translate-x-[-50%] md:top-[35%] lg:top-[50%] ">
               <BeatLoader color="#D87D4A" size={36} />
             </div>
           ) : (

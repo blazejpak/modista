@@ -23,7 +23,6 @@ const HeaderBiggerScreens = () => {
   };
 
   const navMouseOver = (category: string) => {
-    console.log("hover " + category);
     setHoverState((prevState) => ({
       ...prevState,
       [category]: true,

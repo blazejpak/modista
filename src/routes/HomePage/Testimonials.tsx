@@ -1,7 +1,7 @@
-import firstTestimonial from "../../assets/firstTestimonial.jpg";
-import secondTestimonial from "../../assets/secondTestimonial.jpg";
-import thirdTestimonial from "../../assets/thirdTestimonial.jpg";
-import fourthTestimonial from "../../assets/fourthTestimonial.jpg";
+import firstTestimonial from "../../assets/testimonials/firstTestimonial.jpg";
+import secondTestimonial from "../../assets/testimonials/secondTestimonial.jpg";
+import thirdTestimonial from "../../assets/testimonials/thirdTestimonial.jpg";
+import fourthTestimonial from "../../assets/testimonials/fourthTestimonial.jpg";
 
 const Testimonials = () => {
   return (
