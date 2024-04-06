@@ -1,4 +1,4 @@
-import { Category } from "./types";
+import { Category, Product } from "./types";
 
 export const URL = "https://dummyjson.com/";
 
@@ -42,5 +42,30 @@ export function getDataRatingAndDiscount(
     return highRatedProducts;
   } catch (error) {
     console.error(error);
+  }
+}
+
+export function dataSort(data: Product[], typeSort: string) {
+  try {
+    if (!data) return null;
+    else {
+      data.sort((a, b) => {
+        if (a && b) {
+          if (typeSort === "Lowest price") return a.price - b.price;
+          else if (typeSort === "Highest price") return b.price - a.price;
+          else if (typeSort === "Discount")
+            return a.discountPercentage - b.discountPercentage;
+          else if (typeSort === "Name") {
+            return a.title.localeCompare(b.title);
+          }
+        }
+        return 0;
+      });
+
+      return data;
+    }
+  } catch (error) {
+    console.error(error);
+    return [];
   }
 }

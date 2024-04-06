@@ -1,8 +1,9 @@
-import { createContext, useState } from "react";
+import React, { ReactNode, createContext, useState } from "react";
+import { Product } from "../utils/types";
 
 interface SortDataContextType {
-  sortedData: any[];
-  setSortedData: React.Dispatch<React.SetStateAction<any[]>>;
+  sortedData: Product[];
+  setSortedData: React.Dispatch<React.SetStateAction<Product[]>>;
   typeSort: string;
   setTypeSort: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -16,8 +17,12 @@ const initialSortData: SortDataContextType = {
 
 export const SortDataContext = createContext(initialSortData);
 
-export const SortDataProvider = ({ children }: any) => {
-  const [sortedData, setSortedData] = useState<Array<any>>([]);
+interface SortDataProviderProps {
+  children: ReactNode;
+}
+
+export const SortDataProvider = ({ children }: SortDataProviderProps) => {
+  const [sortedData, setSortedData] = useState<Product[]>([]);
   const [typeSort, setTypeSort] = useState<string>("Lowest price");
 
   return (

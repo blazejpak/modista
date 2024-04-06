@@ -3,8 +3,10 @@ import { useContext, useEffect, useState } from "react";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { GrRadial } from "react-icons/gr";
 import { GrRadialSelected } from "react-icons/gr";
-import { dataSort, sortType } from "./utils";
 import { SortDataContext } from "../../context/SortDataContext";
+import { dataSort } from "../../utils/helpers";
+import { sortType } from "../../utils/variables";
+import { Product } from "../../utils/types";
 
 const SortProducts = () => {
   const [isActive, setIsActive] = useState<boolean>(false);
@@ -14,7 +16,7 @@ const SortProducts = () => {
 
   const handleSortChange = (sortType: string) => {
     setTypeSort(sortType);
-    const sortData = dataSort(sortedData, sortType);
+    const sortData = dataSort(sortedData, sortType) as Product[];
     setSortedData(sortData);
   };
 

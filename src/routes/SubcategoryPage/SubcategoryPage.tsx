@@ -2,20 +2,20 @@ import { useLoaderData } from "react-router";
 import SortProducts from "./SortProducts";
 import { useContext, useEffect } from "react";
 import { SortDataContext } from "../../context/SortDataContext";
-import { dataSort } from "./utils";
 import DisplayProducts from "./DisplayProducts";
 import FilterData from "./FilterData";
+import { dataSort } from "../../utils/helpers";
+import { Category, Product } from "../../utils/types";
 
 const SubcategoryPage = () => {
   const { sortedData, setSortedData } = useContext(SortDataContext);
 
-  // TODO type for data
-  const data = useLoaderData() as any;
+  const data = useLoaderData() as Category;
   const { products } = data;
 
   useEffect(() => {
     if (products.length > 0) {
-      const sortData = dataSort(products, "Lowest price");
+      const sortData = dataSort(products, "Lowest price") as Product[];
       setSortedData(sortData);
     }
   }, []);

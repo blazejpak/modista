@@ -2,14 +2,19 @@ import { useContext, useEffect, useState } from "react";
 import { SortDataContext } from "../../context/SortDataContext";
 
 import { FaStar } from "react-icons/fa";
+import { Product } from "../../utils/types";
 
-const FilterData = ({ data }: any) => {
+interface FilterDataProps {
+  data: Product[];
+}
+
+const FilterData = ({ data }: FilterDataProps) => {
   const { setSortedData } = useContext(SortDataContext);
 
   const [filterByPrice, setFilterByPrice] = useState<number>(1);
   const [filterByRate, setFilterByRate] = useState<number>(1);
 
-  const filterData = (data: any[]) => {
+  const filterData = (data: Product[]) => {
     return data.filter((product) => {
       if (filterByPrice !== null && product.price < filterByPrice) {
         return false;
