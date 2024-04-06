@@ -1,4 +1,4 @@
-import { EventHandler, ReactNode, useEffect } from "react";
+import { ReactNode, useEffect } from "react";
 
 interface ClickOutsideProps {
   children: ReactNode;
