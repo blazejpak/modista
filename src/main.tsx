@@ -1,5 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
+
 import "./index.css";
 import {
   Route,
@@ -9,6 +11,7 @@ import {
 } from "react-router-dom";
 
 import ROUTES from "./utils/routes";
+import { store } from "./store/store";
 
 import ErrorPage from "./routes/ErrorPage";
 import Root from "./routes/Root";
@@ -20,7 +23,6 @@ import SubcategoryPage from "./routes/SubcategoryPage/SubcategoryPage";
 
 import { CategoryDataLoader } from "./routes/CategoryPage/CategoryDataLoader";
 import { ProductPageLoader } from "./routes/ProductPage/ProductPageLoader";
-import { SubcategoryLoader } from "./routes/SubcategoryPage/SubcategoryLoader";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -38,8 +40,12 @@ const router = createBrowserRouter(
       <Route
         path={"category/:category"}
         element={<CategoryPage />}
-        loader={() => CategoryDataLoader()}
         errorElement={<ErrorPage />}
+        loader={({ params }: any) => {
+          const category = params.category || "";
+
+          return CategoryPageLoader(category);
+        }}
       />
       <Route
         path={"category/:category/:subCategory"}
@@ -56,8 +62,8 @@ const router = createBrowserRouter(
         element={<ProductPage />}
         loader={({ params }) => {
           const category = params.category || "";
-          const subCategory = params.subCategory || "";
-          return ProductPageLoader(category, subCategory);
+          const product = params.product || "";
+          return ProductPageLoader(category, product);
         }}
         errorElement={<ErrorPage />}
       />
@@ -67,6 +73,8 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>,
 );
