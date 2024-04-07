@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { Provider } from "react-redux";
+// import { Provider } from "react-redux";
 
 import "./index.css";
 import {
@@ -11,7 +11,7 @@ import {
 } from "react-router-dom";
 
 import ROUTES from "./utils/routes";
-import { store } from "./store/store";
+// import { store } from "./store/store";
 
 import ErrorPage from "./routes/ErrorPage";
 import Root from "./routes/Root";
@@ -56,8 +56,8 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <RouterProvider router={router} />
-    </Provider>
+    {/* <Provider store={store}> */}
+    <RouterProvider router={router} />
+    {/* </Provider> */}
   </React.StrictMode>,
 );
