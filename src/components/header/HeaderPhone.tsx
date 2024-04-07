@@ -27,6 +27,7 @@ const HeaderPhone = () => {
   return (
     <nav className="flex h-full items-center justify-between gap-8  ">
       <GiHamburgerMenu
+        data-testid="buttonMenu"
         size={24}
         className="ml-8 cursor-pointer transition-colors hover:text-gold-lighter"
         onClick={() => setBurgerClicked((prevState) => !prevState)}
