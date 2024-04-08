@@ -22,7 +22,7 @@ const SubcategoryPage = () => {
 
   return (
     <section className="flex flex-col  gap-8 p-6">
-      <div className="flex justify-between px-2 md:px-8 lg:px-[10%]">
+      <div className="flex flex-wrap gap-8 px-2 md:px-8 lg:px-[10%]">
         <SortProducts />
         <FilterData data={products} />
       </div>

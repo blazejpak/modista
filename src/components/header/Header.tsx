@@ -17,7 +17,7 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="sticky top-0 z-20  w-full select-none  bg-black-lighter  text-grey-normal">
+    <header className="sticky top-0 z-50  w-full select-none  bg-black-lighter  text-grey-normal">
       {isMobile ? <HeaderPhone /> : <HeaderBiggerScreens />}
     </header>
   );
