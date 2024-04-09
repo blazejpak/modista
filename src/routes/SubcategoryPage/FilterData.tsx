@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 
 import { SortDataContext } from "../../context/SortDataContext";
 
@@ -23,12 +23,58 @@ const FilterData = ({ data }: FilterDataProps) => {
   const priceDivRef = useRef<any>();
   const ratingDivRef = useRef<any>();
 
-  const [price, setPrice] = useState<{ min: number; max: number }>({
+  const [price, setPrice] = useState<{
+    min: number;
+    max: number;
+  }>({
     min: 1,
     max: 1000,
   });
-
   const [filterByRate, setFilterByRate] = useState<number>(1);
+
+  const priceFromChange = (e: any) => {
+    let newValue = e.target.value;
+    console.log(newValue);
+    if (newValue === "-" || newValue === "+") newValue = "";
+    if (newValue.toString().length > 4) {
+      const slicedValue = newValue.toString().slice(0, 4);
+      setPrice((prevState) => ({
+        ...prevState,
+        min: Number(slicedValue),
+      }));
+    } else
+      setPrice((prevState) => ({
+        ...prevState,
+        min: Number(newValue),
+      }));
+  };
+
+  const priceToChange = (e: any) => {
+    const newValue = e.target.value;
+    if (newValue === "-" || newValue === "+") return;
+
+    if (newValue.toString().length > 4) {
+      const slicedValue = newValue.toString().slice(0, 4);
+      setPrice((prevState) => ({
+        ...prevState,
+        max: Number(slicedValue),
+      }));
+    } else
+      setPrice((prevState) => ({
+        ...prevState,
+        max: Number(newValue),
+      }));
+  };
+
+  interface KeyboardEventInterface
+    extends React.KeyboardEvent<HTMLInputElement> {
+    code: string;
+  }
+  const deleteMinus = (e: KeyboardEventInterface) => {
+    if (e.code === "Minus") {
+      e.preventDefault();
+    }
+  };
 
   const filterData = (data: Product[]) => {
     return data.filter((product) => {
@@ -43,15 +89,9 @@ const FilterData = ({ data }: FilterDataProps) => {
   };
 
   const savePriceSubmit = () => {
-    const newData = [...data];
-    const filteredData = filterData(newData);
+    if (price.min > price.max)
+      setPrice((prevState) => ({ ...prevState, min: prevState.max }));
 
-    setSortedData(filteredData);
-  };
-
-  // TODO type on event
-  const ratingChange = (e: any) => {
-    setFilterByRate(Number(e.target.value));
     const newData = [...data];
     const filteredData = filterData(newData);
 
@@ -79,15 +119,9 @@ const FilterData = ({ data }: FilterDataProps) => {
                     className="hide-arrows h-10 w-24 cursor-pointer rounded border pr-4 text-right outline-none sm:w-40"
                     type="number"
                     placeholder="1"
-                    min={1}
-                    max={1000}
                     value={price.min}
-                    onChange={(e) =>
-                      setPrice((prevState) => ({
-                        ...prevState,
-                        min: Number(e.target.value),
-                      }))
-                    }
+                    onChange={priceFromChange}
+                    onKeyDown={deleteMinus}
                   />
                   <p className="absolute left-4 top-2 opacity-50">$</p>
                 </div>
@@ -96,10 +130,9 @@ const FilterData = ({ data }: FilterDataProps) => {
                     className="hide-arrows h-10 w-24 cursor-pointer rounded border pr-4 text-right outline-none sm:w-40"
                     type="number"
                     placeholder="1000"
-                    min={1}
-                    max={1000}
                     value={price.max}
-                    onChange={ratingChange}
+                    onChange={priceToChange}
+                    onKeyDown={deleteMinus}
                   />
                   <p className="absolute left-4 top-2 opacity-50">$</p>
                 </div>
