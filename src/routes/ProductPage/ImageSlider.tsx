@@ -5,9 +5,10 @@ import { IoClose } from "react-icons/io5";
 
 type ImageSliderProps = {
   images: string[];
+  alt: string;
 };
 
-const ImageSlider = ({ images }: ImageSliderProps) => {
+const ImageSlider = ({ images, alt }: ImageSliderProps) => {
   const [imageClicked, setImageClicked] = useState<boolean>(false);
   const [imageNum, setImageNum] = useState<number>(0);
 
@@ -23,25 +24,39 @@ const ImageSlider = ({ images }: ImageSliderProps) => {
     else setImageNum((prevState) => prevState + 1);
   };
 
-  console.log(images);
-  console.log(imageNum);
   return (
-    <div>
+    <div className="w-full select-none">
       {images[0] && (
-        <img
-          src={images[0]}
-          className=""
-          onClick={() => setImageClicked(true)}
-        />
+        <div className="flex gap-2">
+          <img
+            src={images[0]}
+            className=" w-[95%] cursor-zoom-in shadow sm:min-w-[600px] md:min-w-[750px] lg:hidden"
+            onClick={() => {
+              setImageClicked(true);
+
+              document.body.style.overflowY = "hidden";
+            }}
+          />
+          <img
+            src={images[1]}
+            className="cursor-zoom-in shadow lg:hidden"
+            onClick={() => {
+              setImageClicked(true);
+
+              document.body.style.overflowY = "hidden";
+            }}
+          />
+        </div>
       )}
       {imageClicked && (
-        <div className="fixed bottom-0 left-0 right-0 top-0 z-[1000] flex select-none  items-center bg-white">
+        <div className="fixed bottom-0 left-0 right-0 top-0 z-[1000] flex select-none items-center   bg-white">
           <div
-            className="absolute left-[5%] top-6"
+            className="absolute right-[5%] top-6 cursor-pointer"
             onClick={() => {
               setImageClicked(false);
               setImageNum(0);
-              window.scrollTo(0, 0);
+
+              document.body.style.overflowY = "auto";
             }}
           >
             <IoClose size={36} />
@@ -69,6 +84,23 @@ const ImageSlider = ({ images }: ImageSliderProps) => {
           </div>
         </div>
       )}
+      <div className="hidden flex-col justify-between gap-10 lg:flex lg:flex-row lg:flex-wrap lg:gap-0 ">
+        {images &&
+          images.map((image, i) => (
+            <div
+              className={`mb-2 cursor-zoom-in shadow-lg  ${i === 0 ? "w-full" : "w-[49%]"}`}
+              onClick={() => {
+                setImageClicked(true);
+                setImageNum(i);
+
+                document.body.style.overflowY = "hidden";
+              }}
+              key={i}
+            >
+              <img src={image} alt={alt} className="h-full" />
+            </div>
+          ))}
+      </div>
     </div>
   );
 };

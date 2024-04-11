@@ -13,7 +13,7 @@ function Root() {
   }, [pathname]);
 
   return (
-    <div className="flex w-full items-center justify-center">
+    <div className="flex w-full items-center justify-center overflow-x-hidden">
       <div className="relative grid min-h-screen max-w-[2000px] grid-rows-[90px_1fr_300px] shadow-xl lg:grid-rows-[90px_1fr_200px] ">
         <Header />
         <main>
