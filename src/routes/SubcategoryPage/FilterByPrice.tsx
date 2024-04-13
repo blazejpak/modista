@@ -1,38 +1,28 @@
-import { ChangeEvent, Dispatch, MutableRefObject, SetStateAction } from "react";
-import ButtonFn from "../../components/main/Subcategory/ButtonFn";
+import { ChangeEvent, Dispatch, SetStateAction, useRef } from "react";
 import SortButton from "../../components/main/Subcategory/SortButton";
+import { useClickOutside } from "../../components/helpers/useClickOutside";
+import Button from "../../components/main/Subcategory/Button";
 
 type FilterByPriceProps = {
-  priceDivRef: MutableRefObject<any>;
   priceOpen: boolean;
   setPriceOpen: Dispatch<SetStateAction<boolean>>;
   price: {
     min: number;
     max: number;
   };
-  priceFromChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  priceToChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  changePriceInput: (e: ChangeEvent<HTMLInputElement>) => void;
   savePriceSubmit: () => void;
 };
 
 const FilterByPrice = ({
-  priceDivRef,
   priceOpen,
   setPriceOpen,
   price,
-  priceFromChange,
-  priceToChange,
+  changePriceInput,
   savePriceSubmit,
 }: FilterByPriceProps) => {
-  interface KeyboardEventInterface
-    extends React.KeyboardEvent<HTMLInputElement> {
-    code: string;
-  }
-  const deleteMinus = (e: KeyboardEventInterface) => {
-    if (e.code === "Minus") {
-      e.preventDefault();
-    }
-  };
+  const priceDivRef = useRef<HTMLDivElement>(null);
+  useClickOutside({ refEl: priceDivRef, callback: () => setPriceOpen(false) });
 
   return (
     <div className="flex  items-center gap-2" ref={priceDivRef}>
@@ -43,27 +33,33 @@ const FilterByPrice = ({
             <div className="relative h-10">
               <input
                 className="hide-arrows h-10 w-24 cursor-pointer rounded border pr-4 text-right outline-none sm:w-40"
+                name="min"
+                id="min"
                 type="number"
+                min={1}
                 placeholder="1"
                 value={price.min}
-                onChange={priceFromChange}
-                onKeyDown={deleteMinus}
+                onChange={changePriceInput}
               />
               <p className="absolute left-4 top-2 opacity-50">$</p>
             </div>
             <div className="relative h-10">
               <input
                 className="hide-arrows h-10 w-24 cursor-pointer rounded border pr-4 text-right outline-none sm:w-40"
+                name="max"
+                id="max"
                 type="number"
-                placeholder="1000"
+                max={1000}
+                placeholder="9999"
                 value={price.max}
-                onChange={priceToChange}
-                onKeyDown={deleteMinus}
+                onChange={changePriceInput}
               />
               <p className="absolute left-4 top-2 opacity-50">$</p>
             </div>
           </div>
-          <ButtonFn onClick={savePriceSubmit} label="Save" />
+          <Button onClick={savePriceSubmit}>
+            <p>Submit</p>
+          </Button>
         </div>
       )}
     </div>

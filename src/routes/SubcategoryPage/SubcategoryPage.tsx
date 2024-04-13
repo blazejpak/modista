@@ -2,7 +2,7 @@ import { useLoaderData } from "react-router";
 import SortProducts from "./SortProducts";
 import { useContext, useEffect } from "react";
 import { SortDataContext } from "../../context/SortDataContext";
-import DisplayProducts from "./DisplayProducts";
+import Products from "./Products";
 import FilterData from "./FilterData";
 import { dataSort } from "../../utils/helpers";
 import { Category, Product } from "../../utils/types";
@@ -27,7 +27,7 @@ const SubcategoryPage = () => {
         <FilterData data={products} />
       </div>
 
-      {sortedData.length > 0 && <DisplayProducts products={sortedData} />}
+      {sortedData.length > 0 && <Products products={sortedData} />}
     </section>
   );
 };

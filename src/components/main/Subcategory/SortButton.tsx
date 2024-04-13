@@ -8,7 +8,7 @@ interface SortButtonProps {
 
 const SortButton = ({ active, setActive, label }: SortButtonProps) => {
   return (
-    <div
+    <button
       className={`flex w-fit cursor-pointer items-center gap-2 hover:text-gold-lighter  ${active && "text-gold-dark"} `}
       onClick={() => setActive((prevState) => !prevState)}
     >
@@ -18,7 +18,7 @@ const SortButton = ({ active, setActive, label }: SortButtonProps) => {
       ) : (
         <MdOutlineKeyboardArrowDown size={24} />
       )}
-    </div>
+    </button>
   );
 };
 
