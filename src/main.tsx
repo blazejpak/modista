@@ -21,7 +21,7 @@ import CategoryPage from "./routes/CategoryPage/CategoryPage";
 import ProductPage from "./routes/ProductPage/ProductPage";
 
 import { CategoryPageLoader } from "./routes/CategoryPage/CategoryPageLoader";
-import { HomePageLoader } from "./routes/HomePage/HomePageLoader";
+import { RootLoader } from "./routes/HomePage/HomePageLoader";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -29,13 +29,13 @@ const router = createBrowserRouter(
       path={ROUTES.HOMEPAGE}
       element={<Root />}
       errorElement={<ErrorPage />}
+      loader={RootLoader}
     >
       <Route
         index
         path={ROUTES.HOMEPAGE}
         element={<HomePage />}
         errorElement={<ErrorPage />}
-        loader={HomePageLoader}
       />
       <Route
         path={"category/:category"}

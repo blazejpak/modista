@@ -1,7 +1,7 @@
-import { URL } from "../../utils/helpers";
-import { categoryLinks } from "../CategoryPage/categoryLinks";
+import { URL } from "../utils/helpers";
+import { categoryLinks } from "./CategoryPage/categoryLinks";
 
-export const RootLoader = async () => {
+export const HomePageLoader = async () => {
   try {
     const URI = `${URL}products/category/`;
     const requests = [];

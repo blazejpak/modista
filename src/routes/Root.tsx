@@ -1,10 +1,28 @@
-import { Outlet, useLocation, useNavigation } from "react-router-dom";
-import Header from "../components/header/Header";
-import Footer from "../components/footer/Footer";
-import { BeatLoader } from "react-spinners";
+import {
+  Outlet,
+  useLoaderData,
+  useLocation,
+  useNavigation,
+} from "react-router-dom";
 import { useEffect } from "react";
 
+import { BeatLoader } from "react-spinners";
+import Header from "../components/header/Header";
+import Footer from "../components/footer/Footer";
+
+import { Category } from "../utils/types";
+import { useAppDispatch } from "../store/hooks";
+
 function Root() {
+  const dispatch = useAppDispatch();
+
+  const data = useLoaderData() as Category[];
+  const newData = data.map((items) => items.products);
+
+  useEffect(() => {
+    if (newData) dispatch({ type: "data/getData", payload: newData });
+  }, []);
+
   const { state } = useNavigation();
   const { pathname } = useLocation();
 
@@ -18,7 +36,7 @@ function Root() {
         <Header />
         <main>
           {state === "loading" ? (
-            <div className="absolute left-[50%] top-[25%] translate-x-[-50%] md:top-[35%] lg:top-[50%] ">
+            <div className="fixed bottom-0 left-0 right-0 top-0 z-[1000] flex items-center  justify-center bg-black ">
               <BeatLoader color="#D87D4A" size={36} />
             </div>
           ) : (
