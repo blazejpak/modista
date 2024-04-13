@@ -1,9 +1,9 @@
-import { ChangeEvent, Dispatch, MutableRefObject, SetStateAction } from "react";
+import { ChangeEvent, Dispatch, MutableRefObject, RefObject, SetStateAction, useRef } from "react";
 import ButtonFn from "../../components/main/Subcategory/ButtonFn";
 import SortButton from "../../components/main/Subcategory/SortButton";
+import { useClickOutside } from "../../components/helpers/useClickOutside";
 
 type FilterByPriceProps = {
-  priceDivRef: MutableRefObject<any>;
   priceOpen: boolean;
   setPriceOpen: Dispatch<SetStateAction<boolean>>;
   price: {
@@ -16,7 +16,6 @@ type FilterByPriceProps = {
 };
 
 const FilterByPrice = ({
-  priceDivRef,
   priceOpen,
   setPriceOpen,
   price,
@@ -33,6 +32,8 @@ const FilterByPrice = ({
       e.preventDefault();
     }
   };
+  const priceDivRef = useRef<HTMLDivElement>(null);
+  useClickOutside({refEl: priceDivRef, callback: () => setPriceOpen(false)})
 
   return (
     <div className="flex  items-center gap-2" ref={priceDivRef}>

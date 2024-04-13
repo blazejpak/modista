@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext, useEffect, useRef, useState } from "react";
+import { ChangeEvent, MutableRefObject, useContext, useEffect, useRef, useState } from "react";
 
 import { SortDataContext } from "../../context/SortDataContext";
 
@@ -19,8 +19,9 @@ const FilterData = ({ data }: FilterDataProps) => {
   const [ratingOpen, setRatingOpen] = useState<boolean>(false);
 
   // TODO ref type
-  const priceDivRef = useRef<React.MutableRefObject<HTMLDivElement>>();
+ 
   const ratingDivRef = useRef<React.MutableRefObject<HTMLDivElement>>();
+
 
   const [price, setPrice] = useState<{
     min: number;
@@ -100,21 +101,16 @@ const FilterData = ({ data }: FilterDataProps) => {
 
   return (
     <div className="relative flex  gap-8 ">
-      <ClickOutside
-        close={setPriceOpen}
-        isActive={priceOpen}
-        refEl={priceDivRef}
-      >
+
         <FilterByPrice
           price={price}
-          priceDivRef={priceDivRef}
           priceFromChange={priceFromChange}
           priceOpen={priceOpen}
           priceToChange={priceToChange}
           savePriceSubmit={savePriceSubmit}
           setPriceOpen={setPriceOpen}
         />
-      </ClickOutside>
+
 
       <ClickOutside
         close={setRatingOpen}
