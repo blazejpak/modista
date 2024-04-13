@@ -1,13 +1,12 @@
-import { useContext, useRef, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useRef, useState } from "react";
 
 import { SortDataContext } from "../../context/SortDataContext";
 
-import { FaStar } from "react-icons/fa";
 import { Product } from "../../utils/types";
 import ClickOutside from "../../components/helpers/ClickOutside";
 
-import SortButton from "../../components/main/Subcategory/SortButton";
-import ButtonFn from "../../components/main/Subcategory/ButtonFn";
+import RatingProducts from "./RatingProducts";
+import FilterByPrice from "./FilterByPrice";
 
 interface FilterDataProps {
   data: Product[];
@@ -20,8 +19,8 @@ const FilterData = ({ data }: FilterDataProps) => {
   const [ratingOpen, setRatingOpen] = useState<boolean>(false);
 
   // TODO ref type
-  const priceDivRef = useRef<any>();
-  const ratingDivRef = useRef<any>();
+  const priceDivRef = useRef<React.MutableRefObject<HTMLDivElement>>();
+  const ratingDivRef = useRef<React.MutableRefObject<HTMLDivElement>>();
 
   const [price, setPrice] = useState<{
     min: number;
@@ -32,7 +31,7 @@ const FilterData = ({ data }: FilterDataProps) => {
   });
   const [filterByRate, setFilterByRate] = useState<number>(1);
 
-  const priceFromChange = (e: any) => {
+  const priceFromChange = (e: ChangeEvent<HTMLInputElement>) => {
     let newValue = e.target.value;
     console.log(newValue);
     if (newValue === "-" || newValue === "+") newValue = "";
@@ -49,7 +48,7 @@ const FilterData = ({ data }: FilterDataProps) => {
       }));
   };
 
-  const priceToChange = (e: any) => {
+  const priceToChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
     if (newValue === "-" || newValue === "+") return;
 
@@ -66,18 +65,9 @@ const FilterData = ({ data }: FilterDataProps) => {
       }));
   };
 
-  interface KeyboardEventInterface
-    extends React.KeyboardEvent<HTMLInputElement> {
-    code: string;
-  }
-  const deleteMinus = (e: KeyboardEventInterface) => {
-    if (e.code === "Minus") {
-      e.preventDefault();
-    }
-  };
-
   const filterData = (data: Product[]) => {
     return data.filter((product) => {
+      console.log(product.rating < filterByRate);
       if (product.price < price.min || product.price > price.max) {
         return false;
       }
@@ -87,6 +77,16 @@ const FilterData = ({ data }: FilterDataProps) => {
       return true;
     });
   };
+
+  const ratingChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setFilterByRate((prevState) => (prevState = Number(e.target.value)));
+  };
+
+  useEffect(() => {
+    const newData = data;
+    const filteredData = filterData(newData);
+    setSortedData(filteredData);
+  }, [data, filterByRate]);
 
   const savePriceSubmit = () => {
     if (price.min > price.max)
@@ -105,42 +105,15 @@ const FilterData = ({ data }: FilterDataProps) => {
         isActive={priceOpen}
         refEl={priceDivRef}
       >
-        <div className="flex  items-center gap-2" ref={priceDivRef}>
-          <SortButton
-            active={priceOpen}
-            setActive={setPriceOpen}
-            label="Price"
-          />
-          {priceOpen && (
-            <div className="absolute  top-[150%] z-10 flex translate-x-[-10%] flex-col items-center gap-2 border  bg-grey-lighter p-4">
-              <div className="flex  gap-3">
-                <div className="relative h-10">
-                  <input
-                    className="hide-arrows h-10 w-24 cursor-pointer rounded border pr-4 text-right outline-none sm:w-40"
-                    type="number"
-                    placeholder="1"
-                    value={price.min}
-                    onChange={priceFromChange}
-                    onKeyDown={deleteMinus}
-                  />
-                  <p className="absolute left-4 top-2 opacity-50">$</p>
-                </div>
-                <div className="relative h-10">
-                  <input
-                    className="hide-arrows h-10 w-24 cursor-pointer rounded border pr-4 text-right outline-none sm:w-40"
-                    type="number"
-                    placeholder="1000"
-                    value={price.max}
-                    onChange={priceToChange}
-                    onKeyDown={deleteMinus}
-                  />
-                  <p className="absolute left-4 top-2 opacity-50">$</p>
-                </div>
-              </div>
-              <ButtonFn onClick={savePriceSubmit} label="Save" />
-            </div>
-          )}
-        </div>
+        <FilterByPrice
+          price={price}
+          priceDivRef={priceDivRef}
+          priceFromChange={priceFromChange}
+          priceOpen={priceOpen}
+          priceToChange={priceToChange}
+          savePriceSubmit={savePriceSubmit}
+          setPriceOpen={setPriceOpen}
+        />
       </ClickOutside>
 
       <ClickOutside
@@ -148,39 +121,13 @@ const FilterData = ({ data }: FilterDataProps) => {
         isActive={ratingOpen}
         refEl={ratingDivRef}
       >
-        <div className="flex  items-center gap-2" ref={ratingDivRef}>
-          <SortButton
-            active={ratingOpen}
-            setActive={setRatingOpen}
-            label="Rating"
-          />
-          {ratingOpen && (
-            <div className="absolute top-[150%] z-10 flex translate-x-[-50%] flex-col items-center gap-2 border bg-grey-lighter  p-4 sm:translate-x-[0]">
-              <input
-                type="range"
-                value={filterByRate || 1}
-                onChange={(e) => {
-                  setFilterByRate(Number(e.target.value));
-                  const newData = [...data];
-                  const filteredData = filterData(newData);
-
-                  setSortedData(filteredData);
-                }}
-                min={1}
-                max={5}
-                step={0.1}
-                className="relative "
-              />
-              <div className="flex items-center gap-1">
-                <p className="font-bold">
-                  <span>{">"}</span>
-                  {filterByRate}
-                </p>
-                <FaStar color="gold" size={24} />
-              </div>
-            </div>
-          )}
-        </div>
+        <RatingProducts
+          filterByRate={filterByRate}
+          ratingDivRef={ratingDivRef}
+          ratingOpen={ratingOpen}
+          setRatingOpen={setRatingOpen}
+          ratingChange={ratingChange}
+        />
       </ClickOutside>
     </div>
   );

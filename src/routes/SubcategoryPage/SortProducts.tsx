@@ -52,7 +52,7 @@ const SortProducts = () => {
               sortType.map((item) => (
                 <li
                   key={item.id}
-                  className={`flex cursor-pointer items-center gap-2 ${typeSort === item.label && "bg-grey-normal"} p-4 hover:bg-grey-normal`}
+                  className={`flex cursor-pointer items-center  gap-2 ${typeSort === item.label && "bg-grey-normal"} p-4 hover:bg-grey-normal`}
                   onClick={() => handleSortChange(item.label)}
                 >
                   {typeSort === item.label ? (
