@@ -1,7 +1,7 @@
 import { URL } from "../utils/helpers";
 import { categoryLinks } from "./CategoryPage/categoryLinks";
 
-export const HomePageLoader = async () => {
+export const RootLoader = async () => {
   try {
     const URI = `${URL}products/category/`;
     const requests = [];

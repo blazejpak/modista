@@ -21,7 +21,7 @@ import CategoryPage from "./routes/CategoryPage/CategoryPage";
 import ProductPage from "./routes/ProductPage/ProductPage";
 
 import { CategoryPageLoader } from "./routes/CategoryPage/CategoryPageLoader";
-import { RootLoader } from "./routes/HomePage/HomePageLoader";
+import { RootLoader } from "./routes/RootLoader";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
