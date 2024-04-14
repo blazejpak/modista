@@ -12,15 +12,15 @@ import Footer from "../components/footer/Footer";
 
 import { Category } from "../utils/types";
 import { useAppDispatch } from "../store/hooks";
+import { pushDataIntoArray } from "../utils/helpers";
 
 function Root() {
   const dispatch = useAppDispatch();
-
   const data = useLoaderData() as Category[];
-  const newData = data.map((items) => items.products);
+  const getData = pushDataIntoArray(data);
 
   useEffect(() => {
-    if (newData) dispatch({ type: "data/getData", payload: newData });
+    if (getData) dispatch({ type: "data/getData", payload: getData });
   }, []);
 
   const { state } = useNavigation();

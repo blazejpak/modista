@@ -3,6 +3,14 @@ import { Category, Product } from "./types";
 
 export const URL = "https://dummyjson.com/";
 
+export function pushDataIntoArray(data: Category[]) {
+  if (!data) return null;
+
+  const initialData = data.flatMap((items) => items.products);
+
+  return initialData;
+}
+
 export function getDataRatingAndDiscount(
   data: Category[],
   type: "discount" | "rating",

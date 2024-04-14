@@ -69,12 +69,17 @@ const HeaderBiggerScreens = () => {
           </li>
         ))}
       </ul>
-      <div className="flex items-center gap-1">
-        <PiShoppingCart
-          size={24}
-          className="hover-link cursor-pointer transition-all  active:scale-110"
-        />
-        <p className="text-xs font-light">Cart</p>
+      <div className=" group relative ">
+        <div className="hover-link flex cursor-pointer  items-center  gap-1 transition-all active:scale-110">
+          <PiShoppingCart size={24} />
+          <p className="text-sm font-light">Cart</p>
+        </div>
+
+        <div className="absolute top-[105%] hidden  w-10 bg-yellow-300 group-hover:flex">
+          <p>Text</p>
+          <p>Text</p>
+          <p>Text</p>
+        </div>
       </div>
     </nav>
   );
