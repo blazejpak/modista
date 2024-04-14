@@ -70,7 +70,7 @@ const ImageSlider = ({ images, alt }: ImageSliderProps) => {
           <div className="relative">
             <img
               src={images[imageNum]}
-              className="xs:h-[80dvh] h-[60dvh] w-[80dvw] shadow md:h-[80dvh]  xl:w-[70dvw]"
+              className="h-[60dvh] w-[80dvw] shadow xs:h-[80dvh] md:h-[80dvh]  xl:w-[70dvw]"
             />
             <p className="absolute left-[50%] top-[105%] translate-x-[-50%] text-xl md:top-[103%]">
               {imageNum + 1} of {images.length}

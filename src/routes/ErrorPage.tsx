@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-// import ButtonGold from "../ui/ButtonGold";
+import ButtonCart from "../components/main/UI/ButtonCart";
 
 const ErrorPage = () => {
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ const ErrorPage = () => {
         We apologise for this problem. We will fix that ASAP 😊
       </p>
 
-      {/* <ButtonGold text="Home Page" onClick={backHomeHandler} /> */}
+      <ButtonCart onClick={backHomeHandler}>HOME</ButtonCart>
     </div>
   );
 };
