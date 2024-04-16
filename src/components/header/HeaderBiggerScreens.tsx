@@ -1,11 +1,11 @@
 import { NavLink } from "react-router-dom";
 
-import { PiShoppingCart } from "react-icons/pi";
 import logo from "../../assets/logo-no-background.png";
 
 import ROUTES from "../../utils/routes";
 import { useState } from "react";
 import HeaderBiggerScreenLinks from "./HeaderBiggerScreenLinks";
+import CartOnHover from "./Cart/CartOnHover";
 
 const HeaderBiggerScreens = () => {
   const [hoverState, setHoverState] = useState({
@@ -69,18 +69,7 @@ const HeaderBiggerScreens = () => {
           </li>
         ))}
       </ul>
-      <div className=" group relative ">
-        <div className="hover-link flex cursor-pointer  items-center  gap-1 transition-all active:scale-110">
-          <PiShoppingCart size={24} />
-          <p className="text-sm font-light">Cart</p>
-        </div>
-
-        <div className="absolute top-[105%] hidden  w-10 bg-yellow-300 group-hover:flex">
-          <p>Text</p>
-          <p>Text</p>
-          <p>Text</p>
-        </div>
-      </div>
+      <CartOnHover />
     </nav>
   );
 };
