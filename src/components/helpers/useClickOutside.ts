@@ -7,8 +7,8 @@ interface ClickOutsideProps {
 
 export const useClickOutside = ({ refEl, callback }: ClickOutsideProps) => {
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (refEl.current && !refEl.current.contains(event.target as Node)) {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (refEl.current && !refEl.current.contains(e.target as Node)) {
         callback();
       }
     };
