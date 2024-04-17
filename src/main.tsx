@@ -22,6 +22,7 @@ import ProductPage from "./routes/ProductPage/ProductPage";
 
 import { CategoryPageLoader } from "./routes/CategoryPage/CategoryPageLoader";
 import { RootLoader } from "./routes/RootLoader";
+import CartPage from "./routes/Cart/CartPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -35,6 +36,12 @@ const router = createBrowserRouter(
         index
         path={ROUTES.HOMEPAGE}
         element={<HomePage />}
+        errorElement={<ErrorPage />}
+      />
+      <Route
+        index
+        path={ROUTES.CART}
+        element={<CartPage />}
         errorElement={<ErrorPage />}
       />
       <Route

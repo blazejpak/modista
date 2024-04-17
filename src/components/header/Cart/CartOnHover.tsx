@@ -1,9 +1,16 @@
 import { PiShoppingCart } from "react-icons/pi";
 import { useAppSelector } from "../../../store/hooks";
+import { useNavigate } from "react-router-dom";
 
 const CartOnHover = () => {
   const data = useAppSelector((state) => state.dataSlice.data)[0];
-  console.log(data);
+  const navigate = useNavigate();
+
+  const cartHandle = () => {
+    navigate("/cart");
+    window.scrollTo(1, 1);
+  };
+
   if (!data) return null;
   return (
     <div className=" group relative h-full content-center">
@@ -13,15 +20,15 @@ const CartOnHover = () => {
         <p className=" text-xs font-light ">(1)</p>
       </div>
 
-      <div className="text-black-normal absolute right-[-100%] top-[100%] hidden w-[300px]  rounded bg-white shadow-xl group-hover:flex group-hover:flex-col">
+      <div className="absolute right-[-100%] top-[100%] hidden w-[360px] rounded  bg-white p-4 text-black-normal shadow-xl group-hover:flex group-hover:flex-col">
         <div className="flex items-center justify-center gap-4 p-8">
           <img
             src={data.thumbnail}
             alt={data.title}
-            className="h-20 w-20 shadow"
+            className="h-24 w-24 shadow"
           />
 
-          <div className="flex flex-col gap-2 text-xs">
+          <div className="flex flex-col  gap-2 text-xs">
             <div>
               <p>{data.title}</p>
               <p>${data.price.toFixed(2)}</p>
@@ -40,7 +47,7 @@ const CartOnHover = () => {
           </div>
         </div>
         <button>Checkout</button>
-        <button>Shopping bag</button>
+        <button onClick={cartHandle}>Shopping bag</button>
       </div>
     </div>
   );

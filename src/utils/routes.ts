@@ -1,5 +1,7 @@
 const ROUTES = {
   HOMEPAGE: "/",
+  CART: "/cart",
+  SHOPPING_BAG: "/checkout",
   MEN: "category/men",
   MEN_SHIRTS: "category/men/shirts",
   MEN_SHOES: "category/men/shoes",
