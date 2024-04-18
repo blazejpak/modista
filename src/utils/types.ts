@@ -18,3 +18,8 @@ export type Category = {
   skip: number;
   total: number;
 };
+
+export type SortType = {
+  label: string;
+  id: number;
+};

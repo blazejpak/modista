@@ -5,6 +5,7 @@ import {
   useNavigation,
 } from "react-router-dom";
 import { useEffect } from "react";
+import { SortDataProvider } from "../context/SortDataContext";
 
 import { BeatLoader } from "react-spinners";
 import Header from "../components/header/Header";
@@ -31,6 +32,7 @@ function Root() {
   }, [pathname]);
 
   return (
+<<<<<<< HEAD
     <div className="flex w-full items-center justify-center">
       <div className="relative grid min-h-screen max-w-[2000px] grid-rows-[90px_1fr_300px] bg-grey-normal shadow-xl lg:grid-rows-[90px_1fr_200px]">
         <Header />
@@ -44,8 +46,25 @@ function Root() {
           )}
         </main>
         <Footer />
+=======
+    <SortDataProvider>
+      <div className="flex w-full items-center justify-center  bg-grey-normal">
+        <div className="relative grid min-h-screen max-w-[2000px] grid-rows-[90px_1fr_300px]  bg-white shadow-xl lg:grid-rows-[90px_1fr_200px]">
+          <Header />
+          <main>
+            {state === "loading" ? (
+              <div className="absolute left-[50%] top-[35%] translate-x-[-50%] ">
+                <BeatLoader color="#D87D4A" size={36} />
+              </div>
+            ) : (
+              <Outlet />
+            )}
+          </main>
+          <Footer />
+        </div>
+>>>>>>> d4717ec768a79fc008e5084a17ba0067b306715d
       </div>
-    </div>
+    </SortDataProvider>
   );
 }
 

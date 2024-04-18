@@ -19,10 +19,16 @@ import Root from "./routes/Root";
 import HomePage from "./routes/HomePage/HomePage";
 import CategoryPage from "./routes/CategoryPage/CategoryPage";
 import ProductPage from "./routes/ProductPage/ProductPage";
+import SubcategoryPage from "./routes/SubcategoryPage/SubcategoryPage";
 
+import { ProductPageLoader } from "./routes/ProductPage/ProductPageLoader";
 import { CategoryPageLoader } from "./routes/CategoryPage/CategoryPageLoader";
+<<<<<<< HEAD
 import { RootLoader } from "./routes/RootLoader";
 import CartPage from "./routes/Cart/CartPage";
+=======
+import { SubcategoryLoader } from "./routes/SubcategoryPage/SubcategoryLoader";
+>>>>>>> d4717ec768a79fc008e5084a17ba0067b306715d
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -55,8 +61,23 @@ const router = createBrowserRouter(
         }}
       />
       <Route
-        path={"category/:category/:product"}
+        path={"category/:category/:subCategory"}
+        element={<SubcategoryPage />}
+        loader={({ params }) => {
+          const category = params.category || "";
+          const subCategory = params.subCategory || "";
+          return SubcategoryLoader(category, subCategory);
+        }}
+        errorElement={<ErrorPage />}
+      />
+      <Route
+        path={"category/:category/:subCategory/:product"}
         element={<ProductPage />}
+        loader={({ params }) => {
+          const category = params.category || "";
+          const product = params.product || "";
+          return ProductPageLoader(category, product);
+        }}
         errorElement={<ErrorPage />}
       />
     </Route>,
