@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 import { categoryLinks } from "../routes/CategoryPage/categoryLinks";
-=======
->>>>>>> d4717ec768a79fc008e5084a17ba0067b306715d
 import { Category, Product } from "./types";
 
 export const URL = "https://dummyjson.com/";

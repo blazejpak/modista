@@ -23,12 +23,9 @@ import SubcategoryPage from "./routes/SubcategoryPage/SubcategoryPage";
 
 import { ProductPageLoader } from "./routes/ProductPage/ProductPageLoader";
 import { CategoryPageLoader } from "./routes/CategoryPage/CategoryPageLoader";
-<<<<<<< HEAD
+import { SubcategoryLoader } from "./routes/SubcategoryPage/SubcategoryLoader";
 import { RootLoader } from "./routes/RootLoader";
 import CartPage from "./routes/Cart/CartPage";
-=======
-import { SubcategoryLoader } from "./routes/SubcategoryPage/SubcategoryLoader";
->>>>>>> d4717ec768a79fc008e5084a17ba0067b306715d
 
 const router = createBrowserRouter(
   createRoutesFromElements(
