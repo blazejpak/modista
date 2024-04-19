@@ -32,18 +32,17 @@ const ImageSlider = ({ images, alt }: ImageSliderProps) => {
             src={images[0]}
             className=" w-[95%] cursor-zoom-in shadow sm:min-w-[600px] md:min-w-[750px] lg:hidden"
             onClick={() => {
+              document.documentElement.style.overflowY = "hidden";
               setImageClicked(true);
-
-              document.body.style.overflowY = "hidden";
             }}
           />
           <img
             src={images[1]}
             className="cursor-zoom-in shadow lg:hidden"
             onClick={() => {
+              document.documentElement.style.overflowY = "hidden";
+              setImageNum(1);
               setImageClicked(true);
-
-              document.body.style.overflowY = "hidden";
             }}
           />
         </div>
@@ -53,10 +52,9 @@ const ImageSlider = ({ images, alt }: ImageSliderProps) => {
           <div
             className="absolute right-[5%] top-6 cursor-pointer"
             onClick={() => {
+              document.documentElement.style.overflowY = "auto";
               setImageClicked(false);
               setImageNum(0);
-
-              document.body.style.overflowY = "auto";
             }}
           >
             <IoClose size={36} />
@@ -93,11 +91,11 @@ const ImageSlider = ({ images, alt }: ImageSliderProps) => {
                 setImageClicked(true);
                 setImageNum(i);
 
-                document.body.style.overflowY = "hidden";
+                document.documentElement.style.overflowY = "hidden";
               }}
               key={i}
             >
-              <img src={image} alt={alt} className="h-full" />
+              <img src={image} alt={alt} className="h-full w-full" />
             </div>
           ))}
       </div>

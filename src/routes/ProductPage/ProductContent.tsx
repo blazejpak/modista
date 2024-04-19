@@ -1,4 +1,4 @@
-import ButtonCart from "../../components/main/UI/ButtonCart";
+import Button from "../../components/main/Subcategory/Button";
 import { Product } from "../../utils/types";
 
 type ProductContentProps = {
@@ -6,8 +6,6 @@ type ProductContentProps = {
 };
 
 const ProductContent = ({ data }: ProductContentProps) => {
-  console.log(data);
-
   if (!data) return null;
 
   const discountPrice = (data.price * (100 - data.discountPercentage)) / 100;
@@ -22,14 +20,16 @@ const ProductContent = ({ data }: ProductContentProps) => {
           </h2>
           <div className="flex items-center gap-4">
             <p className="text-lg line-through">${data.price.toFixed(2)}</p>
-            <p className="text-2xl font-bold text-red-500">
+            <p className="text-2xl font-bold text-red-500 ">
               ${discountPrice.toFixed(2)}
             </p>
           </div>
         </div>
       </div>
 
-      <ButtonCart />
+      <Button onClick={() => {}} style="self-center">
+        Add to Cart
+      </Button>
 
       <div className="flex flex-col gap-4">
         <h3 className="text-xl font-bold">Description</h3>

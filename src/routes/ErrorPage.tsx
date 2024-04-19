@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import ButtonCart from "../components/main/UI/ButtonCart";
+import Button from "../components/main/Subcategory/Button";
 
 const ErrorPage = () => {
   const navigate = useNavigate();
@@ -8,7 +8,7 @@ const ErrorPage = () => {
     window.scrollTo({ top: 0, behavior: "instant" });
   };
   return (
-    <div className="flex h-screen flex-col items-center justify-center gap-8 bg-grey-normal">
+    <div className="flex h-screen flex-col items-center justify-center gap-8 bg-grey-normal p-[10%]">
       <h1 className="text-xl font-bold md:text-4xl">
         Something went wrong🛑🛑
       </h1>
@@ -16,7 +16,7 @@ const ErrorPage = () => {
         We apologise for this problem. We will fix that ASAP 😊
       </p>
 
-      <ButtonCart onClick={backHomeHandler}>HOME</ButtonCart>
+      <Button onClick={backHomeHandler}>HOME</Button>
     </div>
   );
 };
