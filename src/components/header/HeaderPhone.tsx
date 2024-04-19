@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import logo from "../../assets/logo-no-background.png";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -13,6 +13,8 @@ import ROUTES from "../../utils/routes";
 import HeaderPhoneLinks from "./HeaderPhoneLinks";
 
 const HeaderPhone = () => {
+  const navigate = useNavigate();
+
   const [burgerClicked, setBurgerClicked] = useState<boolean>(false);
   const [activeMenuItem, setActiveMenuItem] = useState<string>("");
 
@@ -102,6 +104,7 @@ const HeaderPhone = () => {
         <img alt="Logo" src={logo} height={60} width={160} />
       </NavLink>
       <PiShoppingCart
+        onClick={() => navigate(ROUTES.CART)}
         size={24}
         className="hover-link mr-8 cursor-pointer transition-all  active:scale-110"
       />

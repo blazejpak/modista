@@ -81,7 +81,7 @@ export function getDataByCategory(data: Product[], param: string) {
       for (const categoryItem of categoryItems) {
         for (const dataSet of data) {
           if (Array.isArray(dataSet)) {
-            const categoryData: Product[] = dataSet.filter((item: Product) => {
+            const categoryData: Product[] = data.filter((item: Product) => {
               return item.category === categoryItem.fullName;
             });
 
@@ -90,6 +90,7 @@ export function getDataByCategory(data: Product[], param: string) {
         }
       }
     }
+    console.log(data);
     return filteredData;
   } catch (error) {
     console.log(error);

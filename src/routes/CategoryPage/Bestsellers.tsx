@@ -10,14 +10,16 @@ import { useAppSelector } from "../../store/hooks";
 const Bestsellers = () => {
   const data = useLoaderData() as Category[];
   const { category } = useParams();
-  const categoryString: string = category as string;
 
   const linkArr = category ? categoryLinks[category] : [];
 
   const dataRed = useAppSelector((state) => state.dataSlice.data);
 
+  if (!dataRed) return null;
+  // TODO
   const newData = getDataByCategory(dataRed, "women");
 
+  console.log(dataRed);
   console.log(newData);
 
   const highRatedProducts = getDataRatingAndDiscount(
