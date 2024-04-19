@@ -19,9 +19,11 @@ import Root from "./routes/Root";
 import HomePage from "./routes/HomePage/HomePage";
 import CategoryPage from "./routes/CategoryPage/CategoryPage";
 import ProductPage from "./routes/ProductPage/ProductPage";
+import SubcategoryPage from "./routes/SubcategoryPage/SubcategoryPage";
 
-import { CategoryPageLoader } from "./routes/CategoryPage/CategoryPageLoader";
 import { ProductPageLoader } from "./routes/ProductPage/ProductPageLoader";
+import { CategoryPageLoader } from "./routes/CategoryPage/CategoryPageLoader";
+import { SubcategoryLoader } from "./routes/SubcategoryPage/SubcategoryLoader";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -47,7 +49,17 @@ const router = createBrowserRouter(
         }}
       />
       <Route
-        path={"category/:category/:subcategory/:product"}
+        path={"category/:category/:subCategory"}
+        element={<SubcategoryPage />}
+        loader={({ params }) => {
+          const category = params.category || "";
+          const subCategory = params.subCategory || "";
+          return SubcategoryLoader(category, subCategory);
+        }}
+        errorElement={<ErrorPage />}
+      />
+      <Route
+        path={"category/:category/:subCategory/:product"}
         element={<ProductPage />}
         errorElement={<ErrorPage />}
         loader={({ params }: any) => {
