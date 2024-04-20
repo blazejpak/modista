@@ -2,6 +2,8 @@ import { useState } from "react";
 
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
+import ImageGrid from "./ImageGrid";
+import SliderImage from "./SliderImage";
 
 type ImageSliderProps = {
   images: string[];
@@ -10,43 +12,33 @@ type ImageSliderProps = {
 
 const ImageSlider = ({ images, alt }: ImageSliderProps) => {
   const [imageClicked, setImageClicked] = useState<boolean>(false);
-  const [imageNum, setImageNum] = useState<number>(0);
+  const [imageNumber, setImageNumber] = useState<number>(0);
 
   const previousImage = () => {
-    if (imageNum === 0)
-      setImageNum((prevState) => (prevState = images.length - 1));
-    else setImageNum((prevState) => prevState - 1);
+    if (imageNumber === 0)
+      setImageNumber((prevState) => (prevState = images.length - 1));
+    else setImageNumber((prevState) => prevState - 1);
   };
 
   const nextImage = () => {
-    if (imageNum === images.length - 1)
-      setImageNum((prevState) => (prevState = 0));
-    else setImageNum((prevState) => prevState + 1);
+    if (imageNumber === images.length - 1)
+      setImageNumber((prevState) => (prevState = 0));
+    else setImageNumber((prevState) => prevState + 1);
+  };
+
+  const imageHandle = (
+    isImageZoomActive: boolean,
+    indexImage: number,
+    typeScroll: "auto" | "hidden",
+  ) => {
+    setImageClicked(isImageZoomActive);
+    setImageNumber(indexImage);
+
+    document.documentElement.style.overflowY = typeScroll;
   };
 
   return (
     <div className="w-full select-none">
-      {images[0] && (
-        <div className="flex gap-2">
-          <img
-            src={images[0]}
-            className=" w-[95%] cursor-zoom-in shadow sm:min-w-[600px] md:min-w-[750px] lg:hidden"
-            onClick={() => {
-              document.documentElement.style.overflowY = "hidden";
-              setImageClicked(true);
-            }}
-          />
-          <img
-            src={images[1]}
-            className="cursor-zoom-in shadow lg:hidden"
-            onClick={() => {
-              document.documentElement.style.overflowY = "hidden";
-              setImageNum(1);
-              setImageClicked(true);
-            }}
-          />
-        </div>
-      )}
       {imageClicked && (
         <div className="fixed bottom-0 left-0 right-0 top-0 z-[1000] flex select-none items-center   bg-white">
           <div
@@ -54,7 +46,7 @@ const ImageSlider = ({ images, alt }: ImageSliderProps) => {
             onClick={() => {
               document.documentElement.style.overflowY = "auto";
               setImageClicked(false);
-              setImageNum(0);
+              setImageNumber(0);
             }}
           >
             <IoClose size={36} />
@@ -67,11 +59,11 @@ const ImageSlider = ({ images, alt }: ImageSliderProps) => {
           </div>
           <div className="relative">
             <img
-              src={images[imageNum]}
-              className="h-[60dvh] w-[80dvw] shadow xs:h-[80dvh] md:h-[80dvh]  xl:w-[70dvw]"
+              src={images[imageNumber]}
+              className="h-[60dvh] w-[80dvw] object-contain  xs:h-[80dvh] md:h-[80dvh]  xl:w-[70dvw]"
             />
             <p className="absolute left-[50%] top-[105%] translate-x-[-50%] text-xl md:top-[103%]">
-              {imageNum + 1} of {images.length}
+              {imageNumber + 1} of {images.length}
             </p>
           </div>
           <div
@@ -82,23 +74,8 @@ const ImageSlider = ({ images, alt }: ImageSliderProps) => {
           </div>
         </div>
       )}
-      <div className="hidden flex-col justify-between gap-10 lg:flex lg:flex-row lg:flex-wrap lg:gap-0 ">
-        {images &&
-          images.map((image, i) => (
-            <div
-              className={`mb-2 cursor-zoom-in shadow-lg  ${i === 0 ? "w-full" : "w-[49%]"}`}
-              onClick={() => {
-                setImageClicked(true);
-                setImageNum(i);
-
-                document.documentElement.style.overflowY = "hidden";
-              }}
-              key={i}
-            >
-              <img src={image} alt={alt} className="h-full w-full" />
-            </div>
-          ))}
-      </div>
+      <SliderImage images={images} alt={alt} imageFunction={imageHandle} />
+      <ImageGrid images={images} alt={alt} imageFunction={imageHandle} />
     </div>
   );
 };

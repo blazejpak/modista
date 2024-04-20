@@ -11,7 +11,7 @@ const ProductContent = ({ data }: ProductContentProps) => {
   const discountPrice = (data.price * (100 - data.discountPercentage)) / 100;
 
   return (
-    <div className="mx-[10%] flex flex-col gap-10 border-l border-r px-[10%] py-10 lg:mx-0 lg:w-[100%] lg:border-[0] lg:px-[5%]">
+    <div className=" flex flex-col gap-10  px-[10%] py-10 lg:mx-0 lg:w-[100%] lg:border-[0] lg:px-[5%]">
       <div className="flex flex-col items-center justify-between gap-4 sm:flex-row sm:gap-0 ">
         <strong className="text-xl md:text-3xl">{data.brand}</strong>
         <div className="flex flex-col items-center gap-4">
@@ -27,7 +27,7 @@ const ProductContent = ({ data }: ProductContentProps) => {
         </div>
       </div>
 
-      <Button onClick={() => {}} style="self-center">
+      <Button onClick={() => {}} className="self-center">
         Add to Cart
       </Button>
 
