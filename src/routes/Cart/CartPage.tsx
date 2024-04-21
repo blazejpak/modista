@@ -1,10 +1,19 @@
+import { useNavigate } from "react-router-dom";
 import Button from "../../components/main/Subcategory/Button";
 import { useAppSelector } from "../../store/hooks";
+import ROUTES from "../../utils/routes";
 
 const CartPage = () => {
+  const navigate = useNavigate();
+
   const data = useAppSelector((state) => state.dataSlice.data)[0];
 
   if (!data) return null;
+
+  const checkoutHandle = () => {
+    navigate(ROUTES.CHECKOUT);
+  };
+
   return (
     <section className=" my-20 flex items-center justify-center ">
       <div className=" w-full max-w-[1140px]">
@@ -54,7 +63,7 @@ const CartPage = () => {
               </div>
             </div>
 
-            <Button disabled>Checkout</Button>
+            <Button onClick={checkoutHandle}>Checkout</Button>
           </div>
         </div>
       </div>

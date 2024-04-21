@@ -5,7 +5,7 @@ import logo from "../../assets/logo-no-background.png";
 import ROUTES from "../../utils/routes";
 import { useState } from "react";
 import HeaderBiggerScreenLinks from "./HeaderBiggerScreenLinks";
-import CartOnHover from "./Cart/CartOnHover";
+import CartOnHover from "../../routes/Cart/CartOnHover";
 
 const HeaderBiggerScreens = () => {
   const [hoverState, setHoverState] = useState({

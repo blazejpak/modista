@@ -1,26 +1,33 @@
 import { PiShoppingCart } from "react-icons/pi";
-import { useAppSelector } from "../../../store/hooks";
+import { useAppSelector } from "../../store/hooks";
 import { useNavigate } from "react-router-dom";
+import ROUTES from "../../utils/routes";
 
 const CartOnHover = () => {
   const data = useAppSelector((state) => state.dataSlice.data)[0];
   const navigate = useNavigate();
 
   const cartHandle = () => {
-    navigate("/cart");
-    window.scrollTo(1, 1);
+    navigate(ROUTES.CART);
+  };
+
+  const checkoutHandle = () => {
+    navigate(ROUTES.CHECKOUT);
   };
 
   if (!data) return null;
   return (
     <div className=" group relative h-full content-center">
-      <div className="hover-link flex cursor-pointer items-center  justify-center  gap-1 transition-all active:scale-110">
+      <div
+        className="hover-link flex cursor-pointer items-center  justify-center  gap-1 transition-all active:scale-110"
+        onClick={cartHandle}
+      >
         <PiShoppingCart size={24} />
         <p className="text-sm font-light">Cart</p>
         <p className=" text-xs font-light ">(1)</p>
       </div>
 
-      <div className="absolute right-[-100%] top-[100%] hidden w-[360px] rounded  bg-white p-4 text-black-normal shadow-xl group-hover:flex group-hover:flex-col">
+      <div className="text-black-normal absolute right-[-100%] top-[100%] hidden w-[360px]  rounded bg-white p-4 shadow-xl group-hover:flex group-hover:flex-col">
         <div className="flex items-center justify-center gap-4 p-8">
           <img
             src={data.thumbnail}
@@ -46,7 +53,7 @@ const CartOnHover = () => {
             <p></p>
           </div>
         </div>
-        <button>Checkout</button>
+        <button onClick={checkoutHandle}>Checkout</button>
         <button onClick={cartHandle}>Shopping bag</button>
       </div>
     </div>
