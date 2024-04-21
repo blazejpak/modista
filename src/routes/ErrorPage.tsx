@@ -5,7 +5,6 @@ const ErrorPage = () => {
   const navigate = useNavigate();
   const backHomeHandler = (): void => {
     navigate("/");
-    window.scrollTo({ top: 0, behavior: "instant" });
   };
   return (
     <div className="flex h-screen flex-col items-center justify-center gap-8 bg-grey-normal p-[10%]">
