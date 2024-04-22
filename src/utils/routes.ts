@@ -108,7 +108,7 @@ export const categoryLinks: LinksImg = {
   accessories: [
     {
       link: ROUTES.ACCESSORIES_DECORATIONS,
-      label: "home decoration",
+      label: "home-decoration",
       img: "/src/assets/categoryPage/accessories/accessories-decoration.jpg",
       fullName: "home-decoration",
     },
