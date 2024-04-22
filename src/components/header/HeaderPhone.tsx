@@ -26,15 +26,20 @@ const HeaderPhone = () => {
   const womenClicked = activeMenuItem === "women";
   const accessoriesClicked = activeMenuItem === "accessories";
 
+  if (burgerClicked) document.documentElement.style.overflowY = "hidden";
+  else document.documentElement.style.overflowY = "auto";
+
   return (
-    <nav className="flex h-full items-center justify-between gap-8  ">
+    <nav className="flex  h-full items-center justify-between gap-8  ">
       <GiHamburgerMenu
         size={24}
         className="ml-8 cursor-pointer transition-colors hover:text-gold-lighter"
-        onClick={() => setBurgerClicked((prevState) => !prevState)}
+        onClick={() => {
+          setBurgerClicked(true);
+        }}
       />
       {burgerClicked && (
-        <div className="absolute top-[0] z-10 flex  h-screen w-full justify-center bg-black-lighter ">
+        <div className="absolute top-[0]  z-[1000] flex  h-screen w-full justify-center bg-black-lighter ">
           <IoClose
             size={30}
             className="hover-link absolute right-4 top-4 cursor-pointer text-grey-normal transition-all active:scale-110"
