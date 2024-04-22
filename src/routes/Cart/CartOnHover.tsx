@@ -1,7 +1,7 @@
 import { PiShoppingCart } from "react-icons/pi";
 import { useAppSelector } from "../../store/hooks";
 import { useNavigate } from "react-router-dom";
-import ROUTES from "../../utils/routes";
+import { ROUTES } from "../../utils/routes";
 
 const CartOnHover = () => {
   const data = useAppSelector((state) => state.dataSlice.data)[0];
@@ -27,7 +27,7 @@ const CartOnHover = () => {
         <p className=" text-xs font-light ">(1)</p>
       </div>
 
-      <div className="text-black-normal absolute right-[-100%] top-[100%] hidden w-[360px]  rounded bg-white p-4 shadow-xl group-hover:flex group-hover:flex-col">
+      <div className="absolute right-[-100%] top-[100%] hidden w-[360px] rounded  bg-white p-4 text-black-normal shadow-xl group-hover:flex group-hover:flex-col">
         <div className="flex items-center justify-center gap-4 p-8">
           <img
             src={data.thumbnail}

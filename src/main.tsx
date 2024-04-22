@@ -10,7 +10,7 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 
-import ROUTES from "./utils/routes";
+import { ROUTES } from "./utils/routes";
 import { store } from "./store/store";
 
 import ErrorPage from "./routes/ErrorPage";
@@ -22,7 +22,6 @@ import ProductPage from "./routes/ProductPage/ProductPage";
 import SubcategoryPage from "./routes/SubcategoryPage/SubcategoryPage";
 
 import { ProductPageLoader } from "./routes/ProductPage/ProductPageLoader";
-import { CategoryPageLoader } from "./routes/CategoryPage/CategoryPageLoader";
 import { SubcategoryLoader } from "./routes/SubcategoryPage/SubcategoryLoader";
 import { RootLoader } from "./routes/RootLoader";
 import CartPage from "./routes/Cart/CartPage";
@@ -58,11 +57,6 @@ const router = createBrowserRouter(
         path={"category/:category"}
         element={<CategoryPage />}
         errorElement={<ErrorPage />}
-        loader={({ params }: any) => {
-          const category = params.category || "";
-
-          return CategoryPageLoader(category);
-        }}
       />
       <Route
         path={"category/:category/:subCategory"}

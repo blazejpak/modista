@@ -1,4 +1,4 @@
-import { categoryLinks } from "../routes/CategoryPage/categoryLinks";
+import { categoryLinks } from "./routes";
 import { Category, Product } from "./types";
 
 export const URL = "https://dummyjson.com/";
@@ -32,14 +32,16 @@ export function getDataRatingAndDiscount(
 }
 
 export function dataSort(data: Product[], typeSort: string) {
-  data.sort((a, b) => {
+  const sortedData = [...data];
+
+  sortedData.sort((a, b) => {
     switch (typeSort) {
       case "Lowest price":
         return a.price - b.price;
       case "Highest price":
         return b.price - a.price;
       case "Discount":
-        return a.discountPercentage - b.discountPercentage;
+        return b.discountPercentage - a.discountPercentage;
       case "Name":
         return a.title.localeCompare(b.title);
 
@@ -48,7 +50,7 @@ export function dataSort(data: Product[], typeSort: string) {
     }
   });
 
-  return data;
+  return sortedData;
 }
 
 export function getDataByCategory(data: Product[], param: string) {
@@ -66,6 +68,18 @@ export function getDataByCategory(data: Product[], param: string) {
         filteredData.push(...categoryData);
       }
     }
+    return filteredData;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export function getDataBySubcategory(data: Product[], param: string) {
+  try {
+    if (!data || !param) return null;
+
+    let filteredData = data.filter((product) => product.category === param);
+
     return filteredData;
   } catch (error) {
     console.log(error);

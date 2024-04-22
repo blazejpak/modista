@@ -4,7 +4,7 @@ import {
   getDataByCategory,
   getDataRatingAndDiscount,
 } from "../../utils/helpers";
-import { categoryLinks } from "./categoryLinks";
+import { categoryLinks } from "../../utils/routes";
 import { useAppSelector } from "../../store/hooks";
 
 const Bestsellers = () => {

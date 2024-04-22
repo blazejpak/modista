@@ -9,7 +9,7 @@ import { HiMinus } from "react-icons/hi";
 
 import { IoClose } from "react-icons/io5";
 
-import ROUTES from "../../utils/routes";
+import { ROUTES } from "../../utils/routes";
 import HeaderPhoneLinks from "./HeaderPhoneLinks";
 
 const HeaderPhone = () => {

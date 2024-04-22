@@ -1,7 +1,7 @@
 import { AiFillFacebook, AiFillInstagram } from "react-icons/ai";
 import logo from "../../assets/logo-no-background.png";
 import { Link } from "react-router-dom";
-import ROUTES from "../../utils/routes";
+import { ROUTES } from "../../utils/routes";
 import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {

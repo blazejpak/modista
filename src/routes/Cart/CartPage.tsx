@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/main/Subcategory/Button";
 import { useAppSelector } from "../../store/hooks";
-import ROUTES from "../../utils/routes";
+import { ROUTES } from "../../utils/routes";
 
 const CartPage = () => {
   const navigate = useNavigate();

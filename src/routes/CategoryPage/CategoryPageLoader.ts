@@ -1,5 +1,5 @@
 import { URL } from "../../utils/helpers";
-import { categoryLinks } from "./categoryLinks";
+import { categoryLinks } from "../../utils/routes";
 
 export const CategoryPageLoader = async (param: string) => {
   try {

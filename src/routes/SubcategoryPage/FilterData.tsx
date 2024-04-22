@@ -6,13 +6,16 @@ import { Product } from "../../utils/types";
 
 import RatingProducts from "./RatingProducts";
 import FilterByPrice from "./FilterByPrice";
+import { dataSort } from "../../utils/helpers";
 
 interface FilterDataProps {
   data: Product[];
 }
 
 const FilterData = ({ data }: FilterDataProps) => {
-  const { setSortedData } = useContext(SortDataContext);
+  if (!data) return null;
+
+  const { setSortedData, typeSort } = useContext(SortDataContext);
 
   const [priceOpen, setPriceOpen] = useState<boolean>(false);
   const [ratingOpen, setRatingOpen] = useState<boolean>(false);
@@ -50,10 +53,13 @@ const FilterData = ({ data }: FilterDataProps) => {
   };
 
   useEffect(() => {
-    const newData = data;
+    const newData = [...data];
     const filteredData = filterData(newData);
-    setSortedData(filteredData);
-  }, [data, filterByRate]);
+
+    const sortData = dataSort(filteredData, typeSort) as Product[];
+
+    setSortedData(sortData);
+  }, [filterByRate]);
 
   const savePriceSubmit = () => {
     if (price.min > price.max) {

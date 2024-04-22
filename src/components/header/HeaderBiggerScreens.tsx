@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 import logo from "../../assets/logo-no-background.png";
 
-import ROUTES from "../../utils/routes";
+import { ROUTES } from "../../utils/routes";
 import { useState } from "react";
 import HeaderBiggerScreenLinks from "./HeaderBiggerScreenLinks";
 import CartOnHover from "../../routes/Cart/CartOnHover";
