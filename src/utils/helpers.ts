@@ -12,41 +12,23 @@ export function pushDataIntoArray(data: Category[]) {
 }
 
 export function getDataRatingAndDiscount(
-  data: Category[],
+  data: Product[],
   type: "discount" | "rating",
 ) {
-  const highRatedProducts = [];
-
   if (!data) return null;
 
-  for (const category of data) {
-    let bestPrice = 0;
-    let bestProduct = null;
-
-    for (const product of category.products) {
-      if (type === "discount" && product.discountPercentage > bestPrice) {
-        bestPrice = product.discountPercentage;
-        bestProduct = product;
-      } else if (type === "rating" && product.rating > bestPrice) {
-        bestPrice = product.rating;
-        bestProduct = product;
+  const sortedData = data
+    .sort((a, b) => {
+      if (a && b) {
+        if (type === "discount")
+          return b.discountPercentage - a.discountPercentage;
+        else if (type === "rating") return b.rating - a.rating;
       }
-    }
+      return 0;
+    })
+    .slice(0, 3);
 
-    highRatedProducts.push(bestProduct);
-  }
-  if (!highRatedProducts) return null;
-
-  highRatedProducts.sort((a, b) => {
-    if (a && b) {
-      if (type === "discount")
-        return b.discountPercentage - a.discountPercentage;
-      else if (type === "rating") return b.rating - a.rating;
-    }
-    return 0;
-  });
-
-  return highRatedProducts;
+  return sortedData;
 }
 
 export function dataSort(data: Product[], typeSort: string) {
@@ -77,20 +59,13 @@ export function getDataByCategory(data: Product[], param: string) {
 
     if (categoryLinks[param]) {
       const categoryItems = categoryLinks[param];
+      const categoriesFullName = categoryItems.map((item) => item.fullName);
 
-      for (const categoryItem of categoryItems) {
-        for (const dataSet of data) {
-          if (Array.isArray(dataSet)) {
-            const categoryData: Product[] = data.filter((item: Product) => {
-              return item.category === categoryItem.fullName;
-            });
-
-            filteredData = filteredData.concat(categoryData);
-          }
-        }
+      for (const category of categoriesFullName) {
+        const categoryData = data.filter((item) => item.category === category);
+        filteredData.push(...categoryData);
       }
     }
-    console.log(data);
     return filteredData;
   } catch (error) {
     console.log(error);

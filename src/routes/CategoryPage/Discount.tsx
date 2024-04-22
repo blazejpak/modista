@@ -1,16 +1,25 @@
-import { Link, useLoaderData, useParams } from "react-router-dom";
-import type { Category, Product } from "../../utils/types";
-import { getDataRatingAndDiscount } from "../../utils/helpers";
+import { Link, useParams } from "react-router-dom";
+import type { Product } from "../../utils/types";
+import {
+  getDataByCategory,
+  getDataRatingAndDiscount,
+} from "../../utils/helpers";
 import { categoryLinks } from "./categoryLinks";
+import { useAppSelector } from "../../store/hooks";
 
 const Discount = () => {
-  const data = useLoaderData() as Category[];
+  const category: string = useParams().category ?? "";
 
-  const { category } = useParams();
   const linkArr = category ? categoryLinks[category] : [];
 
+  const dataRed = useAppSelector((state) => state.dataSlice.data);
+  if (!dataRed) return null;
+
+  const newData = getDataByCategory(dataRed, category);
+  if (!newData) return null;
+
   const highDiscountProducts = getDataRatingAndDiscount(
-    data,
+    newData,
     "discount",
   ) as Product[];
 

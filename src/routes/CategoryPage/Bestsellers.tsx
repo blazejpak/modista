@@ -1,5 +1,5 @@
-import { Link, useLoaderData, useParams } from "react-router-dom";
-import type { Category, Product } from "../../utils/types";
+import { Link, useParams } from "react-router-dom";
+import type { Product } from "../../utils/types";
 import {
   getDataByCategory,
   getDataRatingAndDiscount,
@@ -8,22 +8,18 @@ import { categoryLinks } from "./categoryLinks";
 import { useAppSelector } from "../../store/hooks";
 
 const Bestsellers = () => {
-  const data = useLoaderData() as Category[];
-  const { category } = useParams();
+  const category: string = useParams().category ?? "";
 
   const linkArr = category ? categoryLinks[category] : [];
 
   const dataRed = useAppSelector((state) => state.dataSlice.data);
-
   if (!dataRed) return null;
-  // TODO
-  const newData = getDataByCategory(dataRed, "women");
 
-  console.log(dataRed);
-  console.log(newData);
+  const newData = getDataByCategory(dataRed, category);
+  if (!newData) return null;
 
   const highRatedProducts = getDataRatingAndDiscount(
-    data,
+    newData,
     "rating",
   ) as Product[];
 
