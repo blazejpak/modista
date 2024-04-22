@@ -1,9 +1,13 @@
 import HeaderPhone from "./HeaderPhone";
 import HeaderBiggerScreens from "./HeaderBiggerScreens";
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 
 const Header = () => {
   const [isMobile, setIsMobile] = useState<boolean>(false);
+
+  useEffect(() => {
+    document.documentElement.style.overflowY = "auto";
+  }, [isMobile]);
 
   useLayoutEffect(() => {
     const handlerResize = () => {
