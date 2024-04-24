@@ -2,33 +2,21 @@ import { PiShoppingCart } from "react-icons/pi";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../utils/routes";
-import { useEffect, useState } from "react";
-import { Cart } from "../../utils/types";
+import { useEffect } from "react";
 import { groupProductInCartByAmount } from "../../utils/helpers";
 
 const CartOnHover = () => {
   const cart = useAppSelector((state) => state.cartSlice.cart);
   const isCartOpen = useAppSelector((state) => state.cartSlice.isOpenCart);
-  const [finalData, setFinalData] = useState<Cart[]>([]);
   const dispatch = useAppDispatch();
 
   if (!cart) return null;
 
   useEffect(() => {
-    // const groupAmount = cart.reduce((result: Record<string, Cart>, item) => {
-    //   if (!result[item.id]) {
-    //     result[item.id] = { ...item, amount: 0 };
-    //   }
-    //   result[item.id].amount += 1;
-    //   return result;
-    // }, {});
-
-    // const cartData: Cart[] = Object.values(groupAmount);
-
     const groupAmount = groupProductInCartByAmount(cart);
-    console.log(groupAmount);
-    setFinalData(groupAmount);
-  }, [cart]);
+
+    dispatch({ type: "cart/cartData", payload: groupAmount });
+  }, []);
 
   const navigate = useNavigate();
 
@@ -40,7 +28,6 @@ const CartOnHover = () => {
     navigate(ROUTES.CHECKOUT);
   };
 
-  if (!finalData) return null;
   return (
     <div
       className=" group relative h-full content-center"
@@ -59,10 +46,8 @@ const CartOnHover = () => {
       {isCartOpen && (
         <div className="absolute right-[-100%] top-[100%] flex   w-[360px] flex-col  rounded bg-white p-4 text-black-normal shadow-xl">
           <div className="max-h-[250px] overflow-y-auto">
-            {finalData.length > 0 ? (
-              finalData.map((product) => {
-                console.log(cart);
-
+            {cart.length > 0 ? (
+              cart.map((product) => {
                 return (
                   <div
                     className="flex items-center justify-center gap-4 p-8"

@@ -12,16 +12,35 @@ import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 
 import { Category } from "../utils/types";
-import { useAppDispatch } from "../store/hooks";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { pushDataIntoArray } from "../utils/helpers";
 
 function Root() {
   const dispatch = useAppDispatch();
   const data = useLoaderData() as Category[];
   const getData = pushDataIntoArray(data);
+  const cart = useAppSelector((state) => state.cartSlice.cart);
+
+  useEffect(() => {
+    if (cart.length > 0) {
+      localStorage.setItem("cartData", JSON.stringify(cart));
+    }
+  }, [cart]);
 
   useEffect(() => {
     if (getData) dispatch({ type: "data/getData", payload: getData });
+  }, []);
+
+  useEffect(() => {
+    if (cart.length === 0) {
+      const cartDataLocalStorage = localStorage.getItem("cartData");
+      if (cartDataLocalStorage !== null) {
+        dispatch({
+          type: "cart/cartData",
+          payload: JSON.parse(cartDataLocalStorage),
+        });
+      }
+    }
   }, []);
 
   const { state } = useNavigation();
