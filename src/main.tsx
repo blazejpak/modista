@@ -61,21 +61,16 @@ const router = createBrowserRouter(
       <Route
         path={"category/:category/:subCategory"}
         element={<SubcategoryPage />}
-        loader={({ params }) => {
-          const category = params.category || "";
-          const subCategory = params.subCategory || "";
-          return SubcategoryLoader(category, subCategory);
-        }}
         errorElement={<ErrorPage />}
       />
       <Route
-        path={"category/:category/:subCategory/:product"}
+        path={"category/:category/:subCategory/:productId"}
         element={<ProductPage />}
         errorElement={<ErrorPage />}
         loader={({ params }: any) => {
-          const product = params.product || "";
+          const productId = params.productId || "";
 
-          return ProductPageLoader(product);
+          return ProductPageLoader(productId);
         }}
       />
     </Route>,

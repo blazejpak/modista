@@ -85,3 +85,14 @@ export function getDataBySubcategory(data: Product[], param: string) {
     console.log(error);
   }
 }
+
+export function getProductById(data: Product[], id: string) {
+  try {
+    if (!data || !id) return null;
+
+    const filteredData = data.find((product) => product.id === Number(id));
+    return filteredData;
+  } catch (error) {
+    console.log(error);
+  }
+}
