@@ -77,7 +77,6 @@ export function getDataByCategory(data: Product[], param: string) {
 export function getDataBySubcategory(data: Product[], param: string) {
   try {
     if (!data || !param) return null;
-
     let filteredData = data.filter((product) => product.category === param);
 
     return filteredData;

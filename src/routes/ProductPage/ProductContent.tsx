@@ -1,4 +1,6 @@
+import { useState } from "react";
 import Button from "../../components/main/Subcategory/Button";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { Product } from "../../utils/types";
 import ExtraInformation from "./ExtraInformation";
 import MaterialsInfo from "./MaterialsInfo";
@@ -10,9 +12,24 @@ type ProductContentProps = {
 
 const ProductContent = ({ data }: ProductContentProps) => {
   if (!data) return null;
+  const [buttonCartClicked, setButtonCartClicked] = useState<boolean>();
+  const dispatch = useAppDispatch();
+  const cart = useAppSelector((state) => state.cartSlice.cart);
 
   const discountPrice = (data.price * (100 - data.discountPercentage)) / 100;
 
+  const addProductToCart = () => {
+    dispatch({ type: "cart/cartData", payload: [...cart, data] });
+    dispatch({ type: "cart/openCart", payload: true });
+    window.scrollTo(1, 1);
+    setButtonCartClicked(true);
+
+    setTimeout(() => {
+      dispatch({ type: "cart/openCart", payload: false });
+      setButtonCartClicked(false);
+    }, 3000);
+  };
+  console.log(cart);
   return (
     <div
       className={`flex flex-col gap-10 px-[10%] py-10 lg:mx-0  lg:w-[50%] lg:px-[5%]  lg:pb-10 lg:pt-0 `}
@@ -33,7 +50,11 @@ const ProductContent = ({ data }: ProductContentProps) => {
         </div>
       </div>
 
-      <Button onClick={() => {}} className="self-center">
+      <Button
+        onClick={addProductToCart}
+        className="self-center"
+        disabled={buttonCartClicked}
+      >
         Add to Cart
       </Button>
 

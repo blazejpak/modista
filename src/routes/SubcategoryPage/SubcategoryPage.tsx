@@ -32,7 +32,7 @@ const SubcategoryPage = () => {
   useEffect(() => {
     const sortData = dataSort(newData, "Lowest price") as Product[];
     setSortedData(sortData);
-  }, [data]);
+  }, [data, selectedLink]);
 
   return (
     <section className="flex flex-col  gap-8 p-6">

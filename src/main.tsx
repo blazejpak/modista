@@ -21,8 +21,6 @@ import CategoryPage from "./routes/CategoryPage/CategoryPage";
 import ProductPage from "./routes/ProductPage/ProductPage";
 import SubcategoryPage from "./routes/SubcategoryPage/SubcategoryPage";
 
-import { ProductPageLoader } from "./routes/ProductPage/ProductPageLoader";
-import { SubcategoryLoader } from "./routes/SubcategoryPage/SubcategoryLoader";
 import { RootLoader } from "./routes/RootLoader";
 import CartPage from "./routes/Cart/CartPage";
 import CheckoutPage from "./routes/Checkout/CheckoutPage";
@@ -67,11 +65,6 @@ const router = createBrowserRouter(
         path={"category/:category/:subCategory/:productId"}
         element={<ProductPage />}
         errorElement={<ErrorPage />}
-        loader={({ params }: any) => {
-          const productId = params.productId || "";
-
-          return ProductPageLoader(productId);
-        }}
       />
     </Route>,
   ),

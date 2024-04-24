@@ -5,12 +5,10 @@ import { Product } from "../../utils/types";
 
 interface Data {
   data: Product[];
-  cart: Product[];
 }
 
 const initialState: Data = {
   data: [],
-  cart: [],
 };
 
 export const dataSlice = createSlice({
@@ -20,12 +18,9 @@ export const dataSlice = createSlice({
     getData: (state, action: PayloadAction<Product[]>) => {
       state.data = action.payload;
     },
-    cartData: (state, action: PayloadAction<Product[]>) => {
-      state.cart = action.payload;
-    },
   },
 });
 
-export const { getData, cartData } = dataSlice.actions;
+export const { getData } = dataSlice.actions;
 
 export default dataSlice.reducer;

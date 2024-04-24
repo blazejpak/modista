@@ -8,7 +8,6 @@ import { getProductById } from "../../utils/helpers";
 
 const ProductPage = () => {
   const productId: string = useParams().productId ?? "";
-  // const data = useLoaderData() as Product;
 
   const data = useAppSelector((state) => state.dataSlice.data);
   const product = getProductById(data, productId) as Product;

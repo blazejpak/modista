@@ -6,7 +6,6 @@ interface ProductsProps {
 }
 
 const Products = ({ products }: ProductsProps) => {
-  console.log(products);
   return (
     <div className="grid grid-cols-1 items-center justify-center divide-y-2 xs:grid-cols-2 xs:gap-2 xs:divide-y-0 md:gap-4 lg:grid-cols-3 xl:grid-cols-4">
       {products.length > 0 &&
