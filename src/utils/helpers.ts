@@ -1,5 +1,5 @@
 import { categoryLinks } from "./routes";
-import { Category, Product } from "./types";
+import { Cart, Category, Product } from "./types";
 
 export const URL = "https://dummyjson.com/";
 
@@ -94,4 +94,22 @@ export function getProductById(data: Product[], id: string) {
   } catch (error) {
     console.log(error);
   }
+}
+
+export function groupProductInCartByAmount(data: Cart[]) {
+  // TODO type Record
+
+  const groupAmount = data.reduce(
+    (result: Record<string | number, Cart>, item) => {
+      if (!result[item.id]) {
+        result[item.id] = { ...item, amount: 0 };
+      }
+      result[item.id].amount += 1;
+
+      return result;
+    },
+    {},
+  );
+  const cartData: Cart[] = Object.values(groupAmount);
+  return cartData;
 }

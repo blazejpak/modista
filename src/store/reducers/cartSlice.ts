@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { Product } from "../../utils/types";
+import { Cart } from "../../utils/types";
 
 interface Data {
-  cart: Product[];
+  cart: Cart[];
   isOpenCart: boolean;
 }
 
@@ -17,7 +17,7 @@ export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    cartData: (state, action: PayloadAction<Product[]>) => {
+    cartData: (state, action: PayloadAction<Cart[]>) => {
       state.cart = action.payload;
     },
     openCart: (state, action: PayloadAction<boolean>) => {

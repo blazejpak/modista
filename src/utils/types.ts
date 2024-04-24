@@ -12,6 +12,10 @@ export type Product = {
   title: string;
 };
 
+export interface Cart extends Product {
+  amount: number;
+}
+
 export type Category = {
   limit: number;
   products: Product[];
