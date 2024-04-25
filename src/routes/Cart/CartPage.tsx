@@ -1,29 +1,69 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/main/Subcategory/Button";
-import { useAppSelector } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { ROUTES } from "../../utils/routes";
 import { groupProductInCartByAmount } from "../../utils/helpers";
 import { v4 as uuidv4 } from "uuid";
 import { deliveryPrice } from "../../utils/variables";
+import { useState } from "react";
+import { Cart } from "../../utils/types";
 
 const CartPage = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const cart = useAppSelector((state) => state.cartSlice.cart);
 
   if (!cart) return null;
-  const groupAmount = groupProductInCartByAmount(cart);
 
-  const cartOrderValue = groupAmount.reduce((acc, product) => {
-    acc += product.totalPrice;
+  console.log(cart);
+
+  const groupAmount = groupProductInCartByAmount(cart);
+  console.log(groupAmount);
+
+  const cartData: Cart[] = Object.values(groupAmount);
+
+  const [finalData, setFinalData] = useState(cartData);
+
+  const checkoutHandle = () => {
+    navigate(ROUTES.CHECKOUT);
+  };
+
+  const cartOrderValue = finalData.reduce((acc, product) => {
+    acc += product.price * product.amount;
 
     return acc;
   }, 0);
 
+  console.log(cartOrderValue);
   const cartTotalPrice = cartOrderValue + deliveryPrice;
 
-  const checkoutHandle = () => {
-    navigate(ROUTES.CHECKOUT);
+  const addAmountOfProduct = (id: number) => {
+    const product = finalData.map((item) => {
+      if (item.id === id) {
+        return { ...item, amount: item.amount + 1 };
+      }
+      return item;
+    });
+
+    dispatch({ type: "cart/cartData", payload: product });
+    setFinalData(product);
+  };
+
+  const subtractAmountOfProduct = (id: number) => {
+    const product = finalData
+      .map((item) => {
+        if (item.id === id) {
+          if (item.amount > 1) {
+            return { ...item, amount: item.amount - 1 };
+          } else return null;
+        }
+        return item;
+      })
+      .filter((item) => item !== null) as Cart[];
+
+    dispatch({ type: "cart/cartData", payload: product });
+    setFinalData(product);
   };
 
   return (
@@ -32,8 +72,8 @@ const CartPage = () => {
         <h2 className=" text-center text-3xl font-bold">Shopping bag</h2>
         <div className="flex flex-col md:mt-4 md:flex-row md:justify-between">
           <div className="mt-10 flex flex-col justify-center rounded bg-white">
-            {groupAmount.length > 0 &&
-              groupAmount.map((product) => {
+            {finalData.length > 0 &&
+              finalData.map((product) => {
                 const id = uuidv4();
 
                 return (
@@ -63,10 +103,24 @@ const CartPage = () => {
                         <div>
                           <p>{product.amount}</p>
                           <p>{product.rating}</p>
-                          <p>${product.totalPrice.toFixed(2)}</p>
+                          <p>${(product.price * product.amount).toFixed(2)}</p>
                         </div>
                       </div>
-                      <p></p>
+                      <div className="flex items-center gap-4">
+                        <Button
+                          onClick={() => subtractAmountOfProduct(product.id)}
+                          className="max-w-[40px]"
+                        >
+                          -
+                        </Button>
+                        <p className="text-lg ">{product.amount}</p>
+                        <Button
+                          className="max-w-[40px]"
+                          onClick={() => addAmountOfProduct(product.id)}
+                        >
+                          +
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 );

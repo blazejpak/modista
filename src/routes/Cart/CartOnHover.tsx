@@ -41,23 +41,23 @@ const CartOnHover = () => {
       </div>
 
       {isCartOpen && (
-        <div className="absolute right-[-100%] top-[100%] flex   w-[360px] flex-col  rounded bg-white p-4 text-black-normal shadow-xl">
+        <div className="absolute right-[-100%] top-[100%] flex   w-[360px] flex-col   rounded bg-white p-4 text-black-normal shadow-xl">
           <div className="max-h-[250px] overflow-y-auto">
             {groupAmount.length > 0 ? (
               groupAmount.map((product) => {
                 const id = uuidv4();
                 return (
                   <div
-                    className="flex items-center justify-center gap-4 p-8"
+                    className="flex  items-center justify-between gap-4 p-8"
                     key={id}
                   >
                     <img
                       src={product.thumbnail}
                       alt={product.title}
-                      className="h-24 w-24 shadow"
+                      className="h-24 w-[50%] shadow"
                     />
 
-                    <div className="flex flex-col  gap-2 text-xs">
+                    <div className="flex w-[50%]  flex-col gap-2 text-xs">
                       <div>
                         <p>{product.title}</p>
                         <p>${product.price.toFixed(2)}</p>

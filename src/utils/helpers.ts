@@ -99,14 +99,18 @@ export function getProductById(data: Product[], id: string) {
 export function groupProductInCartByAmount(data: Cart[]) {
   // TODO type Record
 
+  if (!data) return [];
+
   const groupAmount = data.reduce(
     (result: Record<string | number, Cart>, item) => {
-      if (!result[item.id]) {
-        result[item.id] = { ...item, amount: 0, totalPrice: 0 };
-      }
-      result[item.id].amount += 1;
-      result[item.id].totalPrice += item.price;
+      if (item && item.id) {
+        if (!result[item.id]) {
+          result[item.id] = { ...item, amount: 0, totalPrice: 0 };
+        }
 
+        result[item.id].amount += item.amount;
+        result[item.id].totalPrice += item.price * item.amount;
+      }
       return result;
     },
     {},
