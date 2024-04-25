@@ -102,9 +102,10 @@ export function groupProductInCartByAmount(data: Cart[]) {
   const groupAmount = data.reduce(
     (result: Record<string | number, Cart>, item) => {
       if (!result[item.id]) {
-        result[item.id] = { ...item, amount: 0 };
+        result[item.id] = { ...item, amount: 0, totalPrice: 0 };
       }
       result[item.id].amount += 1;
+      result[item.id].totalPrice += item.price;
 
       return result;
     },

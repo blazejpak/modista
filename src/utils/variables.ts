@@ -6,3 +6,5 @@ export const sortType: SortType[] = [
   { label: "Discount", id: 2 },
   { label: "Name", id: 3 },
 ];
+
+export const deliveryPrice = 4.99;

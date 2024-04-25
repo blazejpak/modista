@@ -2,8 +2,9 @@ import { PiShoppingCart } from "react-icons/pi";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../utils/routes";
-import { useEffect } from "react";
 import { groupProductInCartByAmount } from "../../utils/helpers";
+import { v4 as uuidv4 } from "uuid";
+import Button from "../../components/main/Subcategory/Button";
 
 const CartOnHover = () => {
   const cart = useAppSelector((state) => state.cartSlice.cart);
@@ -12,11 +13,7 @@ const CartOnHover = () => {
 
   if (!cart) return null;
 
-  useEffect(() => {
-    const groupAmount = groupProductInCartByAmount(cart);
-
-    dispatch({ type: "cart/cartData", payload: groupAmount });
-  }, []);
+  const groupAmount = groupProductInCartByAmount(cart);
 
   const navigate = useNavigate();
 
@@ -46,12 +43,13 @@ const CartOnHover = () => {
       {isCartOpen && (
         <div className="absolute right-[-100%] top-[100%] flex   w-[360px] flex-col  rounded bg-white p-4 text-black-normal shadow-xl">
           <div className="max-h-[250px] overflow-y-auto">
-            {cart.length > 0 ? (
-              cart.map((product) => {
+            {groupAmount.length > 0 ? (
+              groupAmount.map((product) => {
+                const id = uuidv4();
                 return (
                   <div
                     className="flex items-center justify-center gap-4 p-8"
-                    key={product.id}
+                    key={id}
                   >
                     <img
                       src={product.thumbnail}
@@ -84,10 +82,10 @@ const CartOnHover = () => {
             )}
           </div>
           {cart.length > 0 && (
-            <>
-              <button onClick={checkoutHandle}>Checkout</button>
-              <button onClick={cartHandle}>Shopping bag</button>
-            </>
+            <div className="flex flex-col gap-2 p-4">
+              <Button onClick={checkoutHandle}>Checkout</Button>
+              <Button onClick={cartHandle}>Shopping bag</Button>
+            </div>
           )}
         </div>
       )}

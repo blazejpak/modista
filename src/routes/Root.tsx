@@ -48,12 +48,13 @@ function Root() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    dispatch({ type: "cart/openCart", payload: false });
   }, [pathname]);
 
   return (
     <SortDataProvider>
       <div className="flex w-full items-center justify-center overflow-x-hidden  bg-grey-normal">
-        <div className="relative grid min-h-screen max-w-[2000px] grid-rows-[90px_1fr_300px]  bg-white shadow-xl lg:grid-rows-[90px_1fr_200px]">
+        <div className="relative grid min-h-screen max-w-[2000px] grid-rows-[90px_1fr_300px]   shadow-xl lg:grid-rows-[90px_1fr_200px]">
           <Header />
           <main>
             {state === "loading" ? (

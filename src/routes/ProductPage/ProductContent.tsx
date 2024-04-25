@@ -29,7 +29,7 @@ const ProductContent = ({ data }: ProductContentProps) => {
       setButtonCartClicked(false);
     }, 3000);
   };
-  console.log(cart);
+
   return (
     <div
       className={`flex flex-col gap-10 px-[10%] py-10 lg:mx-0  lg:w-[50%] lg:px-[5%]  lg:pb-10 lg:pt-0 `}
