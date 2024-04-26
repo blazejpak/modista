@@ -60,7 +60,14 @@ const CartOnHover = () => {
                     <div className="flex w-[50%]  flex-col gap-2 text-xs">
                       <div>
                         <p>{product.title}</p>
-                        <p>${product.price.toFixed(2)}</p>
+                        <div className="flex items-center gap-2">
+                          <p className="line-through">
+                            ${product.price.toFixed(2)}
+                          </p>
+                          <p className="font-bold text-red-500 ">
+                            ${product.priceWithDiscount}
+                          </p>
+                        </div>
                       </div>
                       <div className="flex gap-2 font-normal">
                         <div>

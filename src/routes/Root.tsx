@@ -28,7 +28,21 @@ function Root() {
   }, [cart]);
 
   useEffect(() => {
-    if (getData) dispatch({ type: "data/getData", payload: getData });
+    if (getData) {
+      let newData = [];
+      for (const addDiscount of getData) {
+        const priceWithDiscount: number = +(
+          addDiscount.price *
+          ((100 - addDiscount.discountPercentage) / 100)
+        ).toFixed(2);
+        newData.push({
+          ...addDiscount,
+          priceWithDiscount,
+        });
+      }
+
+      dispatch({ type: "data/getData", payload: newData });
+    }
   }, []);
 
   useEffect(() => {

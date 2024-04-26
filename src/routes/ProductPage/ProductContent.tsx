@@ -16,9 +16,8 @@ const ProductContent = ({ data }: ProductContentProps) => {
   const dispatch = useAppDispatch();
   const cart = useAppSelector((state) => state.cartSlice.cart);
 
-  const discountPrice = (data.price * (100 - data.discountPercentage)) / 100;
-
   const addProductToCart = () => {
+    console.log(data);
     dispatch({ type: "cart/cartData", payload: [...cart, data] });
     dispatch({ type: "cart/openCart", payload: true });
     window.scrollTo(1, 1);
@@ -44,7 +43,7 @@ const ProductContent = ({ data }: ProductContentProps) => {
           <div className="flex items-center gap-4">
             <p className="text-lg line-through">${data.price.toFixed(2)}</p>
             <p className="text-2xl font-bold text-red-500 ">
-              ${discountPrice.toFixed(2)}
+              ${data.priceWithDiscount}
             </p>
           </div>
         </div>

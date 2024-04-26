@@ -105,10 +105,11 @@ export function groupProductInCartByAmount(data: Cart[]) {
     (result: Record<string | number, Cart>, item) => {
       if (item && item.id) {
         if (!result[item.id]) {
-          result[item.id] = { ...item, amount: 0, totalPrice: 0 };
+          result[item.id] = { ...item, amount: 0, totalPrice: item.price };
         }
-
-        result[item.id].amount += item.amount;
+        result[item.id].amount = isNaN(result[item.id].amount)
+          ? 1
+          : result[item.id].amount + item.amount;
         result[item.id].totalPrice += item.price * item.amount;
       }
       return result;
