@@ -1,22 +1,14 @@
-import { useNavigate } from "react-router-dom";
 import Button from "../../components/main/Subcategory/Button";
 import { Cart } from "../../utils/types";
 import { deliveryPrice } from "../../utils/variables";
-import { ROUTES } from "../../utils/routes";
 
 type SummaryCartProps = {
   finalData: Cart[];
+  text: string;
+  onClick: () => void;
 };
 
-const SummaryCart = ({ finalData }: SummaryCartProps) => {
-  const navigate = useNavigate();
-
-  const checkoutHandle = () => {
-    navigate(ROUTES.CHECKOUT);
-  };
-
-  console.log(finalData);
-
+const SummaryCart = ({ finalData, text, onClick }: SummaryCartProps) => {
   const cartOrderValue = finalData.reduce((acc, product) => {
     acc += product.priceWithDiscount * product.amount;
 
@@ -42,8 +34,8 @@ const SummaryCart = ({ finalData }: SummaryCartProps) => {
         </div>
       </div>
 
-      <Button onClick={checkoutHandle} className="self-center">
-        Checkout
+      <Button onClick={onClick} className="self-center">
+        {text}
       </Button>
     </div>
   );

@@ -4,8 +4,11 @@ import { useEffect, useState } from "react";
 import { Cart } from "../../utils/types";
 import DisplayProducts from "./DisplayProducts";
 import SummaryCart from "./SummaryCart";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../../utils/routes";
 
 const CartPage = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const cart = useAppSelector((state) => state.cartSlice.cart);
@@ -44,7 +47,11 @@ const CartPage = () => {
     dispatch({ type: "cart/cartData", payload: product });
     setFinalData(product);
   };
-  console.log(finalData);
+
+  const checkoutHandle = () => {
+    navigate(ROUTES.CHECKOUT);
+  };
+
   return (
     <section className=" my-20 flex items-center justify-center md:px-[5%] lg:px-[10%]">
       <div className=" w-full max-w-[1140px]">
@@ -57,7 +64,11 @@ const CartPage = () => {
                 subtractAmountOfProduct={subtractAmountOfProduct}
                 addAmountOfProduct={addAmountOfProduct}
               />
-              <SummaryCart finalData={finalData} />
+              <SummaryCart
+                finalData={finalData}
+                text="checkout"
+                onClick={checkoutHandle}
+              />
             </>
           ) : (
             // TODO

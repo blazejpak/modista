@@ -23,6 +23,9 @@ export const cartSlice = createSlice({
     openCart: (state, action: PayloadAction<boolean>) => {
       state.isOpenCart = action.payload;
     },
+    clearCart: (state) => {
+      state.cart = [];
+    },
   },
 });
 
