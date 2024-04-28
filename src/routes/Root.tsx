@@ -38,6 +38,7 @@ function Root() {
         newData.push({
           ...addDiscount,
           priceWithDiscount,
+          amount: 0,
         });
       }
 

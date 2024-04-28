@@ -11,53 +11,46 @@ const CartPage = () => {
   const cart = useAppSelector((state) => state.cartSlice.cart);
 
   if (!cart) return null;
-  const [finalData, setFinalData] = useState<Cart[]>([]);
+
+  const groupAmount = groupProductInCartByAmount(cart);
+  const [finalData, setFinalData] = useState<Cart[]>(groupAmount);
+
+  useEffect(() => {
+    setFinalData(cart);
+  }, [cart]);
 
   const addAmountOfProduct = (id: number) => {
-    console.log(finalData);
     const product = finalData.map((item) => {
-      console.log(item);
       if (item.id === id) {
         return { ...item, amount: item.amount + 1 };
       }
       return item;
     });
-    console.log(product);
 
     dispatch({ type: "cart/cartData", payload: product });
-    setFinalData((prev) => (prev = product));
+    setFinalData(product);
   };
 
   const subtractAmountOfProduct = (id: number) => {
     const product = finalData
       .map((item) => {
         if (item.id === id) {
-          if (item.amount > 1) {
-            return { ...item, amount: item.amount - 1 };
-          } else return null;
+          return { ...item, amount: item.amount - 1 };
         }
-
         return item;
       })
-      .filter((item) => item !== null) as Cart[];
+      .filter((item) => item.amount !== 0) as Cart[];
 
     dispatch({ type: "cart/cartData", payload: product });
     setFinalData(product);
   };
-
-  useEffect(() => {
-    const groupAmount = groupProductInCartByAmount(cart);
-
-    const cartData: Cart[] = Object.values(groupAmount);
-    console.log(cartData);
-    setFinalData(cartData);
-  }, [cart]);
+  console.log(finalData);
   return (
     <section className=" my-20 flex items-center justify-center md:px-[5%] lg:px-[10%]">
       <div className=" w-full max-w-[1140px]">
         <h2 className=" text-center text-3xl font-bold">Shopping bag</h2>
         <div className="flex flex-col md:mt-4 md:flex-row md:justify-between">
-          {finalData.length > 0 && (
+          {finalData.length > 0 ? (
             <>
               <DisplayProducts
                 finalData={finalData}
@@ -66,6 +59,9 @@ const CartPage = () => {
               />
               <SummaryCart finalData={finalData} />
             </>
+          ) : (
+            // TODO
+            <p className="mx-auto">CART IS EMPTY</p>
           )}
         </div>
       </div>

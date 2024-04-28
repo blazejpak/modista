@@ -15,6 +15,8 @@ const SummaryCart = ({ finalData }: SummaryCartProps) => {
     navigate(ROUTES.CHECKOUT);
   };
 
+  console.log(finalData);
+
   const cartOrderValue = finalData.reduce((acc, product) => {
     acc += product.priceWithDiscount * product.amount;
 

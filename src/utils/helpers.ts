@@ -101,21 +101,17 @@ export function groupProductInCartByAmount(data: Cart[]) {
 
   if (!data) return [];
 
-  const groupAmount = data.reduce(
-    (result: Record<string | number, Cart>, item) => {
-      if (item && item.id) {
-        if (!result[item.id]) {
-          result[item.id] = { ...item, amount: 0, totalPrice: item.price };
-        }
-        result[item.id].amount = isNaN(result[item.id].amount)
-          ? 1
-          : result[item.id].amount + item.amount;
-        result[item.id].totalPrice += item.price * item.amount;
-      }
-      return result;
-    },
-    {},
-  );
+  const groupAmount = data.reduce((result: any, item) => {
+    if (!result[item.id]) {
+      result[item.id] = { ...item, amount: 0 };
+    }
+    if (result[item.id]) {
+      result[item.id].amount += 1;
+    }
+    result[item.id].amount += item.amount;
+
+    return result;
+  }, {});
   const cartData: Cart[] = Object.values(groupAmount);
   return cartData;
 }

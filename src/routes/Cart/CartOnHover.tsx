@@ -5,6 +5,7 @@ import { ROUTES } from "../../utils/routes";
 import { groupProductInCartByAmount } from "../../utils/helpers";
 import { v4 as uuidv4 } from "uuid";
 import Button from "../../components/main/Subcategory/Button";
+import { Cart } from "../../utils/types";
 
 const CartOnHover = () => {
   const cart = useAppSelector((state) => state.cartSlice.cart);
@@ -14,6 +15,7 @@ const CartOnHover = () => {
   if (!cart) return null;
 
   const groupAmount = groupProductInCartByAmount(cart);
+  const cartData: Cart[] = Object.values(groupAmount);
 
   const navigate = useNavigate();
 
@@ -37,14 +39,14 @@ const CartOnHover = () => {
       >
         <PiShoppingCart size={24} />
         <p className="text-sm font-light">Cart</p>
-        <p className=" text-xs font-light ">({cart.length})</p>
+        <p className=" text-xs font-light ">({cartData.length})</p>
       </div>
 
       {isCartOpen && (
         <div className="absolute right-[-100%] top-[100%] flex   w-[360px] flex-col   rounded bg-white p-4 text-black-normal shadow-xl">
           <div className="max-h-[250px] overflow-y-auto">
-            {groupAmount.length > 0 ? (
-              groupAmount.map((product) => {
+            {cartData.length > 0 ? (
+              cartData.map((product) => {
                 const id = uuidv4();
                 return (
                   <div
