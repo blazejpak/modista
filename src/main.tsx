@@ -15,13 +15,13 @@ import { store } from "./store/store";
 
 import ErrorPage from "./routes/ErrorPage";
 import Root from "./routes/Root";
+import { RootLoader } from "./routes/RootLoader";
 
 import HomePage from "./routes/HomePage/HomePage";
 import CategoryPage from "./routes/CategoryPage/CategoryPage";
 import ProductPage from "./routes/ProductPage/ProductPage";
 import SubcategoryPage from "./routes/SubcategoryPage/SubcategoryPage";
-
-import { RootLoader } from "./routes/RootLoader";
+import Search from "./routes/Search/Search";
 import CartPage from "./routes/Cart/CartPage";
 import CheckoutPage from "./routes/Checkout/CheckoutPage";
 
@@ -49,6 +49,12 @@ const router = createBrowserRouter(
         index
         path={ROUTES.CHECKOUT}
         element={<CheckoutPage />}
+        errorElement={<ErrorPage />}
+      />
+      <Route
+        index
+        path={ROUTES.SEARCH}
+        element={<Search />}
         errorElement={<ErrorPage />}
       />
       <Route

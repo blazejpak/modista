@@ -73,7 +73,7 @@ const CheckoutPage = () => {
   });
 
   return (
-    <section className="flex justify-between py-20 md:px-[5%] lg:px-[10%]">
+    <section className="flex flex-col-reverse items-center gap-8 px-4 py-20 md:flex-row md:justify-between md:px-[5%] lg:gap-0 lg:px-[10%]">
       <form onSubmit={formik.handleSubmit}>
         <Stack spacing={4} width={400}>
           <TextField

@@ -1,4 +1,4 @@
-import { categoryLinks } from "./routes";
+import { categoryLinks, paramsLinks } from "./routes";
 import { Cart, Category, Product } from "./types";
 
 export const URL = "https://dummyjson.com/";
@@ -112,4 +112,12 @@ export function groupProductInCartByAmount(data: Cart[]) {
   }, {});
   const cartData: Cart[] = Object.values(groupAmount);
   return cartData;
+}
+
+export function getParamBySubcategory(product: Product) {
+  if (!product) return null;
+
+  const param = paramsLinks.find((item) => item.fullName === product.category);
+
+  return param?.link;
 }

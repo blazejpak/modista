@@ -2,6 +2,7 @@ export const ROUTES = {
   HOMEPAGE: "/",
   CART: "/cart",
   CHECKOUT: "/checkout",
+  SEARCH: "/search",
   MEN: "category/men",
   MEN_SHIRTS: "category/men/shirts",
   MEN_SHOES: "category/men/shoes",
@@ -132,3 +133,56 @@ export const categoryLinks: LinksImg = {
     },
   ],
 };
+
+export const paramsLinks = [
+  {
+    link: ROUTES.MEN_SHIRTS,
+    fullName: "mens-shirts",
+  },
+  {
+    link: ROUTES.MEN_SHOES,
+    fullName: "mens-shoes",
+  },
+  {
+    link: ROUTES.MEN_WATCHES,
+    fullName: "mens-watches",
+  },
+
+  {
+    link: ROUTES.WOMEN_DRESSES,
+    fullName: "womens-dresses",
+  },
+  {
+    link: ROUTES.WOMEN_SHOES,
+    fullName: "womens-shoes",
+  },
+  {
+    link: ROUTES.WOMEN_WATCHES,
+    fullName: "womens-watches",
+  },
+  {
+    link: ROUTES.WOMEN_BAGS,
+    fullName: "womens-bags",
+  },
+  {
+    link: ROUTES.WOMEN_JEWELLERY,
+    fullName: "womens-jewellery",
+  },
+
+  {
+    link: ROUTES.ACCESSORIES_DECORATIONS,
+    fullName: "home-decoration",
+  },
+  {
+    link: ROUTES.ACCESSORIES_FURNITURE,
+    fullName: "furniture",
+  },
+  {
+    link: ROUTES.ACCESSORIES_SKINCARE,
+    fullName: "skincare",
+  },
+  {
+    link: ROUTES.ACCESSORIES_SUNGLASSES,
+    fullName: "sunglasses",
+  },
+];

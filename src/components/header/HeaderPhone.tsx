@@ -11,9 +11,12 @@ import { IoClose } from "react-icons/io5";
 
 import { ROUTES } from "../../utils/routes";
 import HeaderPhoneLinks from "./HeaderPhoneLinks";
+import { FaSearch } from "react-icons/fa";
+import SearchInput from "../../routes/Search/SearchInput";
 
 const HeaderPhone = () => {
   const navigate = useNavigate();
+  const [searchInputClicked, setSearchInputClicked] = useState<boolean>(false);
 
   const [burgerClicked, setBurgerClicked] = useState<boolean>(false);
   const [activeMenuItem, setActiveMenuItem] = useState<string>("");
@@ -28,6 +31,14 @@ const HeaderPhone = () => {
 
   if (burgerClicked) document.documentElement.style.overflowY = "hidden";
   else document.documentElement.style.overflowY = "auto";
+
+  const showInputHandle = () => {
+    setSearchInputClicked((prev) => !prev);
+  };
+
+  const closeSearchInput = () => {
+    setSearchInputClicked(false);
+  };
 
   return (
     <nav className="flex  h-full items-center justify-between gap-8  ">
@@ -105,14 +116,29 @@ const HeaderPhone = () => {
           </ul>
         </div>
       )}
-      <NavLink to={ROUTES.HOMEPAGE} className="transition-all active:scale-110">
-        <img alt="Logo" src={logo} height={60} width={160} />
-      </NavLink>
-      <PiShoppingCart
-        onClick={() => navigate(ROUTES.CART)}
-        size={24}
-        className="hover-link mr-8 cursor-pointer transition-all  active:scale-110"
-      />
+      {!searchInputClicked ? (
+        <NavLink
+          to={ROUTES.HOMEPAGE}
+          className="transition-all active:scale-110"
+        >
+          <img alt="Logo" src={logo} height={60} width={160} />
+        </NavLink>
+      ) : (
+        <SearchInput closeInput={closeSearchInput} />
+      )}
+
+      <div className="flex items-center  gap-4">
+        {!searchInputClicked && (
+          <div onClick={showInputHandle} className="cursor-pointer ">
+            <FaSearch size={16} />
+          </div>
+        )}
+        <PiShoppingCart
+          onClick={() => navigate(ROUTES.CART)}
+          size={24}
+          className="hover-link mr-8 cursor-pointer transition-all  active:scale-110"
+        />
+      </div>
     </nav>
   );
 };
