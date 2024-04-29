@@ -18,10 +18,6 @@ const CartPage = () => {
   const groupAmount = groupProductInCartByAmount(cart);
   const [finalData, setFinalData] = useState<Cart[]>(groupAmount);
 
-  useEffect(() => {
-    setFinalData(cart);
-  }, [cart]);
-
   const addAmountOfProduct = (id: number) => {
     const product = finalData.map((item) => {
       if (item.id === id) {
@@ -49,8 +45,14 @@ const CartPage = () => {
   };
 
   const checkoutHandle = () => {
+    dispatch({ type: "cart/cartData", payload: finalData });
+
     navigate(ROUTES.CHECKOUT);
   };
+
+  useEffect(() => {
+    dispatch({ type: "cart/cartData", payload: finalData });
+  }, []);
 
   return (
     <section className=" my-20 flex items-center justify-center md:px-[5%] lg:px-[10%]">

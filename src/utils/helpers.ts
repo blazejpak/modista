@@ -105,9 +105,7 @@ export function groupProductInCartByAmount(data: Cart[]) {
     if (!result[item.id]) {
       result[item.id] = { ...item, amount: 0 };
     }
-    if (result[item.id]) {
-      result[item.id].amount += 1;
-    }
+
     result[item.id].amount += item.amount;
 
     return result;

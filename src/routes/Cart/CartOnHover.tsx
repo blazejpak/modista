@@ -1,6 +1,6 @@
 import { PiShoppingCart } from "react-icons/pi";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { useNavigate } from "react-router-dom";
+import { useMatch, useNavigate } from "react-router-dom";
 import { ROUTES } from "../../utils/routes";
 import { groupProductInCartByAmount } from "../../utils/helpers";
 import { v4 as uuidv4 } from "uuid";
@@ -11,6 +11,8 @@ const CartOnHover = () => {
   const cart = useAppSelector((state) => state.cartSlice.cart);
   const isCartOpen = useAppSelector((state) => state.cartSlice.isOpenCart);
   const dispatch = useAppDispatch();
+
+  const match = useMatch("/cart");
 
   if (!cart) return null;
 
@@ -42,7 +44,7 @@ const CartOnHover = () => {
         <p className=" text-xs font-light ">({cartData.length})</p>
       </div>
 
-      {isCartOpen && (
+      {isCartOpen && !match && (
         <div className="absolute right-[-100%] top-[100%] flex   w-[360px] flex-col   rounded bg-white p-4 text-black-normal shadow-xl">
           <div className="max-h-[250px] overflow-y-auto">
             {cartData.length > 0 ? (
