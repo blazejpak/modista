@@ -50,10 +50,6 @@ const CartPage = () => {
     navigate(ROUTES.CHECKOUT);
   };
 
-  useEffect(() => {
-    dispatch({ type: "cart/cartData", payload: finalData });
-  }, []);
-
   return (
     <section className=" my-20 flex items-center justify-center md:px-[5%] lg:px-[10%]">
       <div className=" w-full max-w-[1140px]">

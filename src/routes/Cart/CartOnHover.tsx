@@ -12,10 +12,11 @@ const CartOnHover = () => {
   const isCartOpen = useAppSelector((state) => state.cartSlice.isOpenCart);
   const dispatch = useAppDispatch();
 
-  const match = useMatch("/cart");
+  const matchCart = useMatch("/cart");
+  const matchCheckout = useMatch("/checkout");
 
   if (!cart) return null;
-
+  console.log(cart);
   const groupAmount = groupProductInCartByAmount(cart);
   const cartData: Cart[] = Object.values(groupAmount);
 
@@ -44,7 +45,7 @@ const CartOnHover = () => {
         <p className=" text-xs font-light ">({cartData.length})</p>
       </div>
 
-      {isCartOpen && !match && (
+      {isCartOpen && !matchCart && !matchCheckout && (
         <div className="absolute right-[-100%] top-[100%] flex   w-[360px] flex-col   rounded bg-white p-4 text-black-normal shadow-xl">
           <div className="max-h-[250px] overflow-y-auto">
             {cartData.length > 0 ? (

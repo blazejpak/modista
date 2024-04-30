@@ -103,6 +103,7 @@ export function groupProductInCartByAmount(data: Cart[]) {
 
   const groupAmount = data.reduce((result: any, item) => {
     if (!result[item.id]) {
+      console.log(result);
       result[item.id] = { ...item, amount: 0 };
     }
 

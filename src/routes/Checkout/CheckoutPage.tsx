@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import SummaryCart from "../Cart/SummaryCart";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../utils/routes";
+import { ChangeEvent } from "react";
 
 const validationSchema = yup.object({
   name: yup
@@ -15,12 +16,19 @@ const validationSchema = yup.object({
     .string()
     .min(3, "Must be minimum 3 characters")
     .required("Surname is required"),
+  email: yup
+    .string()
+    .min(3, "Must be minimum 3 characters")
+    .matches(
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+      "Invalid email address, should something like: correct@test.com",
+    )
+    .required("Email is required"),
   postalCode: yup
     .string()
-    .min(5, "Must be 5 characters")
-    .max(5, "Must be 5 characters")
+    .length(6)
     .required("Postal code is required")
-    .matches(/^([0-9]{5})*$/, "Invalid postal code"),
+    .matches(/^\d{2}-\d{3}$/, "Invalid postal code"),
   city: yup
     .string()
     .min(3, "Must be minimum 3 characters")
@@ -35,8 +43,8 @@ const validationSchema = yup.object({
     .required("House number is required"),
   phoneNumber: yup
     .string()
-    .min(9, "Must be 9 characters")
-    .max(9, "Must be 9 characters")
+    .matches(/^[0-9]{9}/)
+    .length(9)
     .required("Phone number is required"),
 });
 
@@ -54,6 +62,7 @@ const CheckoutPage = () => {
     initialValues: {
       name: "",
       surname: "",
+      email: "",
       postalCode: "",
       city: "",
       street: "",
@@ -71,6 +80,18 @@ const CheckoutPage = () => {
       dispatch({ type: "cart/clearCart" });
     },
   });
+
+  const postalCodeChange = (e: ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value;
+    console.log(value);
+
+    if (value.length === 2) {
+      value += "-";
+    }
+    if (value.length === 7) return;
+
+    formik.setFieldValue("postalCode", value);
+  };
 
   return (
     <section className="flex flex-col-reverse items-center gap-8 px-4 py-20 md:flex-row md:justify-between md:px-[5%] lg:gap-0 lg:px-[10%]">
@@ -102,12 +123,25 @@ const CheckoutPage = () => {
 
           <TextField
             fullWidth
+            id="email"
+            name="email"
+            label="Email"
+            type="email"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched.email && Boolean(formik.errors.email)}
+            helperText={formik.touched.email && formik.errors.email}
+          />
+
+          <TextField
+            fullWidth
             id="postalCode"
             name="postalCode"
             label="Postal Code"
             type="text"
             value={formik.values.postalCode}
-            onChange={formik.handleChange}
+            onChange={postalCodeChange}
             onBlur={formik.handleBlur}
             error={
               formik.touched.postalCode && Boolean(formik.errors.postalCode)

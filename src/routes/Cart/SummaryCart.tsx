@@ -15,8 +15,6 @@ const SummaryCart = ({ finalData, text, onClick }: SummaryCartProps) => {
     return acc;
   }, 0);
 
-  console.log(finalData);
-
   const cartTotalPrice = cartOrderValue + deliveryPrice;
 
   return (
