@@ -18,6 +18,7 @@ export default {
         "black-lighter": "#191919",
         "grey-normal": "#FAF9F8",
         "grey-lighter": "#FAFAFA",
+        "green-correct": "#408f13",
       },
     },
   },

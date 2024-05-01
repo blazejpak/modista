@@ -1,7 +1,9 @@
 import { FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { FaSearch } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
+
 import { ROUTES } from "../../utils/routes";
 
 type SearchInputProps = {

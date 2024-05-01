@@ -1,6 +1,8 @@
 import { v4 as uuidv4 } from "uuid";
-import Button from "../../components/main/Subcategory/Button";
+
 import { Cart } from "../../utils/types";
+
+import Button from "../../components/main/Subcategory/Button";
 
 type DisplayProductsProps = {
   finalData: Cart[];
@@ -19,17 +21,22 @@ const DisplayProducts = ({
         finalData.map((product) => {
           const id = uuidv4();
 
+          const totalPriceOfProduct =
+            product.priceWithDiscount * product.amount;
+
           return (
             <div
               className="flex   w-full flex-col items-center  gap-8 rounded  p-8 xs:flex-row md:max-w-[500px] md:p-2"
               key={id}
             >
-              <img
-                src={product.thumbnail}
-                alt={product.title}
-                height={160}
-                className="h-48 w-48"
-              />
+              {product.thumbnail && (
+                <img
+                  src={product.thumbnail}
+                  alt={product.title}
+                  height={160}
+                  className="h-48 w-48"
+                />
+              )}
               <div className="flex flex-col  gap-6 text-xs">
                 <div className="text-base">
                   <p className="font-bold first-letter:uppercase">
@@ -40,7 +47,7 @@ const DisplayProducts = ({
                       ${product.price.toFixed(2)}
                     </p>
                     <p className="text-lg font-bold text-red-500 ">
-                      ${product.priceWithDiscount}
+                      ${product.priceWithDiscount.toFixed(2)}
                     </p>
                   </div>
                 </div>
@@ -53,9 +60,7 @@ const DisplayProducts = ({
                   <div>
                     <p>{product.amount}</p>
                     <p>{product.rating}</p>
-                    <p>
-                      ${(product.priceWithDiscount * product.amount).toFixed(2)}
-                    </p>
+                    <p>${totalPriceOfProduct.toFixed(2)}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">

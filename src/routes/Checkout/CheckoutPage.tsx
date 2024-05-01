@@ -1,58 +1,19 @@
-import { useFormik } from "formik";
-import * as yup from "yup";
-import { TextField, Button, Stack } from "@mui/material";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import SummaryCart from "../Cart/SummaryCart";
-import { useNavigate } from "react-router-dom";
-import { ROUTES } from "../../utils/routes";
 import { ChangeEvent } from "react";
+import { useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
+import { TextField, Button, Stack } from "@mui/material";
 
-const validationSchema = yup.object({
-  name: yup
-    .string()
-    .min(3, "Must be minimum 3 characters")
-    .required("Name is required"),
-  surname: yup
-    .string()
-    .min(3, "Must be minimum 3 characters")
-    .required("Surname is required"),
-  email: yup
-    .string()
-    .min(3, "Must be minimum 3 characters")
-    .matches(
-      /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-      "Invalid email address, should something like: correct@test.com",
-    )
-    .required("Email is required"),
-  postalCode: yup
-    .string()
-    .length(6)
-    .required("Postal code is required")
-    .matches(/^\d{2}-\d{3}$/, "Invalid postal code"),
-  city: yup
-    .string()
-    .min(3, "Must be minimum 3 characters")
-    .required("City is required"),
-  street: yup
-    .string()
-    .min(3, "Must be minimum 3 characters")
-    .required("Street is required"),
-  houseNumber: yup
-    .string()
-    .min(1, "Must be minimum 1 character")
-    .required("House number is required"),
-  phoneNumber: yup
-    .string()
-    .matches(/^[0-9]{9}/)
-    .length(9)
-    .required("Phone number is required"),
-});
+import { validationSchema } from "./ValidationFormSchema";
+import SummaryCart from "../Cart/SummaryCart";
+
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { ROUTES } from "../../utils/routes";
 
 const CheckoutPage = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-
   const cart = useAppSelector((state) => state.cartSlice.cart);
+  if (!cart) return null;
 
   const checkoutHandle = () => {
     navigate(ROUTES.CART);
@@ -71,8 +32,6 @@ const CheckoutPage = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log(values);
-      console.log("submit");
       alert(JSON.stringify(values, null, 2));
 
       formik.resetForm();
@@ -83,7 +42,6 @@ const CheckoutPage = () => {
 
   const postalCodeChange = (e: ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value;
-    console.log(value);
 
     if (value.length === 2) {
       value += "-";

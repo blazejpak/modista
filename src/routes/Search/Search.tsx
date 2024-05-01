@@ -1,8 +1,10 @@
 import { useLocation, useNavigate } from "react-router-dom";
+
 import { useAppSelector } from "../../store/hooks";
-import Products from "../SubcategoryPage/Products";
-import Button from "../../components/main/Subcategory/Button";
 import { ROUTES } from "../../utils/routes";
+import Button from "../../components/main/Subcategory/Button";
+
+import Products from "../SubcategoryPage/Products";
 
 const Search = () => {
   const navigate = useNavigate();

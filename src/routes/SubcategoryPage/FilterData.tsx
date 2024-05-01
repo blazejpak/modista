@@ -30,8 +30,8 @@ const FilterData = ({ data }: FilterDataProps) => {
   const [filterByRate, setFilterByRate] = useState<number>(1);
 
   const changePriceInput = (e: ChangeEvent<HTMLInputElement>) => {
-    setPrice((prevState) => ({
-      ...prevState,
+    setPrice((prev) => ({
+      ...prev,
       [e.target.name]: e.target.value,
     }));
   };
@@ -49,7 +49,7 @@ const FilterData = ({ data }: FilterDataProps) => {
   };
 
   const ratingChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setFilterByRate((prevState) => (prevState = Number(e.target.value)));
+    setFilterByRate((prev) => (prev = Number(e.target.value)));
   };
 
   useEffect(() => {
@@ -63,7 +63,7 @@ const FilterData = ({ data }: FilterDataProps) => {
 
   const savePriceSubmit = () => {
     if (price.min > price.max) {
-      setPrice((prevState) => ({ ...prevState, min: prevState.max }));
+      setPrice((prev) => ({ ...prev, min: prev.max }));
     }
     const newData = [...data];
     const filteredData = filterData(newData);

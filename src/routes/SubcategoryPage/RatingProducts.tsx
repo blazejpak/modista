@@ -1,6 +1,8 @@
 import { ChangeEvent, Dispatch, SetStateAction, useRef } from "react";
-import SortButton from "../../components/main/Subcategory/SortButton";
+
 import { FaStar } from "react-icons/fa";
+
+import SortButton from "../../components/main/Subcategory/SortButton";
 import { useClickOutside } from "../../components/helpers/useClickOutside";
 
 interface RatingProductsProps {

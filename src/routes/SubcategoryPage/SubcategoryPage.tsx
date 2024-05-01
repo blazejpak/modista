@@ -1,16 +1,15 @@
 import { useContext, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 import { useAppSelector } from "../../store/hooks";
-
 import { SortDataContext } from "../../context/SortDataContext";
 import { dataSort, getDataBySubcategory } from "../../utils/helpers";
 import { Product } from "../../utils/types";
+import { LinksImg, categoryLinks } from "../../utils/routes";
 
 import SortProducts from "./SortProducts";
 import Products from "./Products";
 import FilterData from "./FilterData";
-import { useParams } from "react-router-dom";
-import { LinksImg, categoryLinks } from "../../utils/routes";
 
 const SubcategoryPage = () => {
   const { category, subCategory } = useParams();

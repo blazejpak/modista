@@ -6,8 +6,8 @@ import { FaSearch } from "react-icons/fa";
 import { ROUTES } from "../../utils/routes";
 import { useState } from "react";
 import HeaderBiggerScreenLinks from "./HeaderBiggerScreenLinks";
-import CartOnHover from "../../routes/Cart/CartOnHover";
 import SearchInput from "../../routes/Search/SearchInput";
+import CartButton from "../../routes/Cart/CartButton";
 
 const HeaderBiggerScreens = () => {
   const [searchInputClicked, setSearchInputClicked] = useState<boolean>(false);
@@ -93,7 +93,7 @@ const HeaderBiggerScreens = () => {
             <FaSearch size={16} />
           </div>
         )}
-        <CartOnHover />
+        <CartButton />
       </div>
     </nav>
   );

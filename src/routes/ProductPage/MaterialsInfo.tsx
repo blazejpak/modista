@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import { FaArrowLeft } from "react-icons/fa6";
 
 type MaterialsInfoProps = {
@@ -8,7 +9,7 @@ type MaterialsInfoProps = {
 const MaterialsInfo = ({ label }: MaterialsInfoProps) => {
   const [isMaterialInfoOpen, setIsMaterialInfoOpen] = useState<boolean>(false);
 
-  const moreInformartionHandle = () => {
+  const moreInformationHandle = () => {
     setIsMaterialInfoOpen((prev) => !prev);
   };
 
@@ -16,7 +17,7 @@ const MaterialsInfo = ({ label }: MaterialsInfoProps) => {
     <div className="p-4">
       <div
         className="flex cursor-pointer items-center gap-4"
-        onClick={moreInformartionHandle}
+        onClick={moreInformationHandle}
       >
         <strong>{label}</strong>
         <FaArrowLeft

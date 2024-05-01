@@ -1,10 +1,11 @@
 import { useParams } from "react-router-dom";
+
 import { Product } from "../../utils/types";
+import { getProductById } from "../../utils/helpers";
+import { useAppSelector } from "../../store/hooks";
 
 import ImageSlider from "./ImageSlider";
 import ProductContent from "./ProductContent";
-import { useAppSelector } from "../../store/hooks";
-import { getProductById } from "../../utils/helpers";
 
 const ProductPage = () => {
   const productId: string = useParams().productId ?? "";

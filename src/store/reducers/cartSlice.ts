@@ -5,12 +5,10 @@ import { Cart } from "../../utils/types";
 
 interface Data {
   cart: Cart[];
-  isOpenCart: boolean;
 }
 
 const initialState: Data = {
   cart: [],
-  isOpenCart: false,
 };
 
 export const cartSlice = createSlice({
@@ -20,15 +18,12 @@ export const cartSlice = createSlice({
     cartData: (state, action: PayloadAction<Cart[]>) => {
       state.cart = action.payload;
     },
-    openCart: (state, action: PayloadAction<boolean>) => {
-      state.isOpenCart = action.payload;
-    },
     clearCart: (state) => {
       state.cart = [];
     },
   },
 });
 
-export const { cartData } = cartSlice.actions;
+export const { cartData, clearCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

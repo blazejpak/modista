@@ -1,8 +1,6 @@
 import { categoryLinks, paramsLinks } from "./routes";
 import { Cart, Category, Product } from "./types";
 
-export const URL = "https://dummyjson.com/";
-
 export function pushDataIntoArray(data: Category[]) {
   if (!data) return null;
 
@@ -41,7 +39,7 @@ export function dataSort(data: Product[], typeSort: string) {
       case "Highest price":
         return b.price - a.price;
       case "Discount":
-        return b.discountPercentage - a.discountPercentage;
+        return a.priceWithDiscount - b.priceWithDiscount;
       case "Name":
         return a.title.localeCompare(b.title);
 
@@ -97,21 +95,31 @@ export function getProductById(data: Product[], id: string) {
 }
 
 export function groupProductInCartByAmount(data: Cart[]) {
-  // TODO type Record
-
   if (!data) return [];
+  let groupObject = {} as Cart[];
 
-  const groupAmount = data.reduce((result: any, item) => {
-    if (!result[item.id]) {
-      console.log(result);
-      result[item.id] = { ...item, amount: 0 };
+  for (const product of data) {
+    if (product.amount && product.amount >= 0) {
+      if (!groupObject[product.id]) {
+        groupObject[product.id] = { ...product, amount: product.amount };
+      } else {
+        if (groupObject[product.id].amount === 0) {
+          groupObject[product.id].amount = 1;
+        } else {
+          groupObject[product.id].amount += 1;
+        }
+      }
+    } else {
+      if (!groupObject[product.id]) {
+        groupObject[product.id] = { ...product, amount: 1 };
+      } else {
+        groupObject[product.id].amount += 1;
+      }
     }
+  }
 
-    result[item.id].amount += item.amount;
+  const cartData = Object.values(groupObject);
 
-    return result;
-  }, {});
-  const cartData: Cart[] = Object.values(groupAmount);
   return cartData;
 }
 

@@ -7,4 +7,6 @@ export const sortType: SortType[] = [
   { label: "Name", id: 3 },
 ];
 
+export const URL = "https://dummyjson.com/";
+
 export const deliveryPrice = 4.99;

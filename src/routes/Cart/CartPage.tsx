@@ -1,22 +1,26 @@
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { groupProductInCartByAmount } from "../../utils/helpers";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { Cart } from "../../utils/types";
+import { ROUTES } from "../../utils/routes";
+import { groupProductInCartByAmount } from "../../utils/helpers";
+
 import DisplayProducts from "./DisplayProducts";
 import SummaryCart from "./SummaryCart";
-import { useNavigate } from "react-router-dom";
-import { ROUTES } from "../../utils/routes";
 
 const CartPage = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const cart = useAppSelector((state) => state.cartSlice.cart);
-
   if (!cart) return null;
-
   const groupAmount = groupProductInCartByAmount(cart);
-  const [finalData, setFinalData] = useState<Cart[]>(groupAmount);
+  const [finalData, setFinalData] = useState(groupAmount);
+
+  useEffect(() => {
+    setFinalData(groupAmount);
+  }, [cart]);
 
   const addAmountOfProduct = (id: number) => {
     const product = finalData.map((item) => {
@@ -25,9 +29,8 @@ const CartPage = () => {
       }
       return item;
     });
-
-    dispatch({ type: "cart/cartData", payload: product });
     setFinalData(product);
+    dispatch({ type: "cart/cartData", payload: product });
   };
 
   const subtractAmountOfProduct = (id: number) => {
@@ -38,15 +41,14 @@ const CartPage = () => {
         }
         return item;
       })
-      .filter((item) => item.amount !== 0) as Cart[];
+      .filter((item) => item.amount > 0) as Cart[];
 
-    dispatch({ type: "cart/cartData", payload: product });
     setFinalData(product);
+    dispatch({ type: "cart/cartData", payload: product });
+    localStorage.setItem("cartData", JSON.stringify(product));
   };
 
   const checkoutHandle = () => {
-    dispatch({ type: "cart/cartData", payload: finalData });
-
     navigate(ROUTES.CHECKOUT);
   };
 
@@ -69,7 +71,6 @@ const CartPage = () => {
               />
             </>
           ) : (
-            // TODO
             <p className="mx-auto">CART IS EMPTY</p>
           )}
         </div>
