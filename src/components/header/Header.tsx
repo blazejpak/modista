@@ -1,9 +1,13 @@
 import HeaderPhone from "./HeaderPhone";
 import HeaderBiggerScreens from "./HeaderBiggerScreens";
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 
 const Header = () => {
   const [isMobile, setIsMobile] = useState<boolean>(false);
+
+  useEffect(() => {
+    document.documentElement.style.overflowY = "auto";
+  }, [isMobile]);
 
   useLayoutEffect(() => {
     const handlerResize = () => {
@@ -15,8 +19,9 @@ const Header = () => {
 
     return () => window.removeEventListener("resize", handlerResize);
   }, []);
+
   return (
-    <header className="sticky top-0 z-10  w-full select-none  bg-black-lighter  text-grey-normal">
+    <header className="sticky top-0 z-50  w-full select-none  bg-black-lighter  text-grey-normal">
       {isMobile ? <HeaderPhone /> : <HeaderBiggerScreens />}
     </header>
   );

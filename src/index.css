@@ -5,10 +5,16 @@
 @layer base {
   html {
     font-family: "Manrope", sans-serif;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 }
 @layer components {
   .hover-link {
     @apply hover:text-gold-dark active:text-gold-lighter;
+  }
+
+  .hide-arrows {
+    @apply [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none;
   }
 }

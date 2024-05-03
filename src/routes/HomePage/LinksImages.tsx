@@ -2,7 +2,7 @@ import manImg from "../../assets/man.webp";
 import womanImg from "../../assets/woman.webp";
 import homeImg from "../../assets/accessories.webp";
 import { Link } from "react-router-dom";
-import ROUTES from "../../utils/routes";
+import { ROUTES } from "../../utils/routes";
 
 const LinksImages = () => {
   return (

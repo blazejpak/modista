@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { Product } from "../../utils/types";
 
 interface Data {
-  data: any[];
+  data: Product[];
 }
 
 const initialState: Data = {
@@ -14,7 +15,7 @@ export const dataSlice = createSlice({
   name: "data",
   initialState,
   reducers: {
-    getData: (state, action: PayloadAction<any>) => {
+    getData: (state, action: PayloadAction<Product[]>) => {
       state.data = action.payload;
     },
   },

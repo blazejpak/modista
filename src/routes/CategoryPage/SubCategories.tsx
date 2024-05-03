@@ -1,5 +1,6 @@
 import { Link, useParams } from "react-router-dom";
-import { categoryLinks } from "./categoryLinks";
+
+import { categoryLinks } from "../../utils/routes";
 
 const SubCategories = () => {
   const { category } = useParams();

@@ -1,15 +1,12 @@
-import {
-  AiFillFacebook,
-  AiFillInstagram,
-  AiFillTwitterCircle,
-} from "react-icons/ai";
+import { AiFillFacebook, AiFillInstagram } from "react-icons/ai";
 import logo from "../../assets/logo-no-background.png";
 import { Link } from "react-router-dom";
-import ROUTES from "../../utils/routes";
+import { ROUTES } from "../../utils/routes";
+import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   return (
-    <footer className="flex h-[300px] flex-col gap-8 bg-black-lighter px-[10%] py-8 text-grey-normal lg:h-[200px] lg:flex-row lg:gap-24">
+    <footer className="z-[100] flex h-[300px] flex-col gap-8 bg-black-lighter px-[10%] py-8 text-grey-normal lg:h-[200px] lg:flex-row lg:gap-24">
       <div className="flex flex-col gap-8">
         <Link to={ROUTES.HOMEPAGE}>
           <img alt="logo" src={logo} height={90} width={130} />
@@ -40,9 +37,9 @@ const Footer = () => {
           <a
             href="https://github.com/blazejpak"
             className="block w-6 cursor-pointer"
-            aria-label="Twitter link"
+            aria-label="Facebook link"
           >
-            <AiFillTwitterCircle
+            <FaXTwitter
               size={24}
               className="transition-colors duration-500 hover:fill-gold-dark active:fill-gold-lighter"
             />
