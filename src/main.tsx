@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-// import { Provider } from "react-redux";
 
 import "./index.css";
 import {
@@ -10,13 +9,7 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 
-<<<<<<< HEAD
-import ROUTES from "./utils/routes";
-// import { store } from "./store/store";
-=======
 import { ROUTES } from "./utils/routes";
-import { store } from "./store/store";
->>>>>>> 648d2010331f620930b1f6d17009d0d15e03061f
 
 import ErrorPage from "./routes/ErrorPage";
 import Root from "./routes/Root";
@@ -29,6 +22,8 @@ import SubcategoryPage from "./routes/SubcategoryPage/SubcategoryPage";
 import Search from "./routes/Search/Search";
 import CartPage from "./routes/Cart/CartPage";
 import CheckoutPage from "./routes/Checkout/CheckoutPage";
+import { Provider } from "react-redux";
+import { setupStore } from "./store/store";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -83,8 +78,8 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    {/* <Provider store={store}> */}
-    <RouterProvider router={router} />
-    {/* </Provider> */}
+    <Provider store={setupStore()}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>,
 );

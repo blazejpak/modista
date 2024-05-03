@@ -15,6 +15,7 @@ const Bestsellers = () => {
 
   const dataRed = useAppSelector((state) => state.dataSlice.data);
   if (!dataRed) return null;
+  console.log(dataRed);
 
   const newData = getDataByCategory(dataRed, category);
   if (!newData) return null;

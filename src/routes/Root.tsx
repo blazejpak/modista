@@ -9,18 +9,19 @@ import { useEffect } from "react";
 import { BeatLoader } from "react-spinners";
 
 import { SortDataProvider } from "../context/SortDataContext";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { useAppDispatch } from "../store/hooks";
 import { Category } from "../utils/types";
 import { pushDataIntoArray } from "../utils/helpers";
 
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
+import { useSelector } from "react-redux";
 
 function Root() {
   const dispatch = useAppDispatch();
   const data = useLoaderData() as Category[];
   const getData = pushDataIntoArray(data);
-  const cart = useAppSelector((state) => state.cartSlice.cart);
+  const cart = useSelector((state) => state.cartSlice.cart);
 
   useEffect(() => {
     if (cart.length > 0) {
