@@ -3,7 +3,13 @@ import { screen } from "@testing-library/react";
 import { renderWithProviders } from "../../../test/test-utils";
 
 describe("Category Page tests:", () => {
-  renderWithProviders(<Bestsellers />);
+  it("d", () => {
+    renderWithProviders(<Bestsellers />);
 
-  expect(screen.getByText("Check")).toBeInTheDocument();
+    screen.debug();
+
+    const textChecker = screen.getByText(/Check/i);
+
+    expect(textChecker).toBeInTheDocument();
+  });
 });
