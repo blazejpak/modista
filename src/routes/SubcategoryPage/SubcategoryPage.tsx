@@ -15,9 +15,8 @@ const SubcategoryPage = () => {
   const { category, subCategory } = useParams();
   const { sortedData, setSortedData } = useContext(SortDataContext);
 
-  const data = useAppSelector((state) => state.dataSlice.data);
+  const data = useAppSelector((state) => state.data.data);
 
-  if (!category || !subCategory || !data) return null;
   const links = categoryLinks[category as keyof LinksImg];
   const selectedLink = links.find(
     (link) => link.label === subCategory,
@@ -27,17 +26,17 @@ const SubcategoryPage = () => {
   const newData = getDataBySubcategory(data, selectedLink);
 
   if (!newData) return null;
+  const sortData = dataSort(newData, "Lowest price") as Product[];
 
   useEffect(() => {
-    const sortData = dataSort(newData, "Lowest price") as Product[];
     setSortedData(sortData);
-  }, [data, selectedLink]);
+  }, [selectedLink, data]);
 
   return (
     <section className="flex flex-col  gap-8 p-6">
       <div className="flex flex-wrap gap-8 px-2 md:px-8 lg:px-[10%]">
         <SortProducts />
-        <FilterData data={newData} />
+        <FilterData data={newData} currentLink={selectedLink} />
       </div>
 
       {sortedData.length > 0 && <Products products={sortedData} />}

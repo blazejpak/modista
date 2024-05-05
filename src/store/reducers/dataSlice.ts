@@ -15,12 +15,15 @@ export const dataSlice = createSlice({
   name: "data",
   initialState,
   reducers: {
-    getData: (state, action: PayloadAction<Product[]>) => {
+    sendData: (state, action: PayloadAction<Product[]>) => {
       state.data = action.payload;
+    },
+    getData: (state) => {
+      state.data;
     },
   },
 });
 
-export const { getData } = dataSlice.actions;
+export const { sendData, getData } = dataSlice.actions;
 
 export default dataSlice.reducer;

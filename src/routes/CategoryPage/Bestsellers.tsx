@@ -13,7 +13,7 @@ const Bestsellers = () => {
 
   const linkArr = category ? categoryLinks[category] : [];
 
-  const dataRed = useAppSelector((state) => state.dataSlice.data);
+  const dataRed = useAppSelector((state) => state.data.data);
   if (!dataRed) return null;
 
   const newData = getDataByCategory(dataRed, category);

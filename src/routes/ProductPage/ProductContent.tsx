@@ -2,30 +2,28 @@ import { useState } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { Product } from "../../utils/types";
-import Button from "../../components/main/Subcategory/Button";
+import Button from "../../components/main/UI/Button";
 
 import ExtraInformation from "./ExtraInformation";
 import MaterialsInfo from "./MaterialsInfo";
 import SocialInfo from "./SocialInfo";
+import { sendCartData } from "../../store/reducers/cartSlice";
 
 type ProductContentProps = {
   data: Product;
 };
 
 const ProductContent = ({ data }: ProductContentProps) => {
-  if (!data) return null;
-  const [buttonCartClicked, setButtonCartClicked] = useState<boolean>();
-  const [addProductToCartMessage, setAddProductToCartMessage] =
-    useState<string>("");
+  const [buttonCartClicked, setButtonCartClicked] = useState(false);
+  const [addProductToCartMessage, setAddProductToCartMessage] = useState("");
 
   const dispatch = useAppDispatch();
-  const cart = useAppSelector((state) => state.cartSlice.cart);
+  const cart = useAppSelector((state) => state.cart.cartData);
 
   const addProductToCart = () => {
     setAddProductToCartMessage("Added to Cart");
 
-    console.log(data);
-    dispatch({ type: "cart/cartData", payload: [...cart, data] });
+    dispatch(sendCartData([...cart, data]));
     setButtonCartClicked(true);
 
     setTimeout(() => {
@@ -62,12 +60,12 @@ const ProductContent = ({ data }: ProductContentProps) => {
         >
           Add to Cart
         </Button>
-        <p className="text-green-correct font-bold">
+        <p className="font-bold text-green-correct">
           {addProductToCartMessage}
         </p>
       </div>
-      <div className="flex flex-col gap-4">
-        <h2 className="text-xl font-bold">Description</h2>
+      <div className="flex flex-col gap-2">
+        <h2 className=" font-bold">Description</h2>
         <p>{data.description}</p>
       </div>
 

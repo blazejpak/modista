@@ -1,24 +1,23 @@
 import { v4 as uuidv4 } from "uuid";
 
-import { Cart } from "../../utils/types";
-
-import Button from "../../components/main/Subcategory/Button";
+import Button from "../../components/main/UI/Button";
+import { useAppSelector } from "../../store/hooks";
 
 type DisplayProductsProps = {
-  finalData: Cart[];
   addAmountOfProduct: (id: number) => void;
   subtractAmountOfProduct: (id: number) => void;
 };
 
 const DisplayProducts = ({
-  finalData,
   addAmountOfProduct,
   subtractAmountOfProduct,
 }: DisplayProductsProps) => {
+  const data = useAppSelector((state) => state.cart.cartData);
+
   return (
-    <div className="mt-10 flex flex-col justify-center rounded bg-white">
-      {finalData.length > 0 &&
-        finalData.map((product) => {
+    <div className="mt-10 flex flex-wrap  rounded ">
+      {data.length > 0 &&
+        data.map((product) => {
           const id = uuidv4();
 
           const totalPriceOfProduct =
@@ -26,7 +25,7 @@ const DisplayProducts = ({
 
           return (
             <div
-              className="flex   w-full flex-col items-center  gap-8 rounded  p-8 xs:flex-row md:max-w-[500px] md:p-2"
+              className="flex w-full  flex-col items-center gap-8  rounded bg-white  p-8 xs:flex-row md:max-w-[400px] md:p-2"
               key={id}
             >
               {product.thumbnail && (

@@ -10,17 +10,19 @@ import { BeatLoader } from "react-spinners";
 
 import { SortDataProvider } from "../context/SortDataContext";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { Category } from "../utils/types";
+import { Category, Product } from "../utils/types";
 import { pushDataIntoArray } from "../utils/helpers";
 
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
+import { sendData } from "../store/reducers/dataSlice";
+import { sendCartData } from "../store/reducers/cartSlice";
 
 function Root() {
   const dispatch = useAppDispatch();
   const data = useLoaderData() as Category[];
   const getData = pushDataIntoArray(data);
-  const cart = useAppSelector((state) => state.cartSlice.cart);
+  const cart = useAppSelector((state) => state.cart.cartData);
 
   useEffect(() => {
     if (cart.length > 0) {
@@ -30,7 +32,7 @@ function Root() {
 
   useEffect(() => {
     if (getData) {
-      let newData = [];
+      let newData = [] as Product[];
       for (const addDiscount of getData) {
         const priceWithDiscount: number = +(
           addDiscount.price *
@@ -43,7 +45,7 @@ function Root() {
         });
       }
 
-      dispatch({ type: "data/getData", payload: newData });
+      dispatch(sendData(newData));
     }
   }, []);
 
@@ -51,10 +53,7 @@ function Root() {
     if (cart.length === 0) {
       const cartDataLocalStorage = localStorage.getItem("cartData");
       if (cartDataLocalStorage !== null) {
-        dispatch({
-          type: "cart/cartData",
-          payload: JSON.parse(cartDataLocalStorage),
-        });
+        dispatch(sendCartData(JSON.parse(cartDataLocalStorage)));
       }
     }
   }, []);
@@ -64,7 +63,6 @@ function Root() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    dispatch({ type: "cart/openCart", payload: false });
   }, [pathname]);
 
   return (

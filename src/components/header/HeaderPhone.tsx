@@ -16,10 +16,10 @@ import SearchInput from "../../routes/Search/SearchInput";
 
 const HeaderPhone = () => {
   const navigate = useNavigate();
-  const [searchInputClicked, setSearchInputClicked] = useState<boolean>(false);
+  const [searchInputClicked, setSearchInputClicked] = useState(false);
 
-  const [burgerClicked, setBurgerClicked] = useState<boolean>(false);
-  const [activeMenuItem, setActiveMenuItem] = useState<string>("");
+  const [burgerClicked, setBurgerClicked] = useState(false);
+  const [activeMenuItem, setActiveMenuItem] = useState("");
 
   const handleToggle = (activeItem: string) => {
     setActiveMenuItem(activeItem);

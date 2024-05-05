@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 
-import Button from "../components/main/Subcategory/Button";
+import Button from "../components/main/UI/Button";
 
 const ErrorPage = () => {
   const navigate = useNavigate();

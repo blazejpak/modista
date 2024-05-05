@@ -20,6 +20,4 @@ export const RootLoader = async () => {
   } catch (error) {
     console.error("Error", error);
   }
-
-  return null;
 };

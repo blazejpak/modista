@@ -1,5 +1,5 @@
 import { categoryLinks, paramsLinks } from "./routes";
-import { Cart, Category, Product } from "./types";
+import { Category, Product } from "./types";
 
 export function pushDataIntoArray(data: Category[]) {
   if (!data) return null;
@@ -17,11 +17,10 @@ export function getDataRatingAndDiscount(
 
   const sortedData = data
     .sort((a, b) => {
-      if (a && b) {
-        if (type === "discount")
-          return b.discountPercentage - a.discountPercentage;
-        else if (type === "rating") return b.rating - a.rating;
-      }
+      if (type === "discount")
+        return b.discountPercentage - a.discountPercentage;
+      else if (type === "rating") return b.rating - a.rating;
+
       return 0;
     })
     .slice(0, 3);
@@ -94,38 +93,29 @@ export function getProductById(data: Product[], id: string) {
   }
 }
 
-export function groupProductInCartByAmount(data: Cart[]) {
-  if (!data) return [];
-  let groupObject = {} as Cart[];
+export function groupProductInCartByAmount(data: Product[]) {
+  const groupedProducts = data.reduce(
+    (acc: { [key: string]: Product }, product) => {
+      const id = product.id;
 
-  for (const product of data) {
-    if (product.amount && product.amount >= 0) {
-      if (!groupObject[product.id]) {
-        groupObject[product.id] = { ...product, amount: product.amount };
+      if (acc[id]) {
+        acc[id].amount += product.amount ? product.amount : 1;
       } else {
-        if (groupObject[product.id].amount === 0) {
-          groupObject[product.id].amount = 1;
-        } else {
-          groupObject[product.id].amount += 1;
-        }
+        acc[id] = { ...product };
+        acc[id].amount =
+          product.amount && product.amount >= 0 ? product.amount : 1;
       }
-    } else {
-      if (!groupObject[product.id]) {
-        groupObject[product.id] = { ...product, amount: 1 };
-      } else {
-        groupObject[product.id].amount += 1;
-      }
-    }
-  }
 
-  const cartData = Object.values(groupObject);
+      return acc;
+    },
+    {},
+  );
+  const cartData = Object.values(groupedProducts);
 
   return cartData;
 }
 
 export function getParamBySubcategory(product: Product) {
-  if (!product) return null;
-
   const param = paramsLinks.find((item) => item.fullName === product.category);
 
   return param?.link;

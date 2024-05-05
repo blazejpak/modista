@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import { useAppSelector } from "../../store/hooks";
 import { ROUTES } from "../../utils/routes";
-import Button from "../../components/main/Subcategory/Button";
+import Button from "../../components/main/UI/Button";
 
 import Products from "../SubcategoryPage/Products";
 
@@ -10,7 +10,7 @@ const Search = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
   const searchedData: string = state.search;
-  const data = useAppSelector((state) => state.dataSlice.data);
+  const data = useAppSelector((state) => state.data.data);
   const newData = data.filter((items) => items.title.includes(searchedData));
 
   const backToHomepageHandle = () => {

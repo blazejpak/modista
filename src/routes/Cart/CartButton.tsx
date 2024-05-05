@@ -3,20 +3,18 @@ import { useNavigate } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { ROUTES } from "../../utils/routes";
-import { groupProductInCartByAmount } from "../../utils/helpers";
 
 import { PiShoppingCart } from "react-icons/pi";
+import { sendCartData } from "../../store/reducers/cartSlice";
 
 const CartButton = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const cart = useAppSelector((state) => state.cartSlice.cart);
-  if (!cart) return null;
-  const groupAmount = groupProductInCartByAmount(cart);
+  const cart = useAppSelector((state) => state.cart.cartData);
 
   useEffect(() => {
-    dispatch({ type: "cart/cartData", payload: groupAmount });
+    dispatch(sendCartData(cart));
   }, []);
 
   const cartHandle = () => {
@@ -24,14 +22,14 @@ const CartButton = () => {
   };
 
   return (
-    <div className=" group relative h-full content-center">
+    <button className=" group relative h-full content-center">
       <div
         className="hover-link flex cursor-pointer items-center  justify-center  gap-1 transition-all active:scale-110"
         onClick={cartHandle}
       >
         <PiShoppingCart size={24} />
       </div>
-    </div>
+    </button>
   );
 };
 

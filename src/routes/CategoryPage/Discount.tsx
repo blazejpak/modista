@@ -13,7 +13,7 @@ const Discount = () => {
 
   const linkArr = category ? categoryLinks[category] : [];
 
-  const allData = useAppSelector((state) => state.dataSlice.data);
+  const allData = useAppSelector((state) => state.data.data);
   if (!allData) return null;
 
   const newData = getDataByCategory(allData, category);

@@ -1,16 +1,16 @@
 import { useParams } from "react-router-dom";
 
-import { Product } from "../../utils/types";
 import { getProductById } from "../../utils/helpers";
 import { useAppSelector } from "../../store/hooks";
 
 import ImageSlider from "./ImageSlider";
 import ProductContent from "./ProductContent";
+import { Product } from "../../utils/types";
 
 const ProductPage = () => {
   const productId: string = useParams().productId ?? "";
 
-  const data = useAppSelector((state) => state.dataSlice.data);
+  const data = useAppSelector((state) => state.data.data);
   const product = getProductById(data, productId) as Product;
   if (!data || !productId || !product) return null;
 

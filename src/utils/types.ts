@@ -12,11 +12,8 @@ export type Product = {
   stock: number;
   thumbnail: string;
   title: string;
-};
-
-export interface Cart extends Product {
   amount: number;
-}
+};
 
 export type Category = {
   limit: number;

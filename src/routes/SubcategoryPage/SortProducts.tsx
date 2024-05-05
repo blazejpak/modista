@@ -8,10 +8,10 @@ import { SortDataContext } from "../../context/SortDataContext";
 import { dataSort } from "../../utils/helpers";
 import { sortType } from "../../utils/variables";
 import { useClickOutside } from "../../components/helpers/useClickOutside";
-import SortButton from "../../components/main/Subcategory/SortButton";
+import SortButton from "../../components/main/UI/SortButton";
 
 const SortProducts = () => {
-  const [isActive, setIsActive] = useState<boolean>(false);
+  const [isActive, setIsActive] = useState(false);
   const param = useParams();
 
   const { sortedData, setSortedData, typeSort, setTypeSort } =

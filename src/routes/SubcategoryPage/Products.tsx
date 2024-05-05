@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-import Button from "../../components/main/Subcategory/Button";
+import Button from "../../components/main/UI/Button";
 
 import { Product } from "../../utils/types";
 import { getParamBySubcategory } from "../../utils/helpers";
@@ -10,11 +10,12 @@ interface ProductsProps {
   products: Product[];
 }
 
-const Products = ({ products }: ProductsProps) => {
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const productsPerPage = 5;
-  const numberOfPages = Math.ceil(products.length / productsPerPage);
+const productsPerPage = 5;
 
+const Products = ({ products }: ProductsProps) => {
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const numberOfPages = Math.ceil(products.length / productsPerPage);
   const lastProduct = currentPage * productsPerPage;
   const firstProduct = lastProduct - productsPerPage;
   const showProducts = products.slice(firstProduct, lastProduct);
@@ -39,7 +40,7 @@ const Products = ({ products }: ProductsProps) => {
 
             return (
               <Link
-                className=" flex h-[420px] flex-col justify-between gap-2 py-4 shadow  xs:px-4 xs:shadow "
+                className=" flex  flex-col justify-between gap-4 py-4 shadow  xs:px-4 xs:shadow "
                 key={product.id}
                 to={`/${paramId}/${product.id}`}
               >
@@ -47,10 +48,10 @@ const Products = ({ products }: ProductsProps) => {
                   <img
                     src={product.images[0]}
                     alt={product.title}
-                    className=" max-h-[300px] w-full max-w-[400px] "
+                    className=" max-h-[300px] w-full max-w-[400px] object-contain"
                   />
                 )}
-                <div>
+                <div className="px-4 xs:px-0">
                   <p className=" text-sm first-letter:uppercase">
                     {product.title}
                   </p>

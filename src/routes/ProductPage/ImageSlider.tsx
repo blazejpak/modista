@@ -10,8 +10,8 @@ type ImageSliderProps = {
 };
 
 const ImageSlider = ({ images, alt }: ImageSliderProps) => {
-  const [imageClicked, setImageClicked] = useState<boolean>(false);
-  const [imageNumber, setImageNumber] = useState<number>(0);
+  const [imageClicked, setImageClicked] = useState(false);
+  const [imageNumber, setImageNumber] = useState(0);
 
   const previousImage = () => {
     if (imageNumber === 0) setImageNumber(images.length - 1);

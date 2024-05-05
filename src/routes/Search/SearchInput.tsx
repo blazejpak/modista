@@ -6,12 +6,8 @@ import { AiOutlineClose } from "react-icons/ai";
 
 import { ROUTES } from "../../utils/routes";
 
-type SearchInputProps = {
-  closeInput: () => void;
-};
-
-const SearchInput = ({ closeInput }: SearchInputProps) => {
-  const [searchValue, setSearchValue] = useState<string>("");
+const SearchInput = ({ ...props }) => {
+  const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
 
   const changeSearchValue = (e: FormEvent<HTMLInputElement>) => {
@@ -29,30 +25,28 @@ const SearchInput = ({ closeInput }: SearchInputProps) => {
     e.preventDefault();
 
     if (searchValue) {
-      console.log(searchValue);
       navigate(ROUTES.SEARCH, { state: { search: searchValue } });
-      closeInput();
+      props.closeInput();
     }
   };
-
-  console.log(searchValue);
 
   return (
     <form
       onSubmit={submitSearchValue}
       className="ml-auto mr-4 flex h-10 w-full items-center border-b-2 border-grey-normal md:w-96"
     >
-      <FaSearch
-        className="w-[20%] cursor-pointer"
-        onClick={searchValueHandle}
-      />
+      <button onClick={searchValueHandle} className="w-[10%] cursor-pointer">
+        <FaSearch />
+      </button>
       <input
-        className="w-[60%] bg-transparent outline-none  placeholder:text-sm placeholder:font-light "
+        className="w-[80%] bg-transparent outline-none  placeholder:text-sm placeholder:font-light "
         placeholder="Search products"
         value={searchValue}
         onChange={changeSearchValue}
       />
-      <AiOutlineClose onClick={closeInput} className="w-[20%] cursor-pointer" />
+      <button onClick={props.closeInput} className=" w-[10%] cursor-pointer">
+        <AiOutlineClose />
+      </button>
     </form>
   );
 };

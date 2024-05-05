@@ -7,10 +7,10 @@ import { ROUTES } from "../../utils/routes";
 import { useState } from "react";
 import HeaderBiggerScreenLinks from "./HeaderBiggerScreenLinks";
 import SearchInput from "../../routes/Search/SearchInput";
-import CartButton from "../../routes/Cart/CartButton";
+import CartOnHover from "../../routes/Cart/CartOnHover";
 
 const HeaderBiggerScreens = () => {
-  const [searchInputClicked, setSearchInputClicked] = useState<boolean>(false);
+  const [searchInputActive, setSearchInputActive] = useState(false);
   const [hoverState, setHoverState] = useState({
     men: false,
     women: false,
@@ -33,11 +33,11 @@ const HeaderBiggerScreens = () => {
   };
 
   const showInputHandle = () => {
-    setSearchInputClicked((prev) => !prev);
+    setSearchInputActive((prev) => !prev);
   };
 
   const closeSearchInput = () => {
-    setSearchInputClicked(false);
+    setSearchInputActive(false);
   };
 
   type Categories = {
@@ -63,7 +63,7 @@ const HeaderBiggerScreens = () => {
       >
         <img alt="Logo" src={logo} height={60} width={160} />
       </NavLink>
-      {!searchInputClicked ? (
+      {!searchInputActive ? (
         <ul className="relative  flex h-full items-center px-4">
           {categories.map(({ label, route, typeLink }) => (
             <li
@@ -88,12 +88,12 @@ const HeaderBiggerScreens = () => {
         <SearchInput closeInput={closeSearchInput} />
       )}
       <div className="flex items-center  gap-4">
-        {!searchInputClicked && (
-          <div onClick={showInputHandle} className="cursor-pointer ">
+        {!searchInputActive && (
+          <button onClick={showInputHandle} className="cursor-pointer ">
             <FaSearch size={16} />
-          </div>
+          </button>
         )}
-        <CartButton />
+        <CartOnHover />
       </div>
     </nav>
   );
