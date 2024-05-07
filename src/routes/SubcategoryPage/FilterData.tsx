@@ -13,16 +13,9 @@ interface FilterDataProps {
   currentLink: string;
 }
 
-<<<<<<< HEAD
-const FilterData = ({ data }: FilterDataProps) => {
-  if (!data) return null;
-
-  const { setSortedData, typeSort } = useContext(SortDataContext);
-=======
 const FilterData = ({ data, currentLink }: FilterDataProps) => {
   console.log(data);
   if (!data) return null;
->>>>>>> 85cdc32feb2d1570b9fc2de74fd7df5d7951ddbb
 
   const { setSortedData, typeSort } = useContext(SortDataContext);
 
@@ -60,11 +53,7 @@ const FilterData = ({ data, currentLink }: FilterDataProps) => {
   };
 
   const ratingChange = (e: ChangeEvent<HTMLInputElement>) => {
-<<<<<<< HEAD
-    setFilterByRate((prev) => (prev = Number(e.target.value)));
-=======
     setFilterByRate(Number(e.target.value));
->>>>>>> 85cdc32feb2d1570b9fc2de74fd7df5d7951ddbb
   };
 
   useEffect(() => {

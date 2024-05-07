@@ -1,12 +1,10 @@
-import { dataSlice } from "./reducers/dataSlice";
-import { cartSlice } from "./reducers/cartSlice";
-import { configureStore } from "@reduxjs/toolkit";
+import dataSlice from "./reducers/dataSlice";
+import cartSlice from "./reducers/cartSlice";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
-export const store = configureStore({
-  reducer: {
-    data: dataSlice.reducer,
-    cart: cartSlice.reducer,
-  },
+export const rootReducer = combineReducers({
+  data: dataSlice,
+  cart: cartSlice,
 });
 
 export const setupStore = (preloadedState?: Partial<RootState>) => {

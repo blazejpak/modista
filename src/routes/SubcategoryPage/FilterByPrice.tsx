@@ -2,13 +2,8 @@ import { ChangeEvent, Dispatch, SetStateAction, useRef } from "react";
 
 import { useClickOutside } from "../../components/helpers/useClickOutside";
 
-<<<<<<< HEAD
-import SortButton from "../../components/main/Subcategory/SortButton";
-import Button from "../../components/main/Subcategory/Button";
-=======
 import SortButton from "../../components/main/UI/SortButton";
 import Button from "../../components/main/UI/Button";
->>>>>>> 85cdc32feb2d1570b9fc2de74fd7df5d7951ddbb
 
 type FilterByPriceProps = {
   priceOpen: boolean;

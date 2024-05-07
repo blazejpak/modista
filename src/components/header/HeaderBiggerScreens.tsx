@@ -7,17 +7,10 @@ import { ROUTES } from "../../utils/routes";
 import { useState } from "react";
 import HeaderBiggerScreenLinks from "./HeaderBiggerScreenLinks";
 import SearchInput from "../../routes/Search/SearchInput";
-<<<<<<< HEAD
-import CartButton from "../../routes/Cart/CartButton";
-
-const HeaderBiggerScreens = () => {
-  const [searchInputClicked, setSearchInputClicked] = useState<boolean>(false);
-=======
 import CartOnHover from "../../routes/Cart/CartOnHover";
 
 const HeaderBiggerScreens = () => {
   const [searchInputActive, setSearchInputActive] = useState(false);
->>>>>>> 85cdc32feb2d1570b9fc2de74fd7df5d7951ddbb
   const [hoverState, setHoverState] = useState({
     men: false,
     women: false,
@@ -40,19 +33,11 @@ const HeaderBiggerScreens = () => {
   };
 
   const showInputHandle = () => {
-<<<<<<< HEAD
-    setSearchInputClicked((prev) => !prev);
-  };
-
-  const closeSearchInput = () => {
-    setSearchInputClicked(false);
-=======
     setSearchInputActive((prev) => !prev);
   };
 
   const closeSearchInput = () => {
     setSearchInputActive(false);
->>>>>>> 85cdc32feb2d1570b9fc2de74fd7df5d7951ddbb
   };
 
   type Categories = {
@@ -78,11 +63,7 @@ const HeaderBiggerScreens = () => {
       >
         <img alt="Logo" src={logo} height={60} width={160} />
       </NavLink>
-<<<<<<< HEAD
-      {!searchInputClicked ? (
-=======
       {!searchInputActive ? (
->>>>>>> 85cdc32feb2d1570b9fc2de74fd7df5d7951ddbb
         <ul className="relative  flex h-full items-center px-4">
           {categories.map(({ label, route, typeLink }) => (
             <li
@@ -107,21 +88,12 @@ const HeaderBiggerScreens = () => {
         <SearchInput closeInput={closeSearchInput} />
       )}
       <div className="flex items-center  gap-4">
-<<<<<<< HEAD
-        {!searchInputClicked && (
-          <div onClick={showInputHandle} className="cursor-pointer ">
-            <FaSearch size={16} />
-          </div>
-        )}
-        <CartButton />
-=======
         {!searchInputActive && (
           <button onClick={showInputHandle} className="cursor-pointer ">
             <FaSearch size={16} />
           </button>
         )}
         <CartOnHover />
->>>>>>> 85cdc32feb2d1570b9fc2de74fd7df5d7951ddbb
       </div>
     </nav>
   );

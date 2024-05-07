@@ -11,11 +11,7 @@ import { useClickOutside } from "../../components/helpers/useClickOutside";
 import SortButton from "../../components/main/UI/SortButton";
 
 const SortProducts = () => {
-<<<<<<< HEAD
-  const [isActive, setIsActive] = useState<boolean>(false);
-=======
   const [isActive, setIsActive] = useState(false);
->>>>>>> 85cdc32feb2d1570b9fc2de74fd7df5d7951ddbb
   const param = useParams();
 
   const { sortedData, setSortedData, typeSort, setTypeSort } =
