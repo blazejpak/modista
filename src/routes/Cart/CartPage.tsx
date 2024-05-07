@@ -45,17 +45,19 @@ const CartPage = () => {
   return (
     <section className=" my-20 flex items-center md:px-[5%]  lg:justify-center lg:px-[10%] ">
       <div className=" w-full max-w-[1200px]">
-        <h2 className=" text-center text-3xl font-bold">Shopping bag</h2>
         {cart.length > 0 ? (
-          <div className="flex flex-col md:mt-4 md:flex-row md:justify-between">
-            <DisplayProducts
-              subtractAmountOfProduct={subtractAmountOfProduct}
-              addAmountOfProduct={addAmountOfProduct}
-            />
-            <SummaryCart text="checkout" onClick={checkoutHandle} />
-          </div>
+          <>
+            <h2 className=" text-center text-3xl font-bold">Shopping bag</h2>
+            <div className="flex flex-col md:mt-4 md:flex-row md:justify-between">
+              <DisplayProducts
+                subtractAmountOfProduct={subtractAmountOfProduct}
+                addAmountOfProduct={addAmountOfProduct}
+              />
+              <SummaryCart text="checkout" onClick={checkoutHandle} />
+            </div>
+          </>
         ) : (
-          <p className="mx-auto">CART IS EMPTY</p>
+          <p className="text-center text-xl font-bold">CART IS EMPTY</p>
         )}
       </div>
     </section>
