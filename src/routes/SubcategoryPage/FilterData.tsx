@@ -53,7 +53,7 @@ const FilterData = ({ data, currentLink }: FilterDataProps) => {
   };
 
   const ratingChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setFilterByRate((prev) => (prev = Number(e.target.value)));
+    setFilterByRate(Number(e.target.value));
   };
 
   useEffect(() => {
