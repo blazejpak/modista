@@ -5,12 +5,6 @@ import { FaArrowLeft } from "react-icons/fa6";
 const MaterialsInfo = ({ ...props }) => {
   const [isMaterialInfoOpen, setIsMaterialInfoOpen] = useState(false);
 
-<<<<<<< HEAD
-const MaterialsInfo = ({ label }: MaterialsInfoProps) => {
-  const [isMaterialInfoOpen, setIsMaterialInfoOpen] = useState<boolean>(false);
-
-=======
->>>>>>> 85cdc32feb2d1570b9fc2de74fd7df5d7951ddbb
   const moreInformationHandle = () => {
     setIsMaterialInfoOpen((prev) => !prev);
   };

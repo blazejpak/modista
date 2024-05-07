@@ -6,23 +6,13 @@ import { TextField, Button, Stack } from "@mui/material";
 import { validationSchema } from "./ValidationFormSchema";
 import SummaryCart from "../Cart/SummaryCart";
 
-<<<<<<< HEAD
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { ROUTES } from "../../utils/routes";
-=======
 import { useAppDispatch } from "../../store/hooks";
 import { ROUTES } from "../../utils/routes";
 import { clearCart } from "../../store/reducers/cartSlice";
->>>>>>> 85cdc32feb2d1570b9fc2de74fd7df5d7951ddbb
 
 const CheckoutPage = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-<<<<<<< HEAD
-  const cart = useAppSelector((state) => state.cartSlice.cart);
-  if (!cart) return null;
-=======
->>>>>>> 85cdc32feb2d1570b9fc2de74fd7df5d7951ddbb
 
   const checkoutHandle = () => {
     navigate(ROUTES.CART);
@@ -45,11 +35,7 @@ const CheckoutPage = () => {
 
       formik.resetForm();
       navigate(ROUTES.HOMEPAGE);
-<<<<<<< HEAD
-      dispatch({ type: "cart/clearCart" });
-=======
       dispatch(clearCart());
->>>>>>> 85cdc32feb2d1570b9fc2de74fd7df5d7951ddbb
     },
   });
 
@@ -179,15 +165,7 @@ const CheckoutPage = () => {
         </Stack>
       </form>
 
-<<<<<<< HEAD
-      <SummaryCart
-        finalData={cart}
-        text="Check Cart"
-        onClick={checkoutHandle}
-      />
-=======
       <SummaryCart text="Check Cart" onClick={checkoutHandle} />
->>>>>>> 85cdc32feb2d1570b9fc2de74fd7df5d7951ddbb
     </section>
   );
 };

@@ -22,22 +22,14 @@ const CartButton = () => {
   };
 
   return (
-<<<<<<< HEAD
-    <div className=" group relative h-full content-center">
-=======
     <button className=" group relative h-full content-center">
->>>>>>> 85cdc32feb2d1570b9fc2de74fd7df5d7951ddbb
       <div
         className="hover-link flex cursor-pointer items-center  justify-center  gap-1 transition-all active:scale-110"
         onClick={cartHandle}
       >
         <PiShoppingCart size={24} />
       </div>
-<<<<<<< HEAD
-    </div>
-=======
     </button>
->>>>>>> 85cdc32feb2d1570b9fc2de74fd7df5d7951ddbb
   );
 };
 

@@ -10,10 +10,7 @@ import {
 } from "react-router-dom";
 
 import { ROUTES } from "./utils/routes";
-<<<<<<< HEAD
-=======
 import { store } from "./store/store";
->>>>>>> 85cdc32feb2d1570b9fc2de74fd7df5d7951ddbb
 
 import ErrorPage from "./routes/ErrorPage";
 import Root from "./routes/Root";
@@ -26,11 +23,6 @@ import SubcategoryPage from "./routes/SubcategoryPage/SubcategoryPage";
 import Search from "./routes/Search/Search";
 import CartPage from "./routes/Cart/CartPage";
 import CheckoutPage from "./routes/Checkout/CheckoutPage";
-<<<<<<< HEAD
-import { Provider } from "react-redux";
-import { setupStore } from "./store/store";
-=======
->>>>>>> 85cdc32feb2d1570b9fc2de74fd7df5d7951ddbb
 
 const router = createBrowserRouter(
   createRoutesFromElements(

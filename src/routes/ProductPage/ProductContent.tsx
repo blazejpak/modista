@@ -2,11 +2,7 @@ import { useState } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { Product } from "../../utils/types";
-<<<<<<< HEAD
-import Button from "../../components/main/Subcategory/Button";
-=======
 import Button from "../../components/main/UI/Button";
->>>>>>> 85cdc32feb2d1570b9fc2de74fd7df5d7951ddbb
 
 import ExtraInformation from "./ExtraInformation";
 import MaterialsInfo from "./MaterialsInfo";
@@ -18,31 +14,16 @@ type ProductContentProps = {
 };
 
 const ProductContent = ({ data }: ProductContentProps) => {
-<<<<<<< HEAD
-  if (!data) return null;
-  const [buttonCartClicked, setButtonCartClicked] = useState<boolean>();
-  const [addProductToCartMessage, setAddProductToCartMessage] =
-    useState<string>("");
-
-  const dispatch = useAppDispatch();
-  const cart = useAppSelector((state) => state.cartSlice.cart);
-=======
   const [buttonCartClicked, setButtonCartClicked] = useState(false);
   const [addProductToCartMessage, setAddProductToCartMessage] = useState("");
 
   const dispatch = useAppDispatch();
   const cart = useAppSelector((state) => state.cart.cartData);
->>>>>>> 85cdc32feb2d1570b9fc2de74fd7df5d7951ddbb
 
   const addProductToCart = () => {
     setAddProductToCartMessage("Added to Cart");
 
-<<<<<<< HEAD
-    console.log(data);
-    dispatch({ type: "cart/cartData", payload: [...cart, data] });
-=======
     dispatch(sendCartData([...cart, data]));
->>>>>>> 85cdc32feb2d1570b9fc2de74fd7df5d7951ddbb
     setButtonCartClicked(true);
 
     setTimeout(() => {
@@ -79,21 +60,12 @@ const ProductContent = ({ data }: ProductContentProps) => {
         >
           Add to Cart
         </Button>
-<<<<<<< HEAD
-        <p className="text-green-correct font-bold">
-          {addProductToCartMessage}
-        </p>
-      </div>
-      <div className="flex flex-col gap-4">
-        <h2 className="text-xl font-bold">Description</h2>
-=======
         <p className="font-bold text-green-correct">
           {addProductToCartMessage}
         </p>
       </div>
       <div className="flex flex-col gap-2">
         <h2 className=" font-bold">Description</h2>
->>>>>>> 85cdc32feb2d1570b9fc2de74fd7df5d7951ddbb
         <p>{data.description}</p>
       </div>
 

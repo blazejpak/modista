@@ -9,33 +9,20 @@ import { useEffect } from "react";
 import { BeatLoader } from "react-spinners";
 
 import { SortDataProvider } from "../context/SortDataContext";
-<<<<<<< HEAD
-import { useAppDispatch } from "../store/hooks";
-import { Category } from "../utils/types";
-=======
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { Category, Product } from "../utils/types";
->>>>>>> 85cdc32feb2d1570b9fc2de74fd7df5d7951ddbb
 import { pushDataIntoArray } from "../utils/helpers";
 
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
-<<<<<<< HEAD
-import { useSelector } from "react-redux";
-=======
 import { sendData } from "../store/reducers/dataSlice";
 import { sendCartData } from "../store/reducers/cartSlice";
->>>>>>> 85cdc32feb2d1570b9fc2de74fd7df5d7951ddbb
 
 function Root() {
   const dispatch = useAppDispatch();
   const data = useLoaderData() as Category[];
   const getData = pushDataIntoArray(data);
-<<<<<<< HEAD
-  const cart = useSelector((state) => state.cartSlice.cart);
-=======
   const cart = useAppSelector((state) => state.cart.cartData);
->>>>>>> 85cdc32feb2d1570b9fc2de74fd7df5d7951ddbb
 
   useEffect(() => {
     if (cart.length > 0) {
@@ -45,11 +32,7 @@ function Root() {
 
   useEffect(() => {
     if (getData) {
-<<<<<<< HEAD
-      let newData = [];
-=======
       let newData = [] as Product[];
->>>>>>> 85cdc32feb2d1570b9fc2de74fd7df5d7951ddbb
       for (const addDiscount of getData) {
         const priceWithDiscount: number = +(
           addDiscount.price *
@@ -62,11 +45,7 @@ function Root() {
         });
       }
 
-<<<<<<< HEAD
-      dispatch({ type: "data/getData", payload: newData });
-=======
       dispatch(sendData(newData));
->>>>>>> 85cdc32feb2d1570b9fc2de74fd7df5d7951ddbb
     }
   }, []);
 
@@ -74,14 +53,7 @@ function Root() {
     if (cart.length === 0) {
       const cartDataLocalStorage = localStorage.getItem("cartData");
       if (cartDataLocalStorage !== null) {
-<<<<<<< HEAD
-        dispatch({
-          type: "cart/cartData",
-          payload: JSON.parse(cartDataLocalStorage),
-        });
-=======
         dispatch(sendCartData(JSON.parse(cartDataLocalStorage)));
->>>>>>> 85cdc32feb2d1570b9fc2de74fd7df5d7951ddbb
       }
     }
   }, []);
