@@ -1,54 +1,44 @@
+import { categoryLinks, paramsLinks } from "./routes";
 import { Category, Product } from "./types";
 
-export const URL = "https://dummyjson.com/";
-
-export function getDataRatingAndDiscount(
-  data: Category[],
-  type: "discount" | "rating",
-) {
-  const highRatedProducts = [];
-
+export function pushDataIntoArray(data: Category[]) {
   if (!data) return null;
 
-  for (const category of data) {
-    let bestPrice = 0;
-    let bestProduct = null;
+  const initialData = data.flatMap((items) => items.products);
 
-    for (const product of category.products) {
-      if (type === "discount" && product.discountPercentage > bestPrice) {
-        bestPrice = product.discountPercentage;
-        bestProduct = product;
-      } else if (type === "rating" && product.rating > bestPrice) {
-        bestPrice = product.rating;
-        bestProduct = product;
-      }
-    }
+  return initialData;
+}
 
-    highRatedProducts.push(bestProduct);
-  }
-  if (!highRatedProducts) return null;
+export function getDataRatingAndDiscount(
+  data: Product[],
+  type: "discount" | "rating",
+) {
+  if (!data) return null;
 
-  highRatedProducts.sort((a, b) => {
-    if (a && b) {
+  const sortedData = data
+    .sort((a, b) => {
       if (type === "discount")
         return b.discountPercentage - a.discountPercentage;
       else if (type === "rating") return b.rating - a.rating;
-    }
-    return 0;
-  });
 
-  return highRatedProducts;
+      return 0;
+    })
+    .slice(0, 3);
+
+  return sortedData;
 }
 
 export function dataSort(data: Product[], typeSort: string) {
-  data.sort((a, b) => {
+  const sortedData = [...data];
+
+  sortedData.sort((a, b) => {
     switch (typeSort) {
       case "Lowest price":
         return a.price - b.price;
       case "Highest price":
         return b.price - a.price;
       case "Discount":
-        return a.discountPercentage - b.discountPercentage;
+        return a.priceWithDiscount - b.priceWithDiscount;
       case "Name":
         return a.title.localeCompare(b.title);
 
@@ -57,5 +47,76 @@ export function dataSort(data: Product[], typeSort: string) {
     }
   });
 
-  return data;
+  return sortedData;
+}
+
+export function getDataByCategory(data: Product[], param: string) {
+  try {
+    if (!data || !param) return null;
+
+    let filteredData: Product[] = [];
+
+    if (categoryLinks[param]) {
+      const categoryItems = categoryLinks[param];
+      const categoriesFullName = categoryItems.map((item) => item.fullName);
+
+      for (const category of categoriesFullName) {
+        const categoryData = data.filter((item) => item.category === category);
+        filteredData.push(...categoryData);
+      }
+    }
+    return filteredData;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export function getDataBySubcategory(data: Product[], param: string) {
+  try {
+    if (!data || !param) return null;
+    let filteredData = data.filter((product) => product.category === param);
+
+    return filteredData;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export function getProductById(data: Product[], id: string) {
+  try {
+    if (!data || !id) return null;
+
+    const filteredData = data.find((product) => product.id === Number(id));
+    return filteredData;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export function groupProductInCartByAmount(data: Product[]) {
+  const groupedProducts = data.reduce(
+    (acc: { [key: string]: Product }, product) => {
+      const id = product.id;
+
+      if (acc[id]) {
+        acc[id].amount += product.amount ? product.amount : 1;
+      } else {
+        acc[id] = { ...product };
+        acc[id].amount =
+          product.amount && product.amount >= 0 ? product.amount : 1;
+      }
+
+      return acc;
+    },
+    {},
+  );
+  const cartData = Object.values(groupedProducts);
+
+  return cartData;
+}
+
+export function getParamBySubcategory(product: Product) {
+  const param = paramsLinks.find((item) => item.fullName === product.category);
+
+  return param?.link;
 }

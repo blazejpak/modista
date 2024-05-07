@@ -1,17 +1,36 @@
-import Button from "../../components/main/Subcategory/Button";
+import { useState } from "react";
+
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { Product } from "../../utils/types";
+import Button from "../../components/main/UI/Button";
+
 import ExtraInformation from "./ExtraInformation";
 import MaterialsInfo from "./MaterialsInfo";
 import SocialInfo from "./SocialInfo";
+import { sendCartData } from "../../store/reducers/cartSlice";
 
 type ProductContentProps = {
   data: Product;
 };
 
 const ProductContent = ({ data }: ProductContentProps) => {
-  if (!data) return null;
+  const [buttonCartClicked, setButtonCartClicked] = useState(false);
+  const [addProductToCartMessage, setAddProductToCartMessage] = useState("");
 
-  const discountPrice = (data.price * (100 - data.discountPercentage)) / 100;
+  const dispatch = useAppDispatch();
+  const cart = useAppSelector((state) => state.cart.cartData);
+
+  const addProductToCart = () => {
+    setAddProductToCartMessage("Added to Cart");
+
+    dispatch(sendCartData([...cart, data]));
+    setButtonCartClicked(true);
+
+    setTimeout(() => {
+      setButtonCartClicked(false);
+      setAddProductToCartMessage("");
+    }, 3000);
+  };
 
   return (
     <div
@@ -27,18 +46,26 @@ const ProductContent = ({ data }: ProductContentProps) => {
           <div className="flex items-center gap-4">
             <p className="text-lg line-through">${data.price.toFixed(2)}</p>
             <p className="text-2xl font-bold text-red-500 ">
-              ${discountPrice.toFixed(2)}
+              ${data.priceWithDiscount.toFixed(2)}
             </p>
           </div>
         </div>
       </div>
 
-      <Button onClick={() => {}} className="self-center">
-        Add to Cart
-      </Button>
-
-      <div className="flex flex-col gap-4">
-        <h2 className="text-xl font-bold">Description</h2>
+      <div className="flex flex-col items-center justify-center gap-2">
+        <Button
+          onClick={addProductToCart}
+          className="self-center"
+          disabled={buttonCartClicked}
+        >
+          Add to Cart
+        </Button>
+        <p className="font-bold text-green-correct">
+          {addProductToCartMessage}
+        </p>
+      </div>
+      <div className="flex flex-col gap-2">
+        <h2 className=" font-bold">Description</h2>
         <p>{data.description}</p>
       </div>
 

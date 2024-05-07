@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import logo from "../../assets/logo-no-background.png";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -9,12 +9,17 @@ import { HiMinus } from "react-icons/hi";
 
 import { IoClose } from "react-icons/io5";
 
-import ROUTES from "../../utils/routes";
+import { ROUTES } from "../../utils/routes";
 import HeaderPhoneLinks from "./HeaderPhoneLinks";
+import { FaSearch } from "react-icons/fa";
+import SearchInput from "../../routes/Search/SearchInput";
 
 const HeaderPhone = () => {
-  const [burgerClicked, setBurgerClicked] = useState<boolean>(false);
-  const [activeMenuItem, setActiveMenuItem] = useState<string>("");
+  const navigate = useNavigate();
+  const [searchInputClicked, setSearchInputClicked] = useState(false);
+
+  const [burgerClicked, setBurgerClicked] = useState(false);
+  const [activeMenuItem, setActiveMenuItem] = useState("");
 
   const handleToggle = (activeItem: string) => {
     setActiveMenuItem(activeItem);
@@ -26,6 +31,14 @@ const HeaderPhone = () => {
 
   if (burgerClicked) document.documentElement.style.overflowY = "hidden";
   else document.documentElement.style.overflowY = "auto";
+
+  const showInputHandle = () => {
+    setSearchInputClicked((prev) => !prev);
+  };
+
+  const closeSearchInput = () => {
+    setSearchInputClicked(false);
+  };
 
   return (
     <nav className="flex  h-full items-center justify-between gap-8  ">
@@ -103,13 +116,29 @@ const HeaderPhone = () => {
           </ul>
         </div>
       )}
-      <NavLink to={ROUTES.HOMEPAGE} className="transition-all active:scale-110">
-        <img alt="Logo" src={logo} height={60} width={160} />
-      </NavLink>
-      <PiShoppingCart
-        size={24}
-        className="hover-link mr-8 cursor-pointer transition-all  active:scale-110"
-      />
+      {!searchInputClicked ? (
+        <NavLink
+          to={ROUTES.HOMEPAGE}
+          className="transition-all active:scale-110"
+        >
+          <img alt="Logo" src={logo} height={60} width={160} />
+        </NavLink>
+      ) : (
+        <SearchInput closeInput={closeSearchInput} />
+      )}
+
+      <div className="flex items-center  gap-4">
+        {!searchInputClicked && (
+          <div onClick={showInputHandle} className="cursor-pointer ">
+            <FaSearch size={16} />
+          </div>
+        )}
+        <PiShoppingCart
+          onClick={() => navigate(ROUTES.CART)}
+          size={24}
+          className="hover-link mr-8 cursor-pointer transition-all  active:scale-110"
+        />
+      </div>
     </nav>
   );
 };

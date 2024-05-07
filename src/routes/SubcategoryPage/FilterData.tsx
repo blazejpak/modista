@@ -6,29 +6,36 @@ import { Product } from "../../utils/types";
 
 import RatingProducts from "./RatingProducts";
 import FilterByPrice from "./FilterByPrice";
+import { dataSort } from "../../utils/helpers";
 
 interface FilterDataProps {
   data: Product[];
+  currentLink: string;
 }
 
-const FilterData = ({ data }: FilterDataProps) => {
-  const { setSortedData } = useContext(SortDataContext);
+const FilterData = ({ data, currentLink }: FilterDataProps) => {
+  console.log(data);
+  if (!data) return null;
 
-  const [priceOpen, setPriceOpen] = useState<boolean>(false);
-  const [ratingOpen, setRatingOpen] = useState<boolean>(false);
+  const { setSortedData, typeSort } = useContext(SortDataContext);
 
-  const [price, setPrice] = useState<{
-    min: number;
-    max: number;
-  }>({
+  const [priceOpen, setPriceOpen] = useState(false);
+  const [ratingOpen, setRatingOpen] = useState(false);
+
+  const [price, setPrice] = useState({
     min: 1,
     max: 1000,
   });
-  const [filterByRate, setFilterByRate] = useState<number>(1);
+  const [filterByRate, setFilterByRate] = useState(1);
+
+  useEffect(() => {
+    setFilterByRate(1);
+    setPrice({ min: 1, max: 1000 });
+  }, [currentLink]);
 
   const changePriceInput = (e: ChangeEvent<HTMLInputElement>) => {
-    setPrice((prevState) => ({
-      ...prevState,
+    setPrice((prev) => ({
+      ...prev,
       [e.target.name]: e.target.value,
     }));
   };
@@ -46,18 +53,21 @@ const FilterData = ({ data }: FilterDataProps) => {
   };
 
   const ratingChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setFilterByRate((prevState) => (prevState = Number(e.target.value)));
+    setFilterByRate((prev) => (prev = Number(e.target.value)));
   };
 
   useEffect(() => {
-    const newData = data;
+    const newData = [...data];
     const filteredData = filterData(newData);
-    setSortedData(filteredData);
-  }, [data, filterByRate]);
+
+    const sortData = dataSort(filteredData, typeSort) as Product[];
+
+    setSortedData(sortData);
+  }, [filterByRate]);
 
   const savePriceSubmit = () => {
     if (price.min > price.max) {
-      setPrice((prevState) => ({ ...prevState, min: prevState.max }));
+      setPrice((prev) => ({ ...prev, min: prev.max }));
     }
     const newData = [...data];
     const filteredData = filterData(newData);

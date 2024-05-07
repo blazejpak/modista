@@ -1,15 +1,18 @@
 import { useContext, useEffect, useRef, useState } from "react";
+import { useParams } from "react-router-dom";
 
 import { GrRadial } from "react-icons/gr";
 import { GrRadialSelected } from "react-icons/gr";
+
 import { SortDataContext } from "../../context/SortDataContext";
 import { dataSort } from "../../utils/helpers";
 import { sortType } from "../../utils/variables";
 import { useClickOutside } from "../../components/helpers/useClickOutside";
-import SortButton from "../../components/main/Subcategory/SortButton";
+import SortButton from "../../components/main/UI/SortButton";
 
 const SortProducts = () => {
-  const [isActive, setIsActive] = useState<boolean>(false);
+  const [isActive, setIsActive] = useState(false);
+  const param = useParams();
 
   const { sortedData, setSortedData, typeSort, setTypeSort } =
     useContext(SortDataContext);
@@ -23,7 +26,7 @@ const SortProducts = () => {
 
   useEffect(() => {
     setTypeSort("Lowest price");
-  }, []);
+  }, [param]);
 
   const sortModalRef = useRef<HTMLDivElement>(null);
   useClickOutside({ refEl: sortModalRef, callback: () => setIsActive(false) });

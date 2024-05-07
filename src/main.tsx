@@ -10,20 +10,20 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 
-import ROUTES from "./utils/routes";
+import { ROUTES } from "./utils/routes";
 import { store } from "./store/store";
 
 import ErrorPage from "./routes/ErrorPage";
 import Root from "./routes/Root";
+import { RootLoader } from "./routes/RootLoader";
 
 import HomePage from "./routes/HomePage/HomePage";
 import CategoryPage from "./routes/CategoryPage/CategoryPage";
 import ProductPage from "./routes/ProductPage/ProductPage";
 import SubcategoryPage from "./routes/SubcategoryPage/SubcategoryPage";
-
-import { ProductPageLoader } from "./routes/ProductPage/ProductPageLoader";
-import { CategoryPageLoader } from "./routes/CategoryPage/CategoryPageLoader";
-import { SubcategoryLoader } from "./routes/SubcategoryPage/SubcategoryLoader";
+import Search from "./routes/Search/Search";
+import CartPage from "./routes/Cart/CartPage";
+import CheckoutPage from "./routes/Checkout/CheckoutPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -31,6 +31,7 @@ const router = createBrowserRouter(
       path={ROUTES.HOMEPAGE}
       element={<Root />}
       errorElement={<ErrorPage />}
+      loader={RootLoader}
     >
       <Route
         index
@@ -39,34 +40,37 @@ const router = createBrowserRouter(
         errorElement={<ErrorPage />}
       />
       <Route
+        index
+        path={ROUTES.CART}
+        element={<CartPage />}
+        errorElement={<ErrorPage />}
+      />
+      <Route
+        index
+        path={ROUTES.CHECKOUT}
+        element={<CheckoutPage />}
+        errorElement={<ErrorPage />}
+      />
+      <Route
+        index
+        path={ROUTES.SEARCH}
+        element={<Search />}
+        errorElement={<ErrorPage />}
+      />
+      <Route
         path={"category/:category"}
         element={<CategoryPage />}
         errorElement={<ErrorPage />}
-        loader={({ params }: any) => {
-          const category = params.category || "";
-
-          return CategoryPageLoader(category);
-        }}
       />
       <Route
         path={"category/:category/:subCategory"}
         element={<SubcategoryPage />}
-        loader={({ params }) => {
-          const category = params.category || "";
-          const subCategory = params.subCategory || "";
-          return SubcategoryLoader(category, subCategory);
-        }}
         errorElement={<ErrorPage />}
       />
       <Route
-        path={"category/:category/:subCategory/:product"}
+        path={"category/:category/:subCategory/:productId"}
         element={<ProductPage />}
         errorElement={<ErrorPage />}
-        loader={({ params }: any) => {
-          const product = params.product || "";
-
-          return ProductPageLoader(product);
-        }}
       />
     </Route>,
   ),

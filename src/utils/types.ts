@@ -6,10 +6,13 @@ export type Product = {
   id: number;
   images: string[];
   price: number;
+  priceWithDiscount: number;
+
   rating: number;
   stock: number;
   thumbnail: string;
   title: string;
+  amount: number;
 };
 
 export type Category = {
