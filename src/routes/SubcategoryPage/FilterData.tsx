@@ -10,24 +10,35 @@ import { dataSort } from "../../utils/helpers";
 
 interface FilterDataProps {
   data: Product[];
+  currentLink: string;
 }
 
+<<<<<<< HEAD
 const FilterData = ({ data }: FilterDataProps) => {
   if (!data) return null;
 
   const { setSortedData, typeSort } = useContext(SortDataContext);
+=======
+const FilterData = ({ data, currentLink }: FilterDataProps) => {
+  console.log(data);
+  if (!data) return null;
+>>>>>>> 85cdc32feb2d1570b9fc2de74fd7df5d7951ddbb
 
-  const [priceOpen, setPriceOpen] = useState<boolean>(false);
-  const [ratingOpen, setRatingOpen] = useState<boolean>(false);
+  const { setSortedData, typeSort } = useContext(SortDataContext);
 
-  const [price, setPrice] = useState<{
-    min: number;
-    max: number;
-  }>({
+  const [priceOpen, setPriceOpen] = useState(false);
+  const [ratingOpen, setRatingOpen] = useState(false);
+
+  const [price, setPrice] = useState({
     min: 1,
     max: 1000,
   });
-  const [filterByRate, setFilterByRate] = useState<number>(1);
+  const [filterByRate, setFilterByRate] = useState(1);
+
+  useEffect(() => {
+    setFilterByRate(1);
+    setPrice({ min: 1, max: 1000 });
+  }, [currentLink]);
 
   const changePriceInput = (e: ChangeEvent<HTMLInputElement>) => {
     setPrice((prev) => ({
@@ -49,7 +60,11 @@ const FilterData = ({ data }: FilterDataProps) => {
   };
 
   const ratingChange = (e: ChangeEvent<HTMLInputElement>) => {
+<<<<<<< HEAD
     setFilterByRate((prev) => (prev = Number(e.target.value)));
+=======
+    setFilterByRate(Number(e.target.value));
+>>>>>>> 85cdc32feb2d1570b9fc2de74fd7df5d7951ddbb
   };
 
   useEffect(() => {

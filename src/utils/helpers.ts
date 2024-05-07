@@ -1,5 +1,9 @@
 import { categoryLinks, paramsLinks } from "./routes";
+<<<<<<< HEAD
 import { Cart, Category, Product } from "./types";
+=======
+import { Category, Product } from "./types";
+>>>>>>> 85cdc32feb2d1570b9fc2de74fd7df5d7951ddbb
 
 export function pushDataIntoArray(data: Category[]) {
   if (!data) return null;
@@ -8,6 +12,7 @@ export function pushDataIntoArray(data: Category[]) {
 
   return initialData;
 }
+<<<<<<< HEAD
 
 export function getDataRatingAndDiscount(
   data: Product[],
@@ -26,6 +31,25 @@ export function getDataRatingAndDiscount(
     })
     .slice(0, 3);
 
+=======
+
+export function getDataRatingAndDiscount(
+  data: Product[],
+  type: "discount" | "rating",
+) {
+  if (!data) return null;
+
+  const sortedData = data
+    .sort((a, b) => {
+      if (type === "discount")
+        return b.discountPercentage - a.discountPercentage;
+      else if (type === "rating") return b.rating - a.rating;
+
+      return 0;
+    })
+    .slice(0, 3);
+
+>>>>>>> 85cdc32feb2d1570b9fc2de74fd7df5d7951ddbb
   return sortedData;
 }
 
@@ -94,6 +118,7 @@ export function getProductById(data: Product[], id: string) {
   }
 }
 
+<<<<<<< HEAD
 export function groupProductInCartByAmount(data: Cart[]) {
   if (!data) return [];
   let groupObject = {} as Cart[];
@@ -119,13 +144,36 @@ export function groupProductInCartByAmount(data: Cart[]) {
   }
 
   const cartData = Object.values(groupObject);
+=======
+export function groupProductInCartByAmount(data: Product[]) {
+  const groupedProducts = data.reduce(
+    (acc: { [key: string]: Product }, product) => {
+      const id = product.id;
+
+      if (acc[id]) {
+        acc[id].amount += product.amount ? product.amount : 1;
+      } else {
+        acc[id] = { ...product };
+        acc[id].amount =
+          product.amount && product.amount >= 0 ? product.amount : 1;
+      }
+
+      return acc;
+    },
+    {},
+  );
+  const cartData = Object.values(groupedProducts);
+>>>>>>> 85cdc32feb2d1570b9fc2de74fd7df5d7951ddbb
 
   return cartData;
 }
 
 export function getParamBySubcategory(product: Product) {
+<<<<<<< HEAD
   if (!product) return null;
 
+=======
+>>>>>>> 85cdc32feb2d1570b9fc2de74fd7df5d7951ddbb
   const param = paramsLinks.find((item) => item.fullName === product.category);
 
   return param?.link;

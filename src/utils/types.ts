@@ -12,6 +12,7 @@ export type Product = {
   stock: number;
   thumbnail: string;
   title: string;
+  amount: number;
 };
 
 export interface Cart extends Product {
