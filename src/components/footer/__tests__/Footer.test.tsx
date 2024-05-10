@@ -18,7 +18,7 @@ describe("Footer tests", () => {
     });
   });
 
-  it("should has actual copyright", async () => {
+  it("should have actual copyright", async () => {
     const copyright = screen.getByText(/Copyright 2024/i);
     expect(copyright).toBeInTheDocument();
   });

@@ -24,6 +24,7 @@ const Bestsellers = () => {
     "rating",
   ) as Product[];
 
+  console.log(highRatedProducts);
   if (!highRatedProducts) return null;
 
   return (
