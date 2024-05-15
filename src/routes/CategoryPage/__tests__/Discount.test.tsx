@@ -4,19 +4,29 @@ import { setupStore } from "../../../store/store";
 import { sendData } from "../../../store/reducers/dataSlice";
 import { initialState } from "../../../test/helper-test";
 import Discount from "../Discount";
+import { MemoryRouter } from "react-router-dom";
 
-describe("CategoryPage - Bestsellers tests:", () => {
-  vi.mock("react-router-dom", () => ({
-    useParams: () => ({ category: "mens-watches" }), // Mock category value
-  }));
+describe("CategoryPage - Discount tests:", () => {
+  vi.mock("react-router-dom", async () => {
+    const mod = await vi.importActual("react-router-dom");
+    return {
+      ...mod,
+      useParams: () => ({ category: "men" }),
+    };
+  });
 
   it("should render a heading for products with discount", async () => {
     const store = setupStore();
     store.dispatch(sendData(initialState));
 
-    renderWithProviders(<Discount />, { store });
+    renderWithProviders(
+      <MemoryRouter>
+        <Discount />
+      </MemoryRouter>,
+      { store },
+    );
 
-    const heading = await screen.getByText("With the biggest discount");
+    const heading = await screen.getByText(/With the biggest discount/i);
     expect(heading).toBeInTheDocument();
   });
 
@@ -24,11 +34,16 @@ describe("CategoryPage - Bestsellers tests:", () => {
     const store = setupStore();
     store.dispatch(sendData(initialState));
 
-    renderWithProviders(<Discount />, { store });
+    renderWithProviders(
+      <MemoryRouter>
+        <Discount />
+      </MemoryRouter>,
+      { store },
+    );
 
     screen.debug();
 
-    const heading = await screen.findByRole("link");
-    expect(heading).toBeGreaterThanOrEqual(1);
+    const heading = await screen.findAllByRole("link");
+    expect(heading.length).toBeGreaterThanOrEqual(1);
   });
 });
