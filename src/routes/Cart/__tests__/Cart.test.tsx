@@ -1,4 +1,3 @@
-import { MemoryRouter } from "react-router-dom";
 import { sendCartData } from "../../../store/reducers/cartSlice";
 import { setupStore } from "../../../store/store";
 import { renderWithProviders } from "../../../test/test-utils";
@@ -12,12 +11,7 @@ describe("Cart tests: ", () => {
   it("should show products when cart.length > 0", () => {
     store.dispatch(sendCartData(product));
 
-    renderWithProviders(
-      <MemoryRouter>
-        <CartPage />
-      </MemoryRouter>,
-      { store },
-    );
+    renderWithProviders(<CartPage />, { store });
 
     const products = screen.getAllByRole("listitem");
     expect(products.length).greaterThan(0);
