@@ -1,16 +1,16 @@
 import { MemoryRouter } from "react-router-dom";
 import { sendCartData } from "../../../store/reducers/cartSlice";
 import { setupStore } from "../../../store/store";
-import { initialState } from "../../../test/helper-test";
 import { renderWithProviders } from "../../../test/test-utils";
 import CartPage from "../CartPage";
 import { screen } from "@testing-library/react";
+import { product } from "../../../test/mocks/products";
 
 describe("Cart tests: ", () => {
   const store = setupStore();
 
   it("should show products when cart.length > 0", () => {
-    store.dispatch(sendCartData(initialState));
+    store.dispatch(sendCartData(product));
 
     renderWithProviders(
       <MemoryRouter>
