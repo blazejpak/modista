@@ -15,7 +15,7 @@ const DisplayProducts = ({
   const data = useAppSelector((state) => state.cart.cartData);
 
   return (
-    <div className="mt-10 flex flex-wrap  rounded ">
+    <ul className="mt-10 flex flex-wrap  rounded ">
       {data.length > 0 &&
         data.map((product) => {
           const id = uuidv4();
@@ -24,7 +24,7 @@ const DisplayProducts = ({
             product.priceWithDiscount * product.amount;
 
           return (
-            <div
+            <li
               className="flex w-full  flex-col items-center gap-8  rounded bg-white  p-8 xs:flex-row md:max-w-[400px] md:p-2"
               key={id}
             >
@@ -33,7 +33,7 @@ const DisplayProducts = ({
                   src={product.thumbnail}
                   alt={product.title}
                   height={160}
-                  className="h-48 w-48"
+                  className="h-48 w-48 object-contain"
                 />
               )}
               <div className="flex flex-col  gap-6 text-xs">
@@ -78,10 +78,10 @@ const DisplayProducts = ({
                   </Button>
                 </div>
               </div>
-            </div>
+            </li>
           );
         })}
-    </div>
+    </ul>
   );
 };
 

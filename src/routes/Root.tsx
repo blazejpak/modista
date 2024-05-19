@@ -63,6 +63,7 @@ function Root() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    dispatch({ type: "cart/openCart", payload: false });
   }, [pathname]);
 
   return (

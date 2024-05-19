@@ -42,6 +42,7 @@ const FilterByPrice = ({
                 placeholder="1"
                 value={price.min}
                 onChange={changePriceInput}
+                data-testid="inputMin"
               />
               <p className="absolute left-4 top-2 opacity-50">$</p>
             </div>
@@ -55,6 +56,7 @@ const FilterByPrice = ({
                 placeholder="9999"
                 value={price.max}
                 onChange={changePriceInput}
+                data-testid="inputMax"
               />
               <p className="absolute left-4 top-2 opacity-50">$</p>
             </div>
