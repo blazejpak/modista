@@ -42,34 +42,41 @@ const HeaderPhone = () => {
 
   return (
     <nav className="flex  h-full items-center justify-between gap-8  ">
-      <GiHamburgerMenu
-        data-testid="buttonMenu"
-        size={24}
-        className="ml-8 cursor-pointer transition-colors hover:text-gold-lighter"
+      <button
         onClick={() => {
           setBurgerClicked(true);
         }}
-      />
+      >
+        <GiHamburgerMenu
+          data-testid="buttonMenu-open"
+          size={24}
+          className="ml-8 cursor-pointer transition-colors hover:text-gold-lighter"
+        />
+      </button>
       {burgerClicked && (
         <div className="absolute top-[0]  z-[1000] flex  h-screen w-full justify-center bg-black-lighter ">
-          <IoClose
-            size={30}
-            className="hover-link absolute right-4 top-4 cursor-pointer text-grey-normal transition-all active:scale-110"
+          <button
             onClick={() => {
               setBurgerClicked(false);
               setActiveMenuItem("");
             }}
-          />
+            data-testid="buttonMenu-close"
+          >
+            <IoClose
+              size={30}
+              className="hover-link absolute right-4 top-4 cursor-pointer text-grey-normal transition-all active:scale-110"
+            />
+          </button>
 
           <ul className="absolute top-[20%] flex flex-col items-center gap-4 text-3xl uppercase">
             <li className="flex flex-col">
-              <div
+              <button
                 className="hover-link flex cursor-pointer items-center justify-center gap-2 p-4 transition-colors  "
                 onClick={() => handleToggle("men")}
               >
                 <p className="first-letter:uppercase">men</p>
                 {menClicked ? <HiMinus size={24} /> : <HiPlus size={24} />}
-              </div>
+              </button>
               {menClicked && (
                 <HeaderPhoneLinks
                   typeLink="men"
@@ -79,13 +86,13 @@ const HeaderPhone = () => {
               )}
             </li>
             <li className="flex flex-col">
-              <div
+              <button
                 className="hover-link flex cursor-pointer items-center justify-center gap-2 p-2 transition-colors "
                 onClick={() => handleToggle("women")}
               >
                 <p className="first-letter:uppercase">women</p>
                 {womenClicked ? <HiMinus size={24} /> : <HiPlus size={24} />}
-              </div>
+              </button>
               {womenClicked && (
                 <HeaderPhoneLinks
                   typeLink="women"
@@ -130,15 +137,16 @@ const HeaderPhone = () => {
 
       <div className="flex items-center  gap-4">
         {!searchInputClicked && (
-          <div onClick={showInputHandle} className="cursor-pointer ">
+          <button onClick={showInputHandle} className="cursor-pointer ">
             <FaSearch size={16} />
-          </div>
+          </button>
         )}
-        <PiShoppingCart
-          onClick={() => navigate(ROUTES.CART)}
-          size={24}
-          className="hover-link mr-8 cursor-pointer transition-all  active:scale-110"
-        />
+        <button onClick={() => navigate(ROUTES.CART)}>
+          <PiShoppingCart
+            size={24}
+            className="hover-link mr-8 cursor-pointer transition-all  active:scale-110"
+          />
+        </button>
       </div>
     </nav>
   );

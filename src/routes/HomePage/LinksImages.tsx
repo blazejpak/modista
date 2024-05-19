@@ -7,7 +7,7 @@ import { ROUTES } from "../../utils/routes";
 const LinksImages = () => {
   return (
     <div className="grid grid-cols-1  sm:grid-cols-3 ">
-      <div className="group relative">
+      <Link to={ROUTES.MEN} className="group relative">
         <img
           alt="Image of man"
           src={manImg}
@@ -15,10 +15,10 @@ const LinksImages = () => {
           className="grayscale group-hover:grayscale-0"
         />
         <div className="absolute bottom-10 left-[50%] translate-x-[-50%] cursor-pointer rounded bg-grey-lighter p-2 text-center text-sm uppercase lg:p-3 lg:text-base">
-          <Link to={ROUTES.MEN}>for him</Link>
+          <p>for him</p>
         </div>
-      </div>
-      <div className="group relative">
+      </Link>
+      <Link to={ROUTES.WOMEN} className="group relative">
         <img
           alt="Image of woman"
           src={womanImg}
@@ -26,10 +26,10 @@ const LinksImages = () => {
           className="grayscale transition-all group-hover:grayscale-0"
         />
         <div className="absolute bottom-10 left-[50%] translate-x-[-50%] cursor-pointer rounded bg-grey-lighter p-2 text-center text-sm uppercase lg:p-3 lg:text-base">
-          <Link to={ROUTES.WOMEN}>for her</Link>
+          <p>for her</p>
         </div>
-      </div>
-      <div className="group relative">
+      </Link>
+      <Link to={ROUTES.ACCESSORIES} className="group relative">
         <img
           alt="Image of home decorations"
           src={homeImg}
@@ -37,9 +37,9 @@ const LinksImages = () => {
           className="grayscale transition-all group-hover:grayscale-0"
         />
         <div className="absolute bottom-10 left-[50%] translate-x-[-50%] cursor-pointer rounded bg-grey-lighter p-2 text-center text-sm uppercase lg:p-3 lg:text-base">
-          <Link to={ROUTES.ACCESSORIES}>Accessories </Link>
+          <p>Accessories </p>
         </div>
-      </div>
+      </Link>
     </div>
   );
 };

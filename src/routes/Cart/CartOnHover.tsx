@@ -61,7 +61,7 @@ const CartOnHover = () => {
                       <img
                         src={product.thumbnail}
                         alt={product.title}
-                        className="h-24 w-24 shadow"
+                        className="h-24 w-24 object-contain "
                       />
                       <div className="flex flex-col  gap-2 text-xs">
                         <div>

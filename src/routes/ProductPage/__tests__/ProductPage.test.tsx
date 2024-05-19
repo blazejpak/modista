@@ -1,14 +1,13 @@
-import { MemoryRouter } from "react-router-dom";
 import { sendData } from "../../../store/reducers/dataSlice";
 import { setupStore } from "../../../store/store";
-import { initialState } from "../../../test/helper-test";
+import { product } from "../../../test/mocks/products";
 import { renderWithProviders } from "../../../test/test-utils";
 import ProductPage from "../ProductPage";
 import { fireEvent, screen } from "@testing-library/react";
 
 describe("Product Page tests: ", () => {
   const store = setupStore();
-  store.dispatch(sendData(initialState));
+  store.dispatch(sendData(product));
   const mockData = store.getState().data.data[0];
 
   vi.mock("react-router-dom", async () => {
@@ -18,18 +17,13 @@ describe("Product Page tests: ", () => {
       useParams: () => ({
         category: "men",
         subCategory: "watches",
-        productId: initialState[0].id,
+        productId: product[0].id,
       }),
     };
   });
 
   it("should show the most important things like title, price and description", () => {
-    renderWithProviders(
-      <MemoryRouter>
-        <ProductPage />
-      </MemoryRouter>,
-      { store },
-    );
+    renderWithProviders(<ProductPage />, { store });
 
     const title = screen.getByRole("heading", {
       name: mockData.brand,
@@ -42,12 +36,7 @@ describe("Product Page tests: ", () => {
   });
 
   it("should send data to the cart when the button clicked", () => {
-    renderWithProviders(
-      <MemoryRouter>
-        <ProductPage />
-      </MemoryRouter>,
-      { store },
-    );
+    renderWithProviders(<ProductPage />, { store });
 
     const button = screen.getByRole("button", { name: /add to cart/i });
     expect(button).toBeInTheDocument();
@@ -58,6 +47,6 @@ describe("Product Page tests: ", () => {
     fireEvent.click(button);
 
     const cartDataNew = store.getState().cart.cartData;
-    expect(cartDataNew.length).greaterThan(0);
+    expect(cartDataNew.length).toBe(1);
   });
 });

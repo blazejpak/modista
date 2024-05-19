@@ -33,7 +33,7 @@ const DisplayProducts = ({
                   src={product.thumbnail}
                   alt={product.title}
                   height={160}
-                  className="h-48 w-48"
+                  className="h-48 w-48 object-contain"
                 />
               )}
               <div className="flex flex-col  gap-6 text-xs">

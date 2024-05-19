@@ -1,4 +1,4 @@
-export const initialState = [
+export const product = [
   {
     amount: 0,
     brand: "Strap Skeleton",

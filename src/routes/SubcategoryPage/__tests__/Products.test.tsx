@@ -5,10 +5,10 @@ import { MemoryRouter } from "react-router-dom";
 import Products from "../Products";
 import { setupStore } from "../../../store/store";
 import { sendData } from "../../../store/reducers/dataSlice";
-import { initialState } from "../../../test/helper-test";
 import { renderWithProviders } from "../../../test/test-utils";
 import SubcategoryPage from "../SubcategoryPage";
 import { SortDataContext } from "../../../context/SortDataContext";
+import { product } from "../../../test/mocks/products";
 
 const user = userEvent.setup();
 
@@ -22,14 +22,14 @@ describe("Subcategory tests:", () => {
   });
 
   const mockSortDataContext = {
-    sortedData: initialState,
+    sortedData: product,
     setSortedData: vi.fn(),
     typeSort: "Lowest price",
     setTypeSort: vi.fn(),
   };
 
   const store = setupStore();
-  store.dispatch(sendData(initialState));
+  store.dispatch(sendData(product));
 
   const data = store.getState().data.data;
 
@@ -46,15 +46,13 @@ describe("Subcategory tests:", () => {
 
   it("should filter data and show products", async () => {
     renderWithProviders(
-      <MemoryRouter>
-        <SortDataContext.Provider value={mockSortDataContext}>
-          <SubcategoryPage />
-        </SortDataContext.Provider>
-      </MemoryRouter>,
+      <SortDataContext.Provider value={mockSortDataContext}>
+        <SubcategoryPage />
+      </SortDataContext.Provider>,
       { store },
     );
 
-    const mockData = initialState;
+    const mockData = product;
 
     const minPrice = 20;
     const maxPrice = 50;
@@ -85,15 +83,13 @@ describe("Subcategory tests:", () => {
 
   it("should filter data and don't show products", async () => {
     renderWithProviders(
-      <MemoryRouter>
-        <SortDataContext.Provider value={mockSortDataContext}>
-          <SubcategoryPage />
-        </SortDataContext.Provider>
-      </MemoryRouter>,
+      <SortDataContext.Provider value={mockSortDataContext}>
+        <SubcategoryPage />
+      </SortDataContext.Provider>,
       { store },
     );
 
-    const mockData = initialState;
+    const mockData = product;
 
     const minPrice = 20;
     const maxPrice = 40;

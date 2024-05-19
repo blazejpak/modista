@@ -11,8 +11,6 @@ import { useAppSelector } from "../../store/hooks";
 const Bestsellers = () => {
   const category: string = useParams().category ?? "";
 
-  console.log(category);
-
   const linkArr = category ? categoryLinks[category] : [];
 
   const dataRed = useAppSelector((state) => state.data.data);
@@ -26,7 +24,6 @@ const Bestsellers = () => {
     "rating",
   ) as Product[];
 
-  console.log(highRatedProducts);
   if (!highRatedProducts) return null;
 
   return (

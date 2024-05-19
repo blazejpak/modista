@@ -9,7 +9,7 @@ describe("Header tests", () => {
         <HeaderPhone />
       </MemoryRouter>,
     );
-    const button = screen.getByTestId("buttonMenu");
+    const button = screen.getByTestId("buttonMenu-open");
     expect(button).toBeInTheDocument();
   });
 
@@ -19,9 +19,12 @@ describe("Header tests", () => {
         <HeaderPhone />
       </MemoryRouter>,
     );
-    const button = screen.getByTestId("buttonMenu");
-    fireEvent.click(button);
+    const buttonOpenMenu = screen.getByTestId("buttonMenu-open");
+    fireEvent.click(buttonOpenMenu);
+    const buttonCloseMenu = screen.getByTestId("buttonMenu-close");
+    const links = screen.getAllByRole("listitem");
 
-    expect(button).toBeInTheDocument();
+    expect(buttonCloseMenu).toBeInTheDocument();
+    expect(links.length).toBeGreaterThan(0);
   });
 });

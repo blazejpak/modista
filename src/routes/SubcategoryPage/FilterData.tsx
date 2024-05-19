@@ -14,7 +14,6 @@ interface FilterDataProps {
 }
 
 const FilterData = ({ data, currentLink }: FilterDataProps) => {
-  console.log(data);
   if (!data) return null;
 
   const { setSortedData, typeSort } = useContext(SortDataContext);
